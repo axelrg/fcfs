@@ -390,7 +390,7 @@ function anadirMemoria {
 	contador_memoria=0
 	proceso_a_meter_en_memoria=${cola[1]}
 	for (( i = 1; i <=$tamanio_memoria ; i++ )); do
-		if [[ ${array_memoria[$i]} -eq 0 ]] && [[ $contador_memoria -le ${ordenado_arr_memoria[$proceso_a_meter_en_memoria]} ]]; then
+		if [[ ${array_memoria[$i]} -eq 0 ]] && [[ $contador_memoria -lt ${ordenado_arr_memoria[$proceso_a_meter_en_memoria]} ]]; then
 			#echo "Antes de meter_en_memoria:${array_memoria[$i]}"
 			array_memoria[$i]=$proceso_a_meter_en_memoria
 			#echo "Despues de meter_en_memoria:${array_memoria[$i]}"
@@ -549,9 +549,11 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 	echo "LINEA TEMPORAL:"
 	imprimir_linea_temporal
 	#echo Memoria:
-	#echo "${#array_memoria[@]}"
+	
 	echo "LINEA MEMORIA:"
-	#imprimir_mem
+	echo "${#array_memoria[@]}"
+	echo "${array_memoria[@]}"
+	imprimir_mem
 	imprimir_linea_memoria
 
 	((tiempo++))
