@@ -442,7 +442,7 @@ function calcular_memoria_restante {
 }
 
 function imprimir_mem {
-	echo MEMORIA
+	#echo MEMORIA
 	for (( i = 1; i <=$tamanio_memoria ; i++ )); do
 		echo -n "${array_memoria[$i]}"
 	done
@@ -450,14 +450,19 @@ echo ""
 }
 
 function imprimir_linea_temporal {
-
 	for (( i = 0; i <= $tiempo; i++ )); do
-
 		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}\u2593$DEFAULT"
 	done
 
 echo ""
+}
 
+function imprimir_linea_memoria {
+	for (( i = 1; i <= $tamanio_memoria; i++ )); do
+		printf "${ordenado_arr_colores[${array_memoria[$i]}]}\u2593$DEFAULT"
+	done
+
+echo ""
 }
 #while [[ $procesos_ejecutados -lt $contador ]]; do
 	
@@ -472,7 +477,8 @@ tiempo=0
 procesos_ejecutados=0
 
 while [[ $procesos_ejecutados -lt $contador ]]; do
-
+	#clear
+	printf "\n\n\n"
 	echo Tiempo=$tiempo
 
 	if [[ $proceso_en_ejecucion -ne 0 ]] && [[ $tiempo -ne 0 ]]; then
@@ -481,14 +487,14 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 
 	if [[ ${array_tiempo_restante[$proceso_en_ejecucion]} -eq 0 ]]; then
 		if [[ $proceso_en_ejecucion -ne 0 ]]; then
-			echo $proceso_en_ejecucion
+			#echo $proceso_en_ejecucion
 			((procesos_ejecutados++))
 		fi
 		array_estado[$proceso_en_ejecucion]="Finalizado"
 		array_tiempo_retorno[$proceso_en_ejecucion]=$tiempo
 		eliminarMemoria
 
-		echo Memoria despues de EM:
+		#echo Memoria despues de EM:
 		#echo "eliminar"
 		#imprimir_mem
 		proceso_en_ejecucion=0
@@ -532,19 +538,21 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 	
 	array_linea_temporal[$tiempo]=$proceso_en_ejecucion
 	#echo Tiempo=$tiempo
-	echo Cola:
-	echo ${cola[@]}
-	echo "P_EN_EJ:${proceso_en_ejecucion}"
-	echo "P_EJECUTADOS:${procesos_ejecutados}"
-	echo "Tamanio memoria: $tamanio_memoria"
+	#echo Cola:
+	#echo ${cola[@]}
+	#echo "P_EN_EJ:${proceso_en_ejecucion}"
+	#echo "P_EJECUTADOS:${procesos_ejecutados}"
+	#echo "Tamanio memoria: $tamanio_memoria"
 	#echo Linea Temporal:
 	#echo ${array_linea_temporal[@]}
 	imprimir_tabla
-	echo "Linea Temporal:"
+	echo "LINEA TEMPORAL:"
 	imprimir_linea_temporal
 	#echo Memoria:
 	#echo "${#array_memoria[@]}"
-	imprimir_mem
+	echo "LINEA MEMORIA:"
+	#imprimir_mem
+	imprimir_linea_memoria
 
 	((tiempo++))
 done
