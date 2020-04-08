@@ -199,8 +199,9 @@ function entrada_aleatoria {
 	while [ $procesos_a_crear -ge $contador ]; do
 
 			arr_tiempos_llegada[$contador]=$((RANDOM%99))
-			arr_tiempos_ejecucion[$contador]=$((RANDOM%99))
-			arr_memoria[$contador]=$((RANDOM%99))
+			arr_tiempos_ejecucion[$contador]=$(((RANDOM%98)+1))
+			arr_memoria[$contador]=$((RANDOM%${tamanio_memoria}))
+
 
 			if [ $contador -gt 9 ]; then
 				nombres_procesos[$contador]="P$contador"
@@ -323,6 +324,7 @@ declare -a array_tiempo_retorno
 declare -a array_linea_temporal
 declare -a array_memoria
 
+
 function inicializar_array_memoria {
 	for (( i = 0 ; i <=$tamanio_memoria ; i++ )); do
 		array_memoria[$i]=0
@@ -330,6 +332,7 @@ function inicializar_array_memoria {
 }
 
 function inicializar_array_tiempo_restante {
+	array_tiempo_restante[0]=10000
 	for (( i = 1 ; i <= $contador ; i++ )); do
 		array_tiempo_restante[$i]="-"
 	done
@@ -421,7 +424,10 @@ function buscar_en_memoria {
 	        #echo $primero_en_llegar
 	    fi
 	done
-	echo "$primero_en_llegar"
+	if [[ $primero_en_llegar -ne 0 ]]; then
+		echo "$primero_en_llegar"
+	fi
+	
 }
 
 function calcular_memoria_restante {
@@ -443,6 +449,16 @@ function imprimir_mem {
 echo ""
 }
 
+function imprimir_linea_temporal {
+
+	for (( i = 0; i <= $tiempo; i++ )); do
+
+		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}\u2593$DEFAULT"
+	done
+
+echo ""
+
+}
 #while [[ $procesos_ejecutados -lt $contador ]]; do
 	
 
@@ -455,7 +471,7 @@ inicializar_array_memoria
 tiempo=0
 procesos_ejecutados=0
 
-while [[ $procesos_ejecutados -le $contador ]]; do
+while [[ $procesos_ejecutados -lt $contador ]]; do
 
 	echo Tiempo=$tiempo
 
@@ -464,7 +480,10 @@ while [[ $procesos_ejecutados -le $contador ]]; do
 	fi
 
 	if [[ ${array_tiempo_restante[$proceso_en_ejecucion]} -eq 0 ]]; then
-		((procesos_ejecutados++))
+		if [[ $proceso_en_ejecucion -ne 0 ]]; then
+			echo $proceso_en_ejecucion
+			((procesos_ejecutados++))
+		fi
 		array_estado[$proceso_en_ejecucion]="Finalizado"
 		array_tiempo_retorno[$proceso_en_ejecucion]=$tiempo
 		eliminarMemoria
@@ -496,27 +515,37 @@ while [[ $procesos_ejecutados -le $contador ]]; do
 		eliminarCola
 	fi
 	
-	#memoria
+	
 	if [[ $proceso_en_ejecucion -eq 0 ]]; then
 
 			proceso_en_ejecucion=$(buscar_en_memoria)
+			if [[ $proceso_en_ejecucion  -gt 100 ]]; then
+				proceso_en_ejecucion=0
+			fi
 			#echo "buscar"
 			#imprimir_mem
 			#echo EN EJ: $proceso_en_ejecucion
 			array_tiempo_restante[$proceso_en_ejecucion]=${ordenado_arr_tiempos_ejecucion[$proceso_en_ejecucion]}
-			array_estado[$proceso_en_ejecucion]="En ejecucion"
-			
+			array_estado[$proceso_en_ejecucion]="En ejecucion"		
 	fi
 
 	
-
+	array_linea_temporal[$tiempo]=$proceso_en_ejecucion
 	#echo Tiempo=$tiempo
 	echo Cola:
 	echo ${cola[@]}
+	echo "P_EN_EJ:${proceso_en_ejecucion}"
+	echo "P_EJECUTADOS:${procesos_ejecutados}"
+	echo "Tamanio memoria: $tamanio_memoria"
+	#echo Linea Temporal:
+	#echo ${array_linea_temporal[@]}
 	imprimir_tabla
+	echo "Linea Temporal:"
+	imprimir_linea_temporal
 	#echo Memoria:
 	#echo "${#array_memoria[@]}"
 	imprimir_mem
+
 	((tiempo++))
 done
 
