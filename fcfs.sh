@@ -510,17 +510,18 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 		#echo ${array_estado[@]}
 		fi
 	done
-
 	primero_en_cola=${cola[1]}
 	calcular_memoria_restante
-
-	if [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ tamCola -gt 0 ]]; then
-		anadirMemoria
-		#echo "añadir"
-		#imprimir_mem
-		eliminarCola
-	fi
-	
+	while [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; do
+		primero_en_cola=${cola[1]}
+		calcular_memoria_restante
+		if [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; then
+			anadirMemoria
+			#echo "añadir"
+			#imprimir_mem
+			eliminarCola
+		fi
+	done	
 	
 	if [[ $proceso_en_ejecucion -eq 0 ]]; then
 
