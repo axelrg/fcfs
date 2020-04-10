@@ -364,9 +364,9 @@ tamCola=0
 proceso_en_ejecucion=0
 
 function imprimir_tabla {
-	printf " REF TLL TEJ MEM TES TRT TRE ESTADO\n"
+	printf " REF TLL TEJ MEM | TES TRT TRE ESTADO\n"
 	for (( i = 1; i <= $contador; i++ )); do
-			printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "${array_estado[$i]}"
+			printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "${array_estado[$i]}"
 		done
 }
 
@@ -374,6 +374,7 @@ function anadirCola {
 	((tamCola++))
 	cola[$tamCola]=$proceso
 	array_estado[$proceso]="En espera"
+	array_tiempo_espera[$proceso]=0
 
 }
 
@@ -516,6 +517,7 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 		primero_en_cola=${cola[1]}
 		calcular_memoria_restante
 		if [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; then
+
 			anadirMemoria
 			#echo "añadir"
 			#imprimir_mem
@@ -538,6 +540,16 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 
 	
 	array_linea_temporal[$tiempo]=$proceso_en_ejecucion
+
+	for (( i = 1; i <= $contador ; i++ )); do
+		if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]]; then
+			if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
+				array_tiempo_espera[$i]=$((${array_tiempo_espera[$i]}+1))
+			fi
+			
+		fi
+	done
+	
 	#echo Tiempo=$tiempo
 	#echo Cola:
 	#echo ${cola[@]}
