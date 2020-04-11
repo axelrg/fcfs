@@ -375,6 +375,7 @@ function anadirCola {
 	cola[$tamCola]=$proceso
 	array_estado[$proceso]="En espera"
 	array_tiempo_espera[$proceso]=0
+	array_tiempo_retorno[$proceso]=0
 
 }
 
@@ -477,10 +478,12 @@ inicializar_array_memoria
 tiempo=0
 procesos_ejecutados=0
 
+
 while [[ $procesos_ejecutados -lt $contador ]]; do
 	#clear
+	cambio_a_imprimir=0
 	printf "\n\n\n"
-	echo Tiempo=$tiempo
+	#echo Tiempo=$tiempo
 
 	if [[ $proceso_en_ejecucion -ne 0 ]] && [[ $tiempo -ne 0 ]]; then
 		array_tiempo_restante[$proceso_en_ejecucion]=$((${array_tiempo_restante[$proceso_en_ejecucion]}-1))
@@ -492,7 +495,7 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 			((procesos_ejecutados++))
 		fi
 		array_estado[$proceso_en_ejecucion]="Finalizado"
-		array_tiempo_retorno[$proceso_en_ejecucion]=$tiempo
+		#array_tiempo_retorno[$proceso_en_ejecucion]=$tiempo
 		eliminarMemoria
 
 		#echo Memoria despues de EM:
@@ -511,6 +514,8 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 		#echo ${array_estado[@]}
 		fi
 	done
+
+	
 	primero_en_cola=${cola[1]}
 	calcular_memoria_restante
 	while [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; do
@@ -525,8 +530,8 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 		fi
 	done	
 	
+	#Condicional encargado de meter procesos a CPU
 	if [[ $proceso_en_ejecucion -eq 0 ]]; then
-
 			proceso_en_ejecucion=$(buscar_en_memoria)
 			if [[ $proceso_en_ejecucion  -gt 100 ]]; then
 				proceso_en_ejecucion=0
@@ -535,18 +540,29 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 			#imprimir_mem
 			#echo EN EJ: $proceso_en_ejecucion
 			array_tiempo_restante[$proceso_en_ejecucion]=${ordenado_arr_tiempos_ejecucion[$proceso_en_ejecucion]}
-			array_estado[$proceso_en_ejecucion]="En ejecucion"		
+			array_estado[$proceso_en_ejecucion]="En ejecucion"
+			cambio_a_imprimir=1
+
 	fi
 
-	
+	#Con esto actualizo unidad de tiempo a unidad de tiempo la LINEA TEMPORAL
 	array_linea_temporal[$tiempo]=$proceso_en_ejecucion
 
+	#Bucle encargado de calcular el TIEMPO EN ESPERA
 	for (( i = 1; i <= $contador ; i++ )); do
 		if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]]; then
 			if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
 				array_tiempo_espera[$i]=$((${array_tiempo_espera[$i]}+1))
 			fi
-			
+		fi
+	done
+
+		#Bucle encargado de calcular el TIEMPO DE RETORNO
+	for (( i = 1; i <= $contador ; i++ )); do
+		if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]] || [[ ${array_estado[$i]} == "Finalizado" &&  ${ordenado_arr_tiempos_ejecucion[$i]} -eq $tiempo ]]; then
+			if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
+				array_tiempo_retorno[$i]=$((${array_tiempo_retorno[$i]}+1))
+			fi
 		fi
 	done
 	
@@ -558,16 +574,28 @@ while [[ $procesos_ejecutados -lt $contador ]]; do
 	#echo "Tamanio memoria: $tamanio_memoria"
 	#echo Linea Temporal:
 	#echo ${array_linea_temporal[@]}
-	imprimir_tabla
-	echo "LINEA TEMPORAL:"
-	imprimir_linea_temporal
+
+	if [[ $cambio_a_imprimir -eq 1 ]]; then
+		clear
+		echo Tiempo=$tiempo
+		printf "\n"
+		imprimir_tabla
+		printf "\n"
+		echo "LINEA TEMPORAL:"
+		imprimir_linea_temporal
+		printf "\n"
+		echo "LINEA MEMORIA:"
+		#echo "${#array_memoria[@]}"
+		#echo "${array_memoria[@]}"
+		#imprimir_mem
+		imprimir_linea_memoria
+		printf "\n"
+		read -ers -p "Pulse [intro] para continuar la ejecucion"
+		printf "\n"
+	fi
 	#echo Memoria:
 	
-	echo "LINEA MEMORIA:"
-	echo "${#array_memoria[@]}"
-	echo "${array_memoria[@]}"
-	imprimir_mem
-	imprimir_linea_memoria
+	
 
 	((tiempo++))
 done
