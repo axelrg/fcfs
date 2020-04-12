@@ -1,0 +1,416 @@
+Tiempo=0
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   0   10  En ejecucion 
+ P09 1   15  30  | -   -   -   Fuera del sistema 
+ P02 2   18  25  | -   -   -   Fuera del sistema 
+ P14 3   30  10  | -   -   -   Fuera del sistema 
+ P07 4   22  10  | -   -   -   Fuera del sistema 
+ P05 6   8   25  | -   -   -   Fuera del sistema 
+ P04 8   11  30  | -   -   -   Fuera del sistema 
+ P08 9   13  15  | -   -   -   Fuera del sistema 
+ P10 11  20  25  | -   -   -   Fuera del sistema 
+ P06 12  12  20  | -   -   -   Fuera del sistema 
+ P12 13  28  35  | -   -   -   Fuera del sistema 
+ P03 14  25  15  | -   -   -   Fuera del sistema 
+ P15 15  15  5   | -   -   -   Fuera del sistema 
+ P11 21  19  10  | -   -   -   Fuera del sistema 
+ P13 22  32  30  | -   -   -   Fuera del sistema 
+
+LINEA TEMPORAL:
+▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=10
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   9   15  En ejecucion 
+ P02 2   18  25  | 8   8   -   En espera 
+ P14 3   30  10  | 7   7   -   En espera 
+ P07 4   22  10  | 6   6   -   En espera 
+ P05 6   8   25  | 4   4   -   En espera 
+ P04 8   11  30  | 2   2   -   En espera 
+ P08 9   13  15  | 1   1   -   En espera 
+ P10 11  20  25  | -   -   -   Fuera del sistema 
+ P06 12  12  20  | -   -   -   Fuera del sistema 
+ P12 13  28  35  | -   -   -   Fuera del sistema 
+ P03 14  25  15  | -   -   -   Fuera del sistema 
+ P15 15  15  5   | -   -   -   Fuera del sistema 
+ P11 21  19  10  | -   -   -   Fuera del sistema 
+ P13 22  32  30  | -   -   -   Fuera del sistema 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=25
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  23  18  En ejecucion 
+ P14 3   30  10  | 22  22  -   En memoria 
+ P07 4   22  10  | 21  21  -   En espera 
+ P05 6   8   25  | 19  19  -   En espera 
+ P04 8   11  30  | 17  17  -   En espera 
+ P08 9   13  15  | 16  16  -   En espera 
+ P10 11  20  25  | 14  14  -   En espera 
+ P06 12  12  20  | 13  13  -   En espera 
+ P12 13  28  35  | 12  12  -   En espera 
+ P03 14  25  15  | 11  11  -   En espera 
+ P15 15  15  5   | 10  10  -   En espera 
+ P11 21  19  10  | 4   4   -   En espera 
+ P13 22  32  30  | 3   3   -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=43
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  40  30  En ejecucion 
+ P07 4   22  10  | 39  39  -   En memoria 
+ P05 6   8   25  | 37  37  -   En espera 
+ P04 8   11  30  | 35  35  -   En espera 
+ P08 9   13  15  | 34  34  -   En espera 
+ P10 11  20  25  | 32  32  -   En espera 
+ P06 12  12  20  | 31  31  -   En espera 
+ P12 13  28  35  | 30  30  -   En espera 
+ P03 14  25  15  | 29  29  -   En espera 
+ P15 15  15  5   | 28  28  -   En espera 
+ P11 21  19  10  | 22  22  -   En espera 
+ P13 22  32  30  | 21  21  -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=73
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  69  22  En ejecucion 
+ P05 6   8   25  | 67  67  -   En memoria 
+ P04 8   11  30  | 65  65  -   En espera 
+ P08 9   13  15  | 64  64  -   En espera 
+ P10 11  20  25  | 62  62  -   En espera 
+ P06 12  12  20  | 61  61  -   En espera 
+ P12 13  28  35  | 60  60  -   En espera 
+ P03 14  25  15  | 59  59  -   En espera 
+ P15 15  15  5   | 58  58  -   En espera 
+ P11 21  19  10  | 52  52  -   En espera 
+ P13 22  32  30  | 51  51  -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=95
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  89  8   En ejecucion 
+ P04 8   11  30  | 87  87  -   En espera 
+ P08 9   13  15  | 86  86  -   En espera 
+ P10 11  20  25  | 84  84  -   En espera 
+ P06 12  12  20  | 83  83  -   En espera 
+ P12 13  28  35  | 82  82  -   En espera 
+ P03 14  25  15  | 81  81  -   En espera 
+ P15 15  15  5   | 80  80  -   En espera 
+ P11 21  19  10  | 74  74  -   En espera 
+ P13 22  32  30  | 73  73  -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=103
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  95  11  En ejecucion 
+ P08 9   13  15  | 94  94  -   En espera 
+ P10 11  20  25  | 92  92  -   En espera 
+ P06 12  12  20  | 91  91  -   En espera 
+ P12 13  28  35  | 90  90  -   En espera 
+ P03 14  25  15  | 89  89  -   En espera 
+ P15 15  15  5   | 88  88  -   En espera 
+ P11 21  19  10  | 82  82  -   En espera 
+ P13 22  32  30  | 81  81  -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=114
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  105 0   Finalizado 
+ P08 9   13  15  | 104 105 13  En ejecucion 
+ P10 11  20  25  | 103 103 -   En memoria 
+ P06 12  12  20  | 102 102 -   En espera 
+ P12 13  28  35  | 101 101 -   En espera 
+ P03 14  25  15  | 100 100 -   En espera 
+ P15 15  15  5   | 99  99  -   En espera 
+ P11 21  19  10  | 93  93  -   En espera 
+ P13 22  32  30  | 92  92  -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=127
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  105 0   Finalizado 
+ P08 9   13  15  | 104 117 0   Finalizado 
+ P10 11  20  25  | 115 116 20  En ejecucion 
+ P06 12  12  20  | 115 115 -   En espera 
+ P12 13  28  35  | 114 114 -   En espera 
+ P03 14  25  15  | 113 113 -   En espera 
+ P15 15  15  5   | 112 112 -   En espera 
+ P11 21  19  10  | 106 106 -   En espera 
+ P13 22  32  30  | 105 105 -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=147
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  105 0   Finalizado 
+ P08 9   13  15  | 104 117 0   Finalizado 
+ P10 11  20  25  | 115 135 0   Finalizado 
+ P06 12  12  20  | 134 135 12  En ejecucion 
+ P12 13  28  35  | 134 134 -   En espera 
+ P03 14  25  15  | 133 133 -   En espera 
+ P15 15  15  5   | 132 132 -   En espera 
+ P11 21  19  10  | 126 126 -   En espera 
+ P13 22  32  30  | 125 125 -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=159
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  105 0   Finalizado 
+ P08 9   13  15  | 104 117 0   Finalizado 
+ P10 11  20  25  | 115 135 0   Finalizado 
+ P06 12  12  20  | 134 146 0   Finalizado 
+ P12 13  28  35  | 145 146 28  En ejecucion 
+ P03 14  25  15  | 145 145 -   En espera 
+ P15 15  15  5   | 144 144 -   En espera 
+ P11 21  19  10  | 138 138 -   En espera 
+ P13 22  32  30  | 137 137 -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=187
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  105 0   Finalizado 
+ P08 9   13  15  | 104 117 0   Finalizado 
+ P10 11  20  25  | 115 135 0   Finalizado 
+ P06 12  12  20  | 134 146 0   Finalizado 
+ P12 13  28  35  | 145 173 0   Finalizado 
+ P03 14  25  15  | 172 173 25  En ejecucion 
+ P15 15  15  5   | 172 172 -   En memoria 
+ P11 21  19  10  | 166 166 -   En memoria 
+ P13 22  32  30  | 165 165 -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=212
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  105 0   Finalizado 
+ P08 9   13  15  | 104 117 0   Finalizado 
+ P10 11  20  25  | 115 135 0   Finalizado 
+ P06 12  12  20  | 134 146 0   Finalizado 
+ P12 13  28  35  | 145 173 0   Finalizado 
+ P03 14  25  15  | 172 197 0   Finalizado 
+ P15 15  15  5   | 196 197 15  En ejecucion 
+ P11 21  19  10  | 191 191 -   En memoria 
+ P13 22  32  30  | 190 190 -   En espera 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=227
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  105 0   Finalizado 
+ P08 9   13  15  | 104 117 0   Finalizado 
+ P10 11  20  25  | 115 135 0   Finalizado 
+ P06 12  12  20  | 134 146 0   Finalizado 
+ P12 13  28  35  | 145 173 0   Finalizado 
+ P03 14  25  15  | 172 197 0   Finalizado 
+ P15 15  15  5   | 196 211 0   Finalizado 
+ P11 21  19  10  | 205 206 19  En ejecucion 
+ P13 22  32  30  | 205 205 -   En memoria 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=246
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  105 0   Finalizado 
+ P08 9   13  15  | 104 117 0   Finalizado 
+ P10 11  20  25  | 115 135 0   Finalizado 
+ P06 12  12  20  | 134 146 0   Finalizado 
+ P12 13  28  35  | 145 173 0   Finalizado 
+ P03 14  25  15  | 172 197 0   Finalizado 
+ P15 15  15  5   | 196 211 0   Finalizado 
+ P11 21  19  10  | 205 224 0   Finalizado 
+ P13 22  32  30  | 223 224 32  En ejecucion 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+Tiempo=278
+
+ REF TLL TEJ MEM | TES TRT TRE ESTADO
+ P01 0   10  20  | 0   10  0   Finalizado 
+ P09 1   15  30  | 8   23  0   Finalizado 
+ P02 2   18  25  | 22  40  0   Finalizado 
+ P14 3   30  10  | 39  69  0   Finalizado 
+ P07 4   22  10  | 68  90  0   Finalizado 
+ P05 6   8   25  | 88  96  0   Finalizado 
+ P04 8   11  30  | 94  105 0   Finalizado 
+ P08 9   13  15  | 104 117 0   Finalizado 
+ P10 11  20  25  | 115 135 0   Finalizado 
+ P06 12  12  20  | 134 146 0   Finalizado 
+ P12 13  28  35  | 145 173 0   Finalizado 
+ P03 14  25  15  | 172 197 0   Finalizado 
+ P15 15  15  5   | 196 211 0   Finalizado 
+ P11 21  19  10  | 205 224 0   Finalizado 
+ P13 22  32  30  | 223 255 0   Finalizado 
+
+LINEA TEMPORAL:
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+LINEA MEMORIA:
+Tamaño memoria = 40
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+

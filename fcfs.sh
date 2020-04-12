@@ -43,8 +43,6 @@ function array_colores {
 	fi
 }
 
-
-
 function pregunto_si_otro_proceso_mas {
 	echo "¿Quieres añadir otro proceso?"
 	       		read "op"
@@ -56,11 +54,8 @@ function pregunto_si_otro_proceso_mas {
 				done
 }
 
-
-#contador guarda el número de elementos en los vectores	
-
 function ordenar_arrays_por_Tll {
-
+	#contador guarda el número de procesos en los arrays
 	for (( t = 1; t <= $contador; t++ )); do
 
 		min=1000 #1000 es un numero que hace imposible que  haya uno menor
@@ -120,74 +115,69 @@ function imprimir_tabla_datos {
 	printf " REF TLL TEJ MEM\n"
 	for (( i = 1; i <= $contador; i++ )); do
 			printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT\n" 3 ${ordenado_nombres_procesos[$i]} 3 ${ordenado_arr_tiempos_llegada[$i]} 3 ${ordenado_arr_tiempos_ejecucion[$i]} 3 ${ordenado_arr_memoria[$i]}
-		done
+	done
+	read -ers -p "Pulse [intro] para continuar la ejecucion"
 }
 
 function entrada_por_teclado {
-op="s"
-contador=1
-echo "Introduce el tamaño de la memoria"
-read tamanio_memoria
-echo "El tamaño de la memoria es $tamanio_memoria"
-while [ "$op" == "s" ]; do
+	op="s"
+	contador=1
+	echo "Introduce el tamaño de la memoria"
+	read tamanio_memoria
+	echo "El tamaño de la memoria es $tamanio_memoria"
+	while [ "$op" == "s" ]; do
 
-		arr_tiempos_llegada[$contador]="-"
-		arr_tiempos_ejecucion[$contador]="-"
-		arr_memoria[$contador]="-"
+			arr_tiempos_llegada[$contador]="-"
+			arr_tiempos_ejecucion[$contador]="-"
+			arr_memoria[$contador]="-"
 
-		if [ $contador -gt 9 ]; then
-			nombres_procesos[$contador]="P$contador"
-		fi
-		
-		if [ $contador -lt 10 ]; then
-			nombres_procesos[$contador]="P0$contador"
-		fi
-		array_colores
-		copia_inversa_arrays
-		#echo "${arr_tiempos_llegada[@]}"
-		#echo "${arr_tiempos_ejecucion[@]}"
-		#echo "${arr_memoria[@]}"
-		#echo "${nombres_procesos[@]}"
-		#echo "${arr_colores[@]}"
-		imprimir_tabla_datos
-		echo "Tiempo de llegada P$contador:"
-		read tiempo_llegada
-		arr_tiempos_llegada[$contador]=$tiempo_llegada
+			if [ $contador -gt 9 ]; then
+				nombres_procesos[$contador]="P$contador"
+			fi
+			
+			if [ $contador -lt 10 ]; then
+				nombres_procesos[$contador]="P0$contador"
+			fi
+			array_colores
+			copia_inversa_arrays
+			#echo "${arr_tiempos_llegada[@]}"
+			#echo "${arr_tiempos_ejecucion[@]}"
+			#echo "${arr_memoria[@]}"
+			#echo "${nombres_procesos[@]}"
+			#echo "${arr_colores[@]}"
+			imprimir_tabla_datos
+			echo "Tiempo de llegada P$contador:"
+			read tiempo_llegada
+			arr_tiempos_llegada[$contador]=$tiempo_llegada
 
-		copia_inversa_arrays
-		imprimir_tabla_datos
-		echo "Tiempo de ejecución P$contador:"
-		read tiempo_ejecucion
-		arr_tiempos_ejecucion[$contador]=$tiempo_ejecucion
+			copia_inversa_arrays
+			imprimir_tabla_datos
+			echo "Tiempo de ejecución P$contador:"
+			read tiempo_ejecucion
+			arr_tiempos_ejecucion[$contador]=$tiempo_ejecucion
 
-		copia_inversa_arrays
-		imprimir_tabla_datos
-		echo "Memoria P$contador:"
-		read memoria
-		arr_memoria[$contador]=$memoria
+			copia_inversa_arrays
+			imprimir_tabla_datos
+			echo "Memoria P$contador:"
+			read memoria
+			arr_memoria[$contador]=$memoria
 
-		
+			ordenar_arrays_por_Tll
+			copiar_arrays
 
+			#echo "${arr_tiempos_llegada[@]}"
+			#echo "${arr_tiempos_ejecucion[@]}"
+			#echo "${arr_memoria[@]}"
+			#echo "${nombres_procesos[@]}"
+			#echo "${arr_colores[@]}"
 
-		
-		ordenar_arrays_por_Tll
-		copiar_arrays
+			imprimir_tabla_datos
+			pregunto_si_otro_proceso_mas
 
-		#echo "${arr_tiempos_llegada[@]}"
-		#echo "${arr_tiempos_ejecucion[@]}"
-		#echo "${arr_memoria[@]}"
-		#echo "${nombres_procesos[@]}"
-		#echo "${arr_colores[@]}"
-
-		
-		imprimir_tabla_datos
-		pregunto_si_otro_proceso_mas
-
-		if [ "$op" == "s" ]; then
-			contador=$(($contador+1))
-		fi
-done
-
+			if [ "$op" == "s" ]; then
+				contador=$(($contador+1))
+			fi
+	done
 }
 
 function entrada_aleatoria {
@@ -200,7 +190,8 @@ function entrada_aleatoria {
 
 			arr_tiempos_llegada[$contador]=$((RANDOM%99))
 			arr_tiempos_ejecucion[$contador]=$(((RANDOM%98)+1))
-			arr_memoria[$contador]=$((RANDOM%${tamanio_memoria}))
+			limite_superior_mem=$(($tamanio_memoria-1))
+			arr_memoria[$contador]=$(((RANDOM%$limite_superior_mem)+1))
 
 
 			if [ $contador -gt 9 ]; then
@@ -223,7 +214,6 @@ function entrada_aleatoria {
 				contador=$procesos_a_crear
 			fi
 }
-
 
 function corte_datos {
 	cd FICHEROS_ENTRADA
@@ -264,7 +254,6 @@ function entrada_por_fichero {
 	corte_datos
 }
 
-
 function menu_entrada {
 
 	echo "Elige una de las opciones para introducir los datos:"
@@ -276,13 +265,13 @@ function menu_entrada {
 		1)
 			echo "Has elegido entrada por teclado:"
 			entrada_por_teclado
-			imprimir_tabla_datos
+			
 		;;
 
 		2)
 			echo "Has elegido generar los datos aleatoriamente:"
 			entrada_aleatoria
-			imprimir_tabla_datos
+			
 		;;
 
 		3)
@@ -292,14 +281,12 @@ function menu_entrada {
 			#echo "${arr_colores[@]}"
 			ordenar_arrays_por_Tll
 			copiar_arrays
-			imprimir_tabla_datos
+			
 
 			#echo "${nombres_procesos[@]}"
 			#echo "${arr_tiempos_llegada[@]}"
 			#echo "${arr_tiempos_ejecucion[@]}"
 			#echo "${arr_memoria[@]}"
-			
-
 		;;
 
 		*)
@@ -307,23 +294,6 @@ function menu_entrada {
 		;;
 	esac
 }
-
-menu_entrada
-
-#echo "${arr_tiempos_llegada[@]}"
-#echo "${arr_tiempos_ejecucion[@]}"
-#echo "${arr_memoria[@]}"
-#echo "${nombres_procesos[@]}"
-
-
-declare -a cola
-declare -a array_estado
-declare -a array_tiempo_restante
-declare -a array_tiempo_espera
-declare -a array_tiempo_retorno
-declare -a array_linea_temporal
-declare -a array_memoria
-
 
 function inicializar_array_memoria {
 	for (( i = 0 ; i <=$tamanio_memoria ; i++ )); do
@@ -356,18 +326,12 @@ function inicializar_array_estado {
 	done
 }
 
-
-
-#En esta función un proceso se va a meter en cola si el tiempo=TLL y no se está ejecutando
-proceso=1
-tamCola=0
-proceso_en_ejecucion=0
-
 function imprimir_tabla {
 	printf " REF TLL TEJ MEM | TES TRT TRE ESTADO\n"
 	for (( i = 1; i <= $contador; i++ )); do
-			printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "${array_estado[$i]}"
-		done
+		printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "${array_estado[$i]}"
+	done
+
 }
 
 function anadirCola {
@@ -376,7 +340,6 @@ function anadirCola {
 	array_estado[$proceso]="En espera"
 	array_tiempo_espera[$proceso]=0
 	array_tiempo_retorno[$proceso]=0
-
 }
 
 function eliminarCola {
@@ -428,19 +391,16 @@ function buscar_en_memoria {
 	done
 	if [[ $primero_en_llegar -ne 0 ]]; then
 		echo "$primero_en_llegar"
-	fi
-	
+	fi	
 }
 
 function calcular_memoria_restante {
 	memoria_restante=0
-
 	for (( i = 1; i <= $tamanio_memoria ; i++ )); do
 		if [[ ${array_memoria[$i]} -eq 0 ]]; then
 			((memoria_restante++))
 		fi
 	done
-
 }
 
 function imprimir_mem {
@@ -448,160 +408,193 @@ function imprimir_mem {
 	for (( i = 1; i <=$tamanio_memoria ; i++ )); do
 		echo -n "${array_memoria[$i]}"
 	done
-echo ""
+	echo ""
 }
 
 function imprimir_linea_temporal {
 	for (( i = 0; i <= $tiempo; i++ )); do
 		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}\u2593$DEFAULT"
 	done
-
-echo ""
+	echo ""
 }
 
 function imprimir_linea_memoria {
 	for (( i = 1; i <= $tamanio_memoria; i++ )); do
 		printf "${ordenado_arr_colores[${array_memoria[$i]}]}\u2593$DEFAULT"
 	done
-
-echo ""
+	echo ""
+	read -ers -p "Pulse [intro] para continuar la ejecucion"
+	echo ""
 }
-#while [[ $procesos_ejecutados -lt $contador ]]; do
-	
 
-#done
-inicializar_array_tiempo_espera
-inicializar_array_tiempo_restante
-inicializar_array_estado
-inicializar_array_tiempo_retorno
-inicializar_array_memoria
-tiempo=0
-procesos_ejecutados=0
+#Esta funcion calcula todos los elementos en el script
+function bucle_principal_script {
 
+	declare -a cola
+	declare -a array_estado
+	declare -a array_tiempo_restante
+	declare -a array_tiempo_espera
+	declare -a array_tiempo_retorno
+	declare -a array_linea_temporal
+	declare -a array_memoria
 
-while [[ $procesos_ejecutados -lt $contador ]]; do
-	#clear
-	cambio_a_imprimir=0
-	printf "\n\n\n"
-	#echo Tiempo=$tiempo
+	proceso=1
+	tamCola=0
+	proceso_en_ejecucion=0
+	tiempo=0
+	procesos_ejecutados=0
 
-	if [[ $proceso_en_ejecucion -ne 0 ]] && [[ $tiempo -ne 0 ]]; then
-		array_tiempo_restante[$proceso_en_ejecucion]=$((${array_tiempo_restante[$proceso_en_ejecucion]}-1))
-	fi
+	inicializar_array_tiempo_espera
+	inicializar_array_tiempo_restante
+	inicializar_array_estado
+	inicializar_array_tiempo_retorno
+	inicializar_array_memoria
 
-	if [[ ${array_tiempo_restante[$proceso_en_ejecucion]} -eq 0 ]]; then
-		if [[ $proceso_en_ejecucion -ne 0 ]]; then
-			#echo $proceso_en_ejecucion
-			((procesos_ejecutados++))
+	while [[ $procesos_ejecutados -lt $contador ]]; do
+		cambio_a_imprimir=0
+		#echo Tiempo=$tiempo
+
+		if [[ $proceso_en_ejecucion -ne 0 ]] && [[ $tiempo -ne 0 ]]; then
+			array_tiempo_restante[$proceso_en_ejecucion]=$((${array_tiempo_restante[$proceso_en_ejecucion]}-1))
 		fi
-		array_estado[$proceso_en_ejecucion]="Finalizado"
-		#array_tiempo_retorno[$proceso_en_ejecucion]=$tiempo
-		eliminarMemoria
 
-		#echo Memoria despues de EM:
-		#echo "eliminar"
-		#imprimir_mem
-		proceso_en_ejecucion=0
-	fi
+		if [[ ${array_tiempo_restante[$proceso_en_ejecucion]} -eq 0 ]]; then
+			if [[ $proceso_en_ejecucion -ne 0 ]]; then
+				#echo $proceso_en_ejecucion
+				((procesos_ejecutados++))
+			fi
+			array_estado[$proceso_en_ejecucion]="Finalizado"
+			#array_tiempo_retorno[$proceso_en_ejecucion]=$tiempo
+			eliminarMemoria
 
-
-	for (( j = 1; j<=$contador ; j++ )); do
-		#echo ${ordenado_arr_tiempos_llegada[$j]}
-		if [[ $tiempo -eq ${ordenado_arr_tiempos_llegada[$j]} ]]; then
-		proceso=$j
-		anadirCola
-		#echo ${cola[@]}
-		#echo ${array_estado[@]}
+			#echo Memoria despues de EM:
+			#echo "eliminar"
+			#imprimir_mem
+			proceso_en_ejecucion=0
 		fi
-	done
 
-	
-	primero_en_cola=${cola[1]}
-	calcular_memoria_restante
-	while [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; do
+
+		for (( j = 1; j<=$contador ; j++ )); do
+			#echo ${ordenado_arr_tiempos_llegada[$j]}
+			if [[ $tiempo -eq ${ordenado_arr_tiempos_llegada[$j]} ]]; then
+			proceso=$j
+			anadirCola
+			#echo ${cola[@]}
+			#echo ${array_estado[@]}
+			fi
+		done
+
+		
 		primero_en_cola=${cola[1]}
 		calcular_memoria_restante
-		if [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; then
+		while [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; do
+			primero_en_cola=${cola[1]}
+			calcular_memoria_restante
+			if [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; then
 
-			anadirMemoria
-			#echo "añadir"
-			#imprimir_mem
-			eliminarCola
-		fi
-	done	
-	
-	#Condicional encargado de meter procesos a CPU
-	if [[ $proceso_en_ejecucion -eq 0 ]]; then
-			proceso_en_ejecucion=$(buscar_en_memoria)
-			if [[ $proceso_en_ejecucion  -gt 100 ]]; then
-				proceso_en_ejecucion=0
+				anadirMemoria
+				#echo "añadir"
+				#imprimir_mem
+				eliminarCola
 			fi
-			#echo "buscar"
-			#imprimir_mem
-			#echo EN EJ: $proceso_en_ejecucion
-			array_tiempo_restante[$proceso_en_ejecucion]=${ordenado_arr_tiempos_ejecucion[$proceso_en_ejecucion]}
-			array_estado[$proceso_en_ejecucion]="En ejecucion"
-			cambio_a_imprimir=1
+		done	
+		
+		#Condicional encargado de meter procesos a CPU
+		if [[ $proceso_en_ejecucion -eq 0 ]]; then
+				proceso_en_ejecucion=$(buscar_en_memoria)
+				if [[ $proceso_en_ejecucion  -gt 100 ]]; then
+					proceso_en_ejecucion=0
+				fi
+				#echo "buscar"
+				#imprimir_mem
+				#echo EN EJ: $proceso_en_ejecucion
+				array_tiempo_restante[$proceso_en_ejecucion]=${ordenado_arr_tiempos_ejecucion[$proceso_en_ejecucion]}
+				array_estado[$proceso_en_ejecucion]="En ejecucion"
+				cambio_a_imprimir=1
 
-	fi
-
-	#Con esto actualizo unidad de tiempo a unidad de tiempo la LINEA TEMPORAL
-	array_linea_temporal[$tiempo]=$proceso_en_ejecucion
-
-	#Bucle encargado de calcular el TIEMPO EN ESPERA
-	for (( i = 1; i <= $contador ; i++ )); do
-		if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]]; then
-			if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
-				array_tiempo_espera[$i]=$((${array_tiempo_espera[$i]}+1))
-			fi
 		fi
+
+		#Con esto actualizo unidad de tiempo a unidad de tiempo la LINEA TEMPORAL
+		array_linea_temporal[$tiempo]=$proceso_en_ejecucion
+
+		#Bucle encargado de calcular el TIEMPO EN ESPERA
+		for (( i = 1; i <= $contador ; i++ )); do
+			if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]]; then
+				if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
+					array_tiempo_espera[$i]=$((${array_tiempo_espera[$i]}+1))
+				fi
+			fi
+		done
+
+			#Bucle encargado de calcular el TIEMPO DE RETORNO
+		for (( i = 1; i <= $contador ; i++ )); do
+			if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]] || [[ ${array_estado[$i]} == "Finalizado" &&  ${ordenado_arr_tiempos_ejecucion[$i]} -eq $tiempo ]]; then
+				if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
+					array_tiempo_retorno[$i]=$((${array_tiempo_retorno[$i]}+1))
+				fi
+			fi
+		done
+		
+		#echo Tiempo=$tiempo
+		#echo Cola:
+		#echo ${cola[@]}
+		#echo "P_EN_EJ:${proceso_en_ejecucion}"
+		#echo "P_EJECUTADOS:${procesos_ejecutados}"
+		#echo "Tamanio memoria: $tamanio_memoria"
+		#echo Linea Temporal:
+		#echo ${array_linea_temporal[@]}
+
+		if [[ $cambio_a_imprimir -eq 1 ]]; then
+			clear
+			echo Tiempo=$tiempo
+			echo ""
+			imprimir_tabla
+			echo ""
+			echo "LINEA TEMPORAL:"
+			imprimir_linea_temporal
+			echo ""
+			echo "LINEA MEMORIA:"
+			#echo "${#array_memoria[@]}"
+			#echo "${array_memoria[@]}"
+			#imprimir_mem
+			echo "Tamaño memoria = $tamanio_memoria"
+			imprimir_linea_memoria 
+
+		fi
+		#echo Memoria:
+		
+		
+
+		((tiempo++))
 	done
 
-		#Bucle encargado de calcular el TIEMPO DE RETORNO
-	for (( i = 1; i <= $contador ; i++ )); do
-		if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]] || [[ ${array_estado[$i]} == "Finalizado" &&  ${ordenado_arr_tiempos_ejecucion[$i]} -eq $tiempo ]]; then
-			if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
-				array_tiempo_retorno[$i]=$((${array_tiempo_retorno[$i]}+1))
-			fi
-		fi
-	done
-	
-	#echo Tiempo=$tiempo
-	#echo Cola:
+	#imprimir_tabla
 	#echo ${cola[@]}
-	#echo "P_EN_EJ:${proceso_en_ejecucion}"
-	#echo "P_EJECUTADOS:${procesos_ejecutados}"
-	#echo "Tamanio memoria: $tamanio_memoria"
-	#echo Linea Temporal:
-	#echo ${array_linea_temporal[@]}
+	#echo ${array_estado[@]}
 
-	if [[ $cambio_a_imprimir -eq 1 ]]; then
-		clear
-		echo Tiempo=$tiempo
-		printf "\n"
-		imprimir_tabla
-		printf "\n"
-		echo "LINEA TEMPORAL:"
-		imprimir_linea_temporal
-		printf "\n"
-		echo "LINEA MEMORIA:"
-		#echo "${#array_memoria[@]}"
-		#echo "${array_memoria[@]}"
-		#imprimir_mem
-		imprimir_linea_memoria
-		printf "\n"
-		read -ers -p "Pulse [intro] para continuar la ejecucion"
-		printf "\n"
-	fi
-	#echo Memoria:
-	
-	
+	# commit de prueba
+}
 
-	((tiempo++))
-done
+function quitar_clear {
+	sed -i 's/\x1b\[3J//g' informeColor.txt
+	sed -i 's/\x1b\[2J//g' informeColor.txt
+	sed -i 's/\x1b\[H//g' informeColor.txt
+	#sed -i 's/\x1b\[3J\x1b\[2J\x1b\[H//g' informePrueba.txt no va
+}
 
-#imprimir_tabla
-#echo ${cola[@]}
-#echo ${array_estado[@]}
+function pasar_fichero_a_BN {
+	sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" informeColor.txt > informeBN.txt
+}
 
-# commit de prueba
+#Esta funcion es la encargada de llamar a la entrada, al bucle principal y a los informes/salida
+function principal {
+	rm informeColor.txt
+	rm informeBN.txt
+	menu_entrada
+	imprimir_tabla_datos
+	bucle_principal_script | tee informeColor.txt
+	quitar_clear
+	pasar_fichero_a_BN	
+}
+
+principal
