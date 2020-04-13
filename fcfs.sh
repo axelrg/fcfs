@@ -60,32 +60,29 @@ function ordenar_arrays_por_Tll {
 
 		min=1000 #1000 es un numero que hace imposible que  haya uno menor
 
-			for (( i = 1; i <= $contador; i++ )); do
+		for (( i = 1; i <= $contador; i++ )); do
 
-				#FIXME: Revisar SI SE ORDENA POR EL NOMBRE DEL PROCESO
-				if [ ${arr_tiempos_llegada[$i]} -lt "$min" ]; then
-		        min="${arr_tiempos_llegada[$i]}"
+			if [ ${arr_tiempos_llegada[$i]} -lt "$min" ]; then
+				min="${arr_tiempos_llegada[$i]}"
 				Posicion="$i"
+			fi
+		done
 
-				fi
+		#en cada ejecución del bucle se copia el elemento que ha establecido como menor
+		#en la posición correspondiente en el array ordenado
+		ordenado_arr_tiempos_llegada[$t]=${arr_tiempos_llegada[$Posicion]}
+		ordenado_arr_tiempos_ejecucion[$t]=${arr_tiempos_ejecucion[$Posicion]}
+		ordenado_arr_memoria[$t]=${arr_memoria[$Posicion]}
+		ordenado_nombres_procesos[$t]=${nombres_procesos[$Posicion]}
+		ordenado_arr_colores[$t]=${arr_colores[$Posicion]}
 
-			done
+		#echo "Min is: $min"
+		#echo "Posicion min es arr_tiempos_llegada[$Posicion]"
+		#echo "${arr_tiempos_llegada[$Posicion]}"
 
-			#en cada ejecución del bucle se copia el elemento que ha establecido como menor
-			#en la posición correspondiente en el array ordenado
-			ordenado_arr_tiempos_llegada[$t]=${arr_tiempos_llegada[$Posicion]}
-			ordenado_arr_tiempos_ejecucion[$t]=${arr_tiempos_ejecucion[$Posicion]}
-			ordenado_arr_memoria[$t]=${arr_memoria[$Posicion]}
-			ordenado_nombres_procesos[$t]=${nombres_procesos[$Posicion]}
-			ordenado_arr_colores[$t]=${arr_colores[$Posicion]}
-
-			#echo "Min is: $min"
-			#echo "Posicion min es arr_tiempos_llegada[$Posicion]"
-			#echo "${arr_tiempos_llegada[$Posicion]}"
-
-			#ese elemento menor se cambia su valor a 1000 para que no entre en la siguiente
-			#iteracion del bucle
-			arr_tiempos_llegada[$Posicion]="1000"
+		#ese elemento menor se cambia su valor a 1000 para que no entre en la siguiente
+		#iteracion del bucle
+		arr_tiempos_llegada[$Posicion]="1000"
 			
 		####################
 	done
@@ -114,9 +111,8 @@ function copia_inversa_arrays {
 function imprimir_tabla_datos {
 	printf " REF TLL TEJ MEM\n"
 	for (( i = 1; i <= $contador; i++ )); do
-			printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT\n" 3 ${ordenado_nombres_procesos[$i]} 3 ${ordenado_arr_tiempos_llegada[$i]} 3 ${ordenado_arr_tiempos_ejecucion[$i]} 3 ${ordenado_arr_memoria[$i]}
+		printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT\n" 3 ${ordenado_nombres_procesos[$i]} 3 ${ordenado_arr_tiempos_llegada[$i]} 3 ${ordenado_arr_tiempos_ejecucion[$i]} 3 ${ordenado_arr_memoria[$i]}
 	done
-	read -ers -p "Pulse [intro] para continuar la ejecucion"
 }
 
 function entrada_por_teclado {
@@ -145,18 +141,21 @@ function entrada_por_teclado {
 			#echo "${arr_memoria[@]}"
 			#echo "${nombres_procesos[@]}"
 			#echo "${arr_colores[@]}"
+			clear
 			imprimir_tabla_datos
 			echo "Tiempo de llegada P$contador:"
 			read tiempo_llegada
 			arr_tiempos_llegada[$contador]=$tiempo_llegada
 
 			copia_inversa_arrays
+			clear
 			imprimir_tabla_datos
 			echo "Tiempo de ejecución P$contador:"
 			read tiempo_ejecucion
 			arr_tiempos_ejecucion[$contador]=$tiempo_ejecucion
 
 			copia_inversa_arrays
+			clear
 			imprimir_tabla_datos
 			echo "Memoria P$contador:"
 			read memoria
@@ -171,6 +170,7 @@ function entrada_por_teclado {
 			#echo "${nombres_procesos[@]}"
 			#echo "${arr_colores[@]}"
 
+			clear
 			imprimir_tabla_datos
 			pregunto_si_otro_proceso_mas
 
@@ -211,8 +211,8 @@ function entrada_aleatoria {
 	done
 
 	if [ $contador -gt $procesos_a_crear ]; then
-				contador=$procesos_a_crear
-			fi
+		contador=$procesos_a_crear
+	fi
 }
 
 function corte_datos {
@@ -221,22 +221,23 @@ function corte_datos {
 	echo "El tamaño de la memoria es $tamanio_memoria"
 
 	for (( contador = 1; contador <= $(($procesos_en_fichero+2)); contador++ )); do
-			arr_tiempos_llegada[$contador]=`sed -n $(($contador+2))p $fichero_entrada | cut -d ":" -f 1`
-			arr_tiempos_ejecucion[$contador]=`sed -n $(($contador+2))p $fichero_entrada | cut -d ":" -f 2`
-			arr_memoria[$contador]=`sed -n $(($contador+2))p $fichero_entrada | cut -d ":" -f 3`
-			if [ $contador -gt 9 ]; then
-				nombres_procesos[$contador]="P$contador"
-			fi
-			
-			if [ $contador -lt 10 ]; then
-				nombres_procesos[$contador]="P0$contador"
-			fi
-			array_colores
-
+		arr_tiempos_llegada[$contador]=`sed -n $(($contador+2))p $fichero_entrada | cut -d ":" -f 1`
+		arr_tiempos_ejecucion[$contador]=`sed -n $(($contador+2))p $fichero_entrada | cut -d ":" -f 2`
+		arr_memoria[$contador]=`sed -n $(($contador+2))p $fichero_entrada | cut -d ":" -f 3`
+		if [ $contador -gt 9 ]; then
+			nombres_procesos[$contador]="P$contador"
+		fi
+		
+		if [ $contador -lt 10 ]; then
+			nombres_procesos[$contador]="P0$contador"
+		fi
+		array_colores
 	done
-			if [ $contador -gt $procesos_en_fichero ]; then
-				contador=$procesos_en_fichero
-			fi
+
+	if [ $contador -gt $procesos_en_fichero ]; then
+		contador=$procesos_en_fichero
+	fi
+
 	cd ../		
 }
 
@@ -261,6 +262,7 @@ function menu_entrada {
 	echo "2-> Generar datos aleatorios"
 	echo "3-> Leer desde un archivo"
 	read opcion_menu_datos
+
 	case $opcion_menu_datos in
 		1)
 			echo "Has elegido entrada por teclado:"
@@ -558,13 +560,9 @@ function bucle_principal_script {
 			#echo "${array_memoria[@]}"
 			#imprimir_mem
 			echo "Tamaño memoria = $tamanio_memoria"
-			imprimir_linea_memoria 
-
+			imprimir_linea_memoria
 		fi
-		#echo Memoria:
 		
-		
-
 		((tiempo++))
 	done
 
@@ -586,15 +584,75 @@ function pasar_fichero_a_BN {
 	sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" informeColor.txt > informeBN.txt
 }
 
+function portada {
+	clear 
+	#Las siguientes lineas van a aparecer en el informe y en la consola durante la ejecucion gracias a "tee -a"
+	echo "      ############################################################"| tee -a informeColor.txt
+	echo "      #                     Creative Commons                     #"| tee -a informeColor.txt
+	echo "      #                                                          #"| tee -a informeColor.txt
+	echo "      #                   BY - Atribución (BY)                   #"| tee -a informeColor.txt
+	echo "      #                 NC - No uso Comercial (NC)               #"| tee -a informeColor.txt
+	echo "      #                SA - Compartir Igual (SA)                 #"| tee -a informeColor.txt
+	echo "      ############################################################"| tee -a informeColor.txt
+	echo "">>informeColor.txt
+	echo "">>informeColor.txt
+	#Las siguientes lineas solo van a aparecer en el informe gracias a ">>"
+	echo "      #######################################################################">> informeColor.txt
+	echo "      #                                                                     #">> informeColor.txt
+	echo "      #                         INFORME DE PRÁCTICA                         #">> informeColor.txt
+	echo "      #                         GESTIÓN DE PROCESOS                         #">> informeColor.txt
+	echo "      #---------------------------------------------------------------------#">> informeColor.txt
+	echo "      #     Algoritmo:FCFS-SN-N-S                                           #">> informeColor.txt
+	echo "      #     Último Alumno: Áxel Rubio González                              #">> informeColor.txt
+	echo "      #                                                                     #">> informeColor.txt
+	echo "      #     Alumnos Anteriores:                                             #">> informeColor.txt
+	echo "      #        Víctor Paniagua Santana                                      #">> informeColor.txt
+	echo "      #        Enzo Argeñal                                                 #">> informeColor.txt
+	echo "      #        Hector Cogollos y Luis Miguel Cabrejas                       #">> informeColor.txt
+	echo "      #        Omar Santos Bernabé                                          #">> informeColor.txt
+	echo "      #---------------------------------------------------------------------#">> informeColor.txt
+	echo "      #              Sistemas Operativos 2º Semestre                        #">> informeColor.txt
+	echo "      #              Grado en ingeniería informática (2019-2020)            #">> informeColor.txt
+	echo "      #                                                                     #">> informeColor.txt
+	echo "      #######################################################################">> informeColor.txt
+	
+	echo ""
+	echo ""
+	echo -e "\e[31m        /= = = = = = = = = = = = = = = = = = = = = = = = = = = =\\"
+	echo -e "\e[31m       /= = = = = = = = = = = = = = = = = = = = = = = = = = = = =\\"
+	echo -e "\e[31m      ||                                                         ||\e[39m"
+	echo -e "\e[31m      ||   FCFS-SN-N-S:                                          ||\e[39m"
+	echo -e "\e[31m      ||        -FCFS:First Coming First Served                  ||\e[39m"
+	echo -e "\e[31m      ||        -SN:Según Necesidades                            ||\e[39m"
+	echo -e "\e[31m      ||        -N:Memoria no Continua                           ||\e[39m"
+	echo -e "\e[31m      ||        -R:Memoria Reubicable                            ||\e[39m"
+	echo -e "\e[31m      ||                                                         ||\e[39m"
+	echo -e "\e[31m      ||   AUTOR:                                                ||\e[39m"
+	echo -e "\e[31m      ||        -Áxel Rubio González                             ||\e[39m"
+	echo -e "\e[31m      ||                                                         ||\e[39m"
+	echo -e "\e[31m      ||   VERSIÓN:                                              ||\e[39m"
+	echo -e "\e[31m      ||        -Abril 2020                                      ||\e[39m"
+	echo -e "\e[31m      ||                                                         ||\e[39m"
+	echo -e "\e[31m       \\= = = = = = = = = = = = = = = = = = = = = = = = = = = = =/\e[39m"
+	echo -e "\e[31m        \\= = = = = = = = = = = = = = = = = = = = = = = = = = = =/\e[39m"
+	
+	read -ers -p "Pulse [intro] para continuar la ejecucion"
+
+}
+
 #Esta funcion es la encargada de llamar a la entrada, al bucle principal y a los informes/salida
 function principal {
 	rm informeColor.txt
 	rm informeBN.txt
+	portada
+	clear
+	echo ""
 	menu_entrada
 	imprimir_tabla_datos
-	bucle_principal_script | tee informeColor.txt
+	bucle_principal_script | tee -a informeColor.txt
 	quitar_clear
 	pasar_fichero_a_BN	
 }
+
 
 principal
