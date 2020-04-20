@@ -340,6 +340,7 @@ function anadirCola {
 	((tamCola++))
 	cola[$tamCola]=$proceso
 	array_estado[$proceso]="En espera"
+	cambio_a_imprimir=1
 	array_tiempo_espera[$proceso]=0
 	array_tiempo_retorno[$proceso]=0
 }
@@ -360,11 +361,12 @@ function anadirMemoria {
 		if [[ ${array_memoria[$i]} -eq 0 ]] && [[ $contador_memoria -lt ${ordenado_arr_memoria[$proceso_a_meter_en_memoria]} ]]; then
 			#echo "Antes de meter_en_memoria:${array_memoria[$i]}"
 			array_memoria[$i]=$proceso_a_meter_en_memoria
+
 			#echo "Despues de meter_en_memoria:${array_memoria[$i]}"
 			((contador_memoria++))
-		fi
-		
+		fi	
 	done
+	cambio_a_imprimir=1
 	array_estado[$proceso_a_meter_en_memoria]="En memoria"
 }
 
@@ -465,9 +467,13 @@ function bucle_principal_script {
 				#echo $proceso_en_ejecucion
 				((procesos_ejecutados++))
 			fi
+
 			array_estado[$proceso_en_ejecucion]="Finalizado"
+			array_tiempo_retorno[$proceso_en_ejecucion]=$((${array_tiempo_retorno[$proceso_en_ejecucion]}+1))
+			#array_tiempo_espera[$proceso_en_ejecucion]=$((${array_tiempo_espera[$proceso_en_ejecucion]}+1))
 			#array_tiempo_retorno[$proceso_en_ejecucion]=$tiempo
 			eliminarMemoria
+
 
 			#echo Memoria despues de EM:
 			#echo "eliminar"
@@ -489,11 +495,11 @@ function bucle_principal_script {
 		
 		primero_en_cola=${cola[1]}
 		calcular_memoria_restante
+
 		while [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; do
 			primero_en_cola=${cola[1]}
 			calcular_memoria_restante
 			if [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; then
-
 				anadirMemoria
 				#echo "añadir"
 				#imprimir_mem
@@ -503,16 +509,16 @@ function bucle_principal_script {
 		
 		#Condicional encargado de meter procesos a CPU
 		if [[ $proceso_en_ejecucion -eq 0 ]]; then
-				proceso_en_ejecucion=$(buscar_en_memoria)
-				if [[ $proceso_en_ejecucion  -gt 100 ]]; then
-					proceso_en_ejecucion=0
-				fi
-				#echo "buscar"
-				#imprimir_mem
-				#echo EN EJ: $proceso_en_ejecucion
-				array_tiempo_restante[$proceso_en_ejecucion]=${ordenado_arr_tiempos_ejecucion[$proceso_en_ejecucion]}
-				array_estado[$proceso_en_ejecucion]="En ejecucion"
-				cambio_a_imprimir=1
+			proceso_en_ejecucion=$(buscar_en_memoria)
+			if [[ $proceso_en_ejecucion  -gt 100 ]]; then
+				proceso_en_ejecucion=0
+			fi
+			#echo "buscar"
+			#imprimir_mem
+			#echo EN EJ: $proceso_en_ejecucion
+			array_tiempo_restante[$proceso_en_ejecucion]=${ordenado_arr_tiempos_ejecucion[$proceso_en_ejecucion]}
+			array_estado[$proceso_en_ejecucion]="En ejecucion"
+			cambio_a_imprimir=1
 
 		fi
 
@@ -522,7 +528,7 @@ function bucle_principal_script {
 		#Bucle encargado de calcular el TIEMPO EN ESPERA
 		for (( i = 1; i <= $contador ; i++ )); do
 			if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]]; then
-				if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
+				if [[ $tiempo -ne 0 ]]; then
 					array_tiempo_espera[$i]=$((${array_tiempo_espera[$i]}+1))
 				fi
 			fi
@@ -530,7 +536,7 @@ function bucle_principal_script {
 
 			#Bucle encargado de calcular el TIEMPO DE RETORNO
 		for (( i = 1; i <= $contador ; i++ )); do
-			if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]] || [[ ${array_estado[$i]} == "Finalizado" &&  ${ordenado_arr_tiempos_ejecucion[$i]} -eq $tiempo ]]; then
+			if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]]; then
 				if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
 					array_tiempo_retorno[$i]=$((${array_tiempo_retorno[$i]}+1))
 				fi
@@ -546,7 +552,7 @@ function bucle_principal_script {
 		#echo Linea Temporal:
 		#echo ${array_linea_temporal[@]}
 
-		if [[ $cambio_a_imprimir -eq 1 ]]; then
+		if [[ $cambio_a_imprimir -eq 1 ]] && [[ $tiempo -ge ${ordenado_arr_tiempos_llegada[1]} ]] ||  [[ $tiempo -eq 0 ]] ; then
 			clear
 			echo Tiempo=$tiempo
 			echo ""
@@ -625,7 +631,7 @@ function portada {
 	echo -e "\e[31m      ||        -FCFS:First Coming First Served                  ||\e[39m"
 	echo -e "\e[31m      ||        -SN:Según Necesidades                            ||\e[39m"
 	echo -e "\e[31m      ||        -N:Memoria no Continua                           ||\e[39m"
-	echo -e "\e[31m      ||        -R:Memoria Reubicable                            ||\e[39m"
+	echo -e "\e[31m      ||        -S:Memoria Reubicable                            ||\e[39m"
 	echo -e "\e[31m      ||                                                         ||\e[39m"
 	echo -e "\e[31m      ||   AUTOR:                                                ||\e[39m"
 	echo -e "\e[31m      ||        -Áxel Rubio González                             ||\e[39m"
