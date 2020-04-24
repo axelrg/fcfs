@@ -329,7 +329,7 @@ function inicializar_array_estado {
 }
 
 function imprimir_tabla {
-	printf " REF TLL TEJ MEM | TES TRT TRE ESTADO\n"
+	printf " Ref Tll Tej Mem | Tes Trt Tre Estado\n"
 	for (( i = 1; i <= $contador; i++ )); do
 		printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "${array_estado[$i]}"
 	done
@@ -368,9 +368,11 @@ function anadirMemoria {
 	done
 	cambio_a_imprimir=1
 	array_estado[$proceso_a_meter_en_memoria]="En memoria"
+	array_tiempo_restante[$proceso_a_meter_en_memoria]=${ordenado_arr_tiempos_ejecucion[$proceso_a_meter_en_memoria]}
 }
 
 function eliminarMemoria {
+	$proceso_en_ejecucion
 	for (( i = 1; i <=$tamanio_memoria ; i++ )); do
 
 		if [[ ${array_memoria[$i]} -eq $proceso_en_ejecucion ]]
@@ -420,14 +422,14 @@ function imprimir_linea_temporal {
 		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}\u2593$DEFAULT"
 	done
 	echo ""
+	read -ers -p "Pulse [intro] para continuar la ejecucion"
+	echo ""
 }
 
 function imprimir_linea_memoria {
 	for (( i = 1; i <= $tamanio_memoria; i++ )); do
 		printf "${ordenado_arr_colores[${array_memoria[$i]}]}\u2593$DEFAULT"
 	done
-	echo ""
-	read -ers -p "Pulse [intro] para continuar la ejecucion"
 	echo ""
 }
 
@@ -445,7 +447,7 @@ function bucle_principal_script {
 	proceso=1
 	tamCola=0
 	proceso_en_ejecucion=0
-	tiempo=0
+	tiempo=-1
 	procesos_ejecutados=0
 
 	inicializar_array_tiempo_espera
@@ -455,6 +457,7 @@ function bucle_principal_script {
 	inicializar_array_memoria
 
 	while [[ $procesos_ejecutados -lt $contador ]]; do
+		((tiempo++))
 		cambio_a_imprimir=0
 		#echo Tiempo=$tiempo
 
@@ -469,6 +472,7 @@ function bucle_principal_script {
 			fi
 
 			array_estado[$proceso_en_ejecucion]="Finalizado"
+			
 			array_tiempo_retorno[$proceso_en_ejecucion]=$((${array_tiempo_retorno[$proceso_en_ejecucion]}+1))
 			#array_tiempo_espera[$proceso_en_ejecucion]=$((${array_tiempo_espera[$proceso_en_ejecucion]}+1))
 			#array_tiempo_retorno[$proceso_en_ejecucion]=$tiempo
@@ -516,7 +520,10 @@ function bucle_principal_script {
 			#echo "buscar"
 			#imprimir_mem
 			#echo EN EJ: $proceso_en_ejecucion
-			array_tiempo_restante[$proceso_en_ejecucion]=${ordenado_arr_tiempos_ejecucion[$proceso_en_ejecucion]}
+			if [[ $tiempo -ne 0 ]]; then
+				array_tiempo_espera[$proceso_en_ejecucion]=$((${array_tiempo_espera[$proceso_en_ejecucion]}+1))
+
+			fi
 			array_estado[$proceso_en_ejecucion]="En ejecucion"
 			cambio_a_imprimir=1
 
@@ -525,25 +532,28 @@ function bucle_principal_script {
 		#Con esto actualizo unidad de tiempo a unidad de tiempo la LINEA TEMPORAL
 		array_linea_temporal[$tiempo]=$proceso_en_ejecucion
 
-		#Bucle encargado de calcular el TIEMPO EN ESPERA
-		for (( i = 1; i <= $contador ; i++ )); do
-			if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]]; then
-				if [[ $tiempo -ne 0 ]]; then
-					array_tiempo_espera[$i]=$((${array_tiempo_espera[$i]}+1))
-				fi
-			fi
-		done
-
-			#Bucle encargado de calcular el TIEMPO DE RETORNO
+		#Bucle encargado de calcular el TIEMPO DE RETORNO
 		for (( i = 1; i <= $contador ; i++ )); do
 			if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]]; then
 				if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
 					array_tiempo_retorno[$i]=$((${array_tiempo_retorno[$i]}+1))
 				fi
 			fi
+
+		done
+
+		#Bucle encargado de calcular el TIEMPO EN ESPERA
+		for (( i = 1; i <= $contador ; i++ )); do
+			if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]]; then
+				if [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$i]} ]]; then
+					array_tiempo_espera[$i]=$((${array_tiempo_espera[$i]}+1))
+				fi
+			fi
+
 		done
 		
 		#echo Tiempo=$tiempo
+
 		#echo Cola:
 		#echo ${cola[@]}
 		#echo "P_EN_EJ:${proceso_en_ejecucion}"
@@ -558,25 +568,23 @@ function bucle_principal_script {
 			echo ""
 			imprimir_tabla
 			echo ""
-			echo "LINEA TEMPORAL:"
-			imprimir_linea_temporal
-			echo ""
 			echo "LINEA MEMORIA:"
 			#echo "${#array_memoria[@]}"
 			#echo "${array_memoria[@]}"
 			#imprimir_mem
 			echo "Tamaño memoria = $tamanio_memoria"
 			imprimir_linea_memoria
+			echo ""
+			echo "LINEA TEMPORAL:"
+			imprimir_linea_temporal
 		fi
 		
-		((tiempo++))
+		
 	done
 
 	#imprimir_tabla
 	#echo ${cola[@]}
 	#echo ${array_estado[@]}
-
-	# commit de prueba
 }
 
 function quitar_clear {
