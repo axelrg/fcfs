@@ -418,17 +418,57 @@ function imprimir_mem {
 }
 
 function imprimir_linea_temporal {
-	for (( i = 0; i <= $tiempo; i++ )); do
-		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}\u2593$DEFAULT"
+	printf "BT|"
+	for (( i = 0; i <= $(($tiempo-1)); i++ )); do
+		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}\u2593\u2593\u2593$DEFAULT"
 	done
-	echo ""
-	read -ers -p "Pulse [intro] para continuar la ejecucion"
 	echo ""
 }
 
 function imprimir_linea_memoria {
+
 	for (( i = 1; i <= $tamanio_memoria; i++ )); do
 		printf "${ordenado_arr_colores[${array_memoria[$i]}]}\u2593$DEFAULT"
+	done
+	echo ""
+}
+
+function tiempo_linea_temporal {
+	tiempo_linea_temporal[0]="0  "
+	for (( i = 1; i <= $tiempo; i++ )); do
+		if [[ ${array_linea_temporal[$i]} -ne ${array_linea_temporal[$(($i - 1))]} ]]; then
+			if [[ $(($i - 1)) -lt 10 ]]; then
+				tiempo_linea_temporal[$i]="$i  "
+			fi
+
+			if [[ $(($i - 1)) -ge 10 ]]; then
+				tiempo_linea_temporal[$i]="$i "
+			fi
+			
+		fi
+
+		if [[ ${array_linea_temporal[$i]} -eq ${array_linea_temporal[$(($i - 1))]} ]]; then
+			 tiempo_linea_temporal[$i]="   "
+		fi
+
+		if [[ $i -eq $tiempo ]]; then
+
+			if [[ $(($i - 1)) -lt 10 ]]; then
+				tiempo_linea_temporal[$i]="$i  "
+			fi
+
+			if [[ $(($i - 1)) -ge 10 ]]; then
+				tiempo_linea_temporal[$i]="$i "
+			fi
+		fi
+
+	done
+}
+
+function imprimir_tiempo_linea_temporal {
+	printf "   "
+	for (( i = 0; i <= $tiempo; i++ )); do
+		printf "${tiempo_linea_temporal[$i]}"
 	done
 	echo ""
 }
@@ -443,6 +483,7 @@ function bucle_principal_script {
 	declare -a array_tiempo_retorno
 	declare -a array_linea_temporal
 	declare -a array_memoria
+	declare -a tiempo_linea_temporal
 
 	proceso=1
 	tamCola=0
@@ -530,8 +571,10 @@ function bucle_principal_script {
 		fi
 
 		#Con esto actualizo unidad de tiempo a unidad de tiempo la LINEA TEMPORAL
-		array_linea_temporal[$tiempo]=$proceso_en_ejecucion
-
+		
+			array_linea_temporal[$tiempo]=$proceso_en_ejecucion
+			tiempo_linea_temporal
+		
 		#Bucle encargado de calcular el TIEMPO DE RETORNO
 		for (( i = 1; i <= $contador ; i++ )); do
 			if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]]; then
@@ -576,7 +619,18 @@ function bucle_principal_script {
 			imprimir_linea_memoria
 			echo ""
 			echo "LINEA TEMPORAL:"
-			imprimir_linea_temporal
+			echo ${array_linea_temporal[@]}
+			
+			#echo ${tiempo_linea_temporal[@]}
+			if [[ $tiempo -ne 0 ]]; then
+				imprimir_linea_temporal
+				imprimir_tiempo_linea_temporal
+			fi
+			
+
+			echo ""
+			read -ers -p "Pulse [intro] para continuar la ejecucion"
+			
 		fi
 		
 		
