@@ -470,8 +470,42 @@ function imprimir_tiempo_linea_temporal {
 	for (( i = 0; i <= $tiempo; i++ )); do
 		printf "${tiempo_linea_temporal[$i]}"
 	done
+}
+
+function procesos_linea_temporal {
+
+	for (( i = 0; i <= $tiempo; i++ )); do
+		if [[ ${array_linea_temporal[$i]} -ne ${array_linea_temporal[$(($i - 1))]} ]]; then
+			procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"	
+		fi
+
+		if [[ ${array_linea_temporal[$i]} -eq ${array_linea_temporal[$(($i - 1))]} ]]; then
+			 procesos_linea_temporal[$i]="   "
+		fi
+
+		if [[ $i -eq $tiempo ]]; then
+			procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"
+		fi
+	done
+
+	if [[ ${array_linea_temporal[0]} -ne 0 ]]; then
+		procesos_linea_temporal[0]="${ordenado_nombres_procesos[${array_linea_temporal[0]}]}"	
+	fi
+
+	if [[ ${array_linea_temporal[0]} -eq 0 ]]; then
+		procesos_linea_temporal[0]="   "
+	fi
+
+}
+
+function imprimir_procesos_linea_temporal {
+	printf "   "
+	for (( i = 0; i <= $tiempo; i++ )); do
+		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}${procesos_linea_temporal[$i]}$DEFAULT"
+	done
 	echo ""
 }
+
 
 #Esta funcion calcula todos los elementos en el script
 function bucle_principal_script {
@@ -481,9 +515,10 @@ function bucle_principal_script {
 	declare -a array_tiempo_restante
 	declare -a array_tiempo_espera
 	declare -a array_tiempo_retorno
-	declare -a array_linea_temporal
 	declare -a array_memoria
+	declare -a array_linea_temporal
 	declare -a tiempo_linea_temporal
+	declare -a procesos_linea_temporal
 
 	proceso=1
 	tamCola=0
@@ -571,9 +606,10 @@ function bucle_principal_script {
 		fi
 
 		#Con esto actualizo unidad de tiempo a unidad de tiempo la LINEA TEMPORAL
-		
+			
 			array_linea_temporal[$tiempo]=$proceso_en_ejecucion
 			tiempo_linea_temporal
+			procesos_linea_temporal
 		
 		#Bucle encargado de calcular el TIEMPO DE RETORNO
 		for (( i = 1; i <= $contador ; i++ )); do
@@ -619,10 +655,12 @@ function bucle_principal_script {
 			imprimir_linea_memoria
 			echo ""
 			echo "LINEA TEMPORAL:"
-			echo ${array_linea_temporal[@]}
+			#echo ${array_linea_temporal[@]}
 			
 			#echo ${tiempo_linea_temporal[@]}
 			if [[ $tiempo -ne 0 ]]; then
+				#echo "${tiempo_linea_temporal[@]}"
+				imprimir_procesos_linea_temporal
 				imprimir_linea_temporal
 				imprimir_tiempo_linea_temporal
 			fi
