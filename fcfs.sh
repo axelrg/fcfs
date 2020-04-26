@@ -369,6 +369,7 @@ function anadirMemoria {
 	cambio_a_imprimir=1
 	array_estado[$proceso_a_meter_en_memoria]="En memoria"
 	array_tiempo_restante[$proceso_a_meter_en_memoria]=${ordenado_arr_tiempos_ejecucion[$proceso_a_meter_en_memoria]}
+	direcciones_linea_memoria
 }
 
 function eliminarMemoria {
@@ -382,6 +383,7 @@ function eliminarMemoria {
 			#echo "Despues de igualar:${array_memoria[$i]}"
 		fi
 	done
+	direcciones_linea_memoria
 }
 
 function buscar_en_memoria {
@@ -426,9 +428,9 @@ function imprimir_linea_temporal {
 }
 
 function imprimir_linea_memoria {
-
+	printf "BM|"
 	for (( i = 1; i <= $tamanio_memoria; i++ )); do
-		printf "${ordenado_arr_colores[${array_memoria[$i]}]}\u2593$DEFAULT"
+		printf "${ordenado_arr_colores[${array_memoria[$i]}]}\u2593\u2593\u2593$DEFAULT"
 	done
 	echo ""
 }
@@ -506,16 +508,75 @@ function imprimir_procesos_linea_temporal {
 	echo ""
 }
 
+function direcciones_linea_memoria {
+
+	for (( i = 1; i <= $tamanio_memoria; i++ )); do
+		if [[ $i -ne 1 ]]; then
+		if [[ ${array_memoria[$i]} -ne ${array_memoria[$(($i - 1))]} ]]; then
+			
+
+			if [[ $(($i - 1)) -lt 10 ]]; then
+				direcciones_linea_memoria[$i]="$(($i - 1))  "
+			fi
+
+			if [[ $(($i - 1)) -ge 10 ]]; then
+				direcciones_linea_memoria[$i]="$(($i - 1)) "
+			fi	
+
+			
+
+			
+
+
+		fi
+
+		if [[ ${array_memoria[$i]} -eq ${array_memoria[$(($i - 1))]} ]]; then
+			 direcciones_linea_memoria[$i]="   "
+		fi
+
+		if [[ $i -eq $tamanio_memoria ]]; then
+
+			if [[ $(($i - 1)) -lt 10 ]]; then
+				direcciones_linea_memoria[$i]="   $i  "
+			fi
+
+			if [[ $(($i - 1)) -ge 10 ]]; then
+				direcciones_linea_memoria[$i]="   $i "
+			fi
+		fi
+		fi
+	done
+
+	#if [[ "${direcciones_linea_memoria[0]}" == "   " ]]; then
+		#direcciones_linea_memoria[0]="0  "
+	#fi
+}
+
+function imprimir_direcciones_linea_memoria {
+	printf "   "
+	printf "0  "
+	for (( i = 0; i <= $(($tamanio_memoria + 1)); i++ )); do
+		printf "${direcciones_linea_memoria[$i]}"
+	done
+}
+
+#function procesos_linea_memoria {
+	
+	
+#}
 
 #Esta funcion calcula todos los elementos en el script
 function bucle_principal_script {
-
 	declare -a cola
 	declare -a array_estado
 	declare -a array_tiempo_restante
 	declare -a array_tiempo_espera
 	declare -a array_tiempo_retorno
+	#Estos arrays se encargan de calcular los elementos de la linea de memoria
 	declare -a array_memoria
+	declare -a direcciones_linea_memoria
+	declare -a procesos_linea_memoria
+	#Estos arrays se encargan de calcular los elementos de la linea de tiempo
 	declare -a array_linea_temporal
 	declare -a tiempo_linea_temporal
 	declare -a procesos_linea_temporal
@@ -649,10 +710,11 @@ function bucle_principal_script {
 			echo ""
 			echo "LINEA MEMORIA:"
 			#echo "${#array_memoria[@]}"
-			#echo "${array_memoria[@]}"
+			echo "${array_memoria[@]}"
 			#imprimir_mem
 			echo "Tamaño memoria = $tamanio_memoria"
 			imprimir_linea_memoria
+			imprimir_direcciones_linea_memoria
 			echo ""
 			echo "LINEA TEMPORAL:"
 			#echo ${array_linea_temporal[@]}
@@ -660,6 +722,7 @@ function bucle_principal_script {
 			#echo ${tiempo_linea_temporal[@]}
 			if [[ $tiempo -ne 0 ]]; then
 				#echo "${tiempo_linea_temporal[@]}"
+				
 				imprimir_procesos_linea_temporal
 				imprimir_linea_temporal
 				imprimir_tiempo_linea_temporal
