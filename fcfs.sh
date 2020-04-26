@@ -369,7 +369,6 @@ function anadirMemoria {
 	cambio_a_imprimir=1
 	array_estado[$proceso_a_meter_en_memoria]="En memoria"
 	array_tiempo_restante[$proceso_a_meter_en_memoria]=${ordenado_arr_tiempos_ejecucion[$proceso_a_meter_en_memoria]}
-	direcciones_linea_memoria
 }
 
 function eliminarMemoria {
@@ -383,7 +382,6 @@ function eliminarMemoria {
 			#echo "Despues de igualar:${array_memoria[$i]}"
 		fi
 	done
-	direcciones_linea_memoria
 }
 
 function buscar_en_memoria {
@@ -446,11 +444,10 @@ function tiempo_linea_temporal {
 			if [[ $(($i - 1)) -ge 10 ]]; then
 				tiempo_linea_temporal[$i]="$i "
 			fi
-			
 		fi
 
 		if [[ ${array_linea_temporal[$i]} -eq ${array_linea_temporal[$(($i - 1))]} ]]; then
-			 tiempo_linea_temporal[$i]="   "
+			tiempo_linea_temporal[$i]="   "
 		fi
 
 		if [[ $i -eq $tiempo ]]; then
@@ -488,15 +485,21 @@ function procesos_linea_temporal {
 		if [[ $i -eq $tiempo ]]; then
 			procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"
 		fi
+
+		if [[ $i -eq 0 ]]; then
+			procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"	
+		fi
 	done
 
-	if [[ ${array_linea_temporal[0]} -ne 0 ]]; then
-		procesos_linea_temporal[0]="${ordenado_nombres_procesos[${array_linea_temporal[0]}]}"	
-	fi
+	#if [[ ${array_linea_temporal[0]} -ne 0 ]]; then
+	#	procesos_linea_temporal[0]="${ordenado_nombres_procesos[${array_linea_temporal[0]}]}"	
+	#fi
 
-	if [[ ${array_linea_temporal[0]} -eq 0 ]]; then
-		procesos_linea_temporal[0]="   "
-	fi
+	#if [[ ${array_linea_temporal[0]} -eq 0 ]]; then
+	#	procesos_linea_temporal[0]="   "
+	#fi
+
+	#procesos_linea_temporal[0]="${ordenado_nombres_procesos[${array_linea_temporal[]}]}"
 
 }
 
@@ -512,58 +515,81 @@ function direcciones_linea_memoria {
 
 	for (( i = 1; i <= $tamanio_memoria; i++ )); do
 		if [[ $i -ne 1 ]]; then
-		if [[ ${array_memoria[$i]} -ne ${array_memoria[$(($i - 1))]} ]]; then
-			
+			if [[ ${array_memoria[$i]} -ne ${array_memoria[$(($i - 1))]} ]]; then
+				
 
-			if [[ $(($i - 1)) -lt 10 ]]; then
-				direcciones_linea_memoria[$i]="$(($i - 1))  "
+				if [[ $(($i - 1)) -lt 10 ]]; then
+					direcciones_linea_memoria[$i]="$(($i - 1))  "
+				fi
+
+				if [[ $(($i - 1)) -ge 10 ]]; then
+					direcciones_linea_memoria[$i]="$(($i - 1)) "
+				fi	
 			fi
 
-			if [[ $(($i - 1)) -ge 10 ]]; then
-				direcciones_linea_memoria[$i]="$(($i - 1)) "
-			fi	
-
-			
-
-			
-
-
-		fi
-
-		if [[ ${array_memoria[$i]} -eq ${array_memoria[$(($i - 1))]} ]]; then
-			 direcciones_linea_memoria[$i]="   "
-		fi
-
-		if [[ $i -eq $tamanio_memoria ]]; then
-
-			if [[ $(($i - 1)) -lt 10 ]]; then
-				direcciones_linea_memoria[$i]="   $i  "
+			if [[ ${array_memoria[$i]} -eq ${array_memoria[$(($i - 1))]} ]]; then
+				direcciones_linea_memoria[$i]="   "
 			fi
 
-			if [[ $(($i - 1)) -ge 10 ]]; then
-				direcciones_linea_memoria[$i]="   $i "
+			if [[ $i -eq $tamanio_memoria ]]; then
+
+				if [[ $(($i - 1)) -lt 10 ]]; then
+					direcciones_linea_memoria[$i]="   $i  "
+				fi
+
+				if [[ $(($i - 1)) -ge 10 ]]; then
+					direcciones_linea_memoria[$i]="   $i "
+				fi
 			fi
-		fi
 		fi
 	done
-
-	#if [[ "${direcciones_linea_memoria[0]}" == "   " ]]; then
-		#direcciones_linea_memoria[0]="0  "
-	#fi
 }
 
 function imprimir_direcciones_linea_memoria {
 	printf "   "
 	printf "0  "
-	for (( i = 0; i <= $(($tamanio_memoria + 1)); i++ )); do
+	for (( i = 0; i <= $tamanio_memoria; i++ )); do
 		printf "${direcciones_linea_memoria[$i]}"
 	done
 }
 
-#function procesos_linea_memoria {
-	
-	
-#}
+function procesos_linea_memoria {
+
+
+	for (( i = 1; i <= $tamanio_memoria; i++ )); do
+
+		if [[ ${array_memoria[$i]} -ne ${array_memoria[$(($i - 1))]} ]]; then
+			procesos_linea_memoria[$i]="${ordenado_nombres_procesos[${array_memoria[$i]}]}"	
+		fi
+
+		if [[ ${array_memoria[$i]} -eq ${array_memoria[$(($i - 1))]} ]]; then
+			procesos_linea_memoria[$i]="   "
+		fi
+
+		if [[ $i -eq 1 ]]; then
+			procesos_linea_memoria[$i]="${ordenado_nombres_procesos[${array_memoria[$i]}]}"	
+		fi
+
+	done
+
+	#if [[ ${array_memoria[1]} -ne 0 ]]; then
+	#	procesos_linea_memoria[1]="${ordenado_nombres_procesos[${array_memoria[1]}]}"	
+	#fi
+
+	#if [[ ${array_memoria[1]} -eq 0 ]]; then
+	#	procesos_linea_memoria[1]="---"
+	#fi
+
+	#procesos_linea_memoria[1]="${ordenado_nombres_procesos[${array_memoria[1]}]}"
+}
+
+function imprimir_procesos_linea_memoria {
+	printf "   "
+	for (( i = 0; i <=$tamanio_memoria; i++ )); do
+		printf "${ordenado_arr_colores[${array_memoria[$i]}]}${procesos_linea_memoria[$i]}$DEFAULT"
+	done
+	echo ""
+}
 
 #Esta funcion calcula todos los elementos en el script
 function bucle_principal_script {
@@ -580,6 +606,9 @@ function bucle_principal_script {
 	declare -a array_linea_temporal
 	declare -a tiempo_linea_temporal
 	declare -a procesos_linea_temporal
+
+	ordenado_nombres_procesos[0]="---"
+	ordenado_arr_colores[0]="$DEFAULT"
 
 	proceso=1
 	tamCola=0
@@ -667,6 +696,9 @@ function bucle_principal_script {
 		fi
 
 		#Con esto actualizo unidad de tiempo a unidad de tiempo la LINEA TEMPORAL
+
+			direcciones_linea_memoria
+			procesos_linea_memoria
 			
 			array_linea_temporal[$tiempo]=$proceso_en_ejecucion
 			tiempo_linea_temporal
@@ -710,10 +742,13 @@ function bucle_principal_script {
 			echo ""
 			echo "LINEA MEMORIA:"
 			#echo "${#array_memoria[@]}"
-			echo "${array_memoria[@]}"
+			#echo "${array_memoria[@]}"
 			#imprimir_mem
 			echo "Tamaño memoria = $tamanio_memoria"
+			#echo "${procesos_linea_memoria[@]}"
+			imprimir_procesos_linea_memoria
 			imprimir_linea_memoria
+			#echo "${direcciones_linea_memoria[@]}"
 			imprimir_direcciones_linea_memoria
 			echo ""
 			echo "LINEA TEMPORAL:"
