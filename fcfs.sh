@@ -350,7 +350,7 @@ function eliminarCola {
 	for(( i = 1; i <= tamCola; i++ )); do
 		cola[$i]=${cola[$i+1]}
 	done
-    ((tamCola--))
+	((tamCola--))
 }
 
 function anadirMemoria {
@@ -372,7 +372,6 @@ function anadirMemoria {
 }
 
 function eliminarMemoria {
-	$proceso_en_ejecucion
 	for (( i = 1; i <=$tamanio_memoria ; i++ )); do
 
 		if [[ ${array_memoria[$i]} -eq $proceso_en_ejecucion ]]
@@ -591,6 +590,77 @@ function imprimir_procesos_linea_memoria {
 	echo ""
 }
 
+function reubicamos {
+	
+	for (( i = 0 ; i <=$tamanio_memoria ; i++ )); do
+		array_memoria_ord[$i]=0
+	done
+
+	for (( i = 1; i <= $tamanio_memoria; i++ )); do
+		minimo=1000
+		for (( j = 1; j <= $tamanio_memoria; j++ )); do
+
+			if [[ ${array_memoria[$j]} -lt "$minimo" ]]; then
+				minimo=${array_memoria[$j]}
+				posicion=$j
+				
+			fi
+		done
+		array_memoria_ord[$i]=${array_memoria[$posicion]}
+		array_memoria[$posicion]="1000"
+	done
+
+	inicializar_array_memoria
+
+	for (( i = 1; i <= $tamanio_memoria; i++ )); do
+		array_memoria[$i]=${array_memoria_ord[$i]}
+	done
+
+	
+
+	#for (( i = 1; i <= $tamanio_memoria; i++ )); do
+	#	array_memoria[$i]=${array_memoria_ord[$i]}
+	#done
+}
+
+function gg_necesito_reubicar {
+	contador_reubicar=0
+	necesito_reubicar=0
+
+	for (( i = 1; i <= $tamanio_memoria ; i++ )); do
+		if [[ ${array_memoria[$i]} -ne 0 ]]; then
+			
+		
+			if [[ $i -eq 1 ]]; then
+				((contador_reubicar++))
+			fi
+
+			if [[ $i -ne 1 ]]; then
+				if [[ ${array_memoria[$i]} -eq ${array_memoria[$(($i - 1))]} ]]; then
+					((contador_reubicar++))
+				fi
+
+				if [[ ${array_memoria[$i]} -ne ${array_memoria[$(($i - 1))]} ]]; then
+					if [[ $contador_reubicar -le 1 ]]; then
+						if [[ ${ordenado_arr_memoria[${array_memoria[$(($i - 1))]}]} -gt 1 ]]; then
+							necesito_reubicar=0
+							reubicamos
+							necesito_reubicar=1
+						fi
+						
+					fi
+
+					if [[ $contador_reubicar -gt 1 ]]; then
+						contador_reubicar=0
+						((contador_reubicar++))
+					fi
+				fi
+			fi
+		fi
+	done
+
+}
+
 #Esta funcion calcula todos los elementos en el script
 function bucle_principal_script {
 	declare -a cola
@@ -674,6 +744,8 @@ function bucle_principal_script {
 				#echo "añadir"
 				#imprimir_mem
 				eliminarCola
+
+				gg_necesito_reubicar
 			fi
 		done	
 		
@@ -742,7 +814,12 @@ function bucle_principal_script {
 			echo ""
 			echo "LINEA MEMORIA:"
 			#echo "${#array_memoria[@]}"
+			#echo "${array_memoria_ord[@]}"
 			#echo "${array_memoria[@]}"
+
+			if [[ $necesito_reubicar -eq 1 ]]; then
+				echo "necesito reubicar"
+			fi
 			#imprimir_mem
 			echo "Tamaño memoria = $tamanio_memoria"
 			#echo "${procesos_linea_memoria[@]}"

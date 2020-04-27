@@ -28,40 +28,65 @@
 Tiempo=0
 
  Ref Tll Tej Mem | Tes Trt Tre Estado
- P01 3   3   3   | -   -   -   Fuera del sistema 
+ P01 0   1   1   | 0   0   1   En ejecucion 
+ P02 0   10  3   | 0   0   10  En memoria 
+ P03 1   5   2   | -   -   -   Fuera del sistema 
 
 LINEA MEMORIA:
 Tamaño memoria = 5
-   ---            
+   P01P02      ---
 BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5  
+   0  1           5  
 LINEA TEMPORAL:
 
-Tiempo=3
+Tiempo=1
 
  Ref Tll Tej Mem | Tes Trt Tre Estado
- P01 3   3   3   | 1   0   3   En ejecucion 
+ P01 0   1   1   | 0   1   0   Finalizado 
+ P02 0   10  3   | 1   1   10  En ejecucion 
+ P03 1   5   2   | 0   0   5   En memoria 
 
 LINEA MEMORIA:
+necesito reubicar
 Tamaño memoria = 5
-   P01      ---   
+   P02      P03   
 BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
    0        3     5  
 LINEA TEMPORAL:
-   ---      P01
-BT|▓▓▓▓▓▓▓▓▓
-   0        3  
-Tiempo=6
+   P01P02
+BT|▓▓▓
+   0  1  
+Tiempo=11
 
  Ref Tll Tej Mem | Tes Trt Tre Estado
- P01 3   3   3   | 1   3   0   Finalizado 
+ P01 0   1   1   | 0   1   0   Finalizado 
+ P02 0   10  3   | 1   11  0   Finalizado 
+ P03 1   5   2   | 10  10  5   En ejecucion 
 
 LINEA MEMORIA:
+necesito reubicar
+Tamaño memoria = 5
+   ---      P03   
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0        3     5  
+LINEA TEMPORAL:
+   P01P02                           P03
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0  1                             11 
+Tiempo=16
+
+ Ref Tll Tej Mem | Tes Trt Tre Estado
+ P01 0   1   1   | 0   1   0   Finalizado 
+ P02 0   10  3   | 1   11  0   Finalizado 
+ P03 1   5   2   | 10  15  0   Finalizado 
+
+LINEA MEMORIA:
+necesito reubicar
 Tamaño memoria = 5
    ---            
 BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
    0              5  
 LINEA TEMPORAL:
-   ---      P01      ---
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3        6  
+   P01P02                           P03            ---
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0  1                             11             16 
