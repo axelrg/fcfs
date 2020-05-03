@@ -555,7 +555,7 @@ function imprimir_direcciones_linea_memoria {
 function procesos_linea_memoria {
 
 
-	for (( i = 1; i <= $tamanio_memoria; i++ )); do
+	for (( i = 1; i <= $(($tamanio_memoria + 1)); i++ )); do
 
 		if [[ ${array_memoria[$i]} -ne ${array_memoria[$(($i - 1))]} ]]; then
 			procesos_linea_memoria[$i]="${ordenado_nombres_procesos[${array_memoria[$i]}]}"	
@@ -661,6 +661,71 @@ function gg_necesito_reubicar {
 
 }
 
+function llenar_direcciones_memoria {
+	contador_dir=0
+	contador_partes_de_procesos_en_mem=0
+	for (( i = 1; i <=  $(($tamanio_memoria +1)); i++ )); do 
+		#if [[ ${array_memoria[$i]} -ne 0 ]]; then
+			if [[ $i -eq 1 ]] ; then
+				((contador_dir++))
+				
+			else
+				if [[ ${array_memoria[$i]} -eq ${array_memoria[$(($i - 1))]} ]]  ; then
+					((contador_dir++))
+				fi
+
+				if [[ ${array_memoria[$i]} -ne ${array_memoria[$(($i - 1))]} ]]; then
+					direcciones_memoria_proceso[$contador_partes_de_procesos_en_mem]=${array_memoria[$(($i - 1))]}
+					direcciones_memoria_inicial[$contador_partes_de_procesos_en_mem]=$(($i - $(($contador_dir + 1))))
+					direcciones_memoria_final[$contador_partes_de_procesos_en_mem]=$(($i - 2))
+					contador_dir=1
+					contador_partes_de_procesos_en_mem=$(($contador_partes_de_procesos_en_mem +1))
+				fi
+
+			fi
+			
+			
+		#fi
+	done
+}
+
+function tabla_con_DM {
+	printf " Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado\n"
+	for (( i = 1; i <= $contador; i++ )); do
+		
+
+		if [[ ${array_estado[$i]} == "Finalizado" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "Fuera del sistema" ]]; then
+			printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "-" 3 "-" 3 "${array_estado[$i]}"
+		else
+
+		#if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]]; then
+			#echo $i
+			proceso_detectado=$i
+			while [[ $proceso_detectado -eq $i ]]; do
+				for (( j = 0; j <= $contador_partes_de_procesos_en_mem; j++ )); do
+					if [[ ${direcciones_memoria_proceso[$j]} -ne 0 ]]; then
+						if [[ ${direcciones_memoria_proceso[$j]} -eq $i ]]; then
+							#echo $j
+							proceso_detectado=${direcciones_memoria_proceso[$j]}
+							#echo $proceso_detectado
+							printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "${direcciones_memoria_inicial[$j]}" 3 "${direcciones_memoria_final[$j]}" 3 "${array_estado[$i]}"
+							direcciones_memoria_proceso[$j]=1000
+						else
+							proceso_detectado=1000
+						fi
+					fi
+				done
+			done
+		
+		fi
+
+
+	done
+
+
+
+}
+
 #Esta funcion calcula todos los elementos en el script
 function bucle_principal_script {
 	declare -a cola
@@ -676,9 +741,21 @@ function bucle_principal_script {
 	declare -a array_linea_temporal
 	declare -a tiempo_linea_temporal
 	declare -a procesos_linea_temporal
+	#Este es un array bidimensional encargado de guardar en la columna 1 el proceso y en las dos siguientes la DIn y la DFi
+	declare -a direcciones_memoria
+	declare -a direcciones_memoria_final
+	declare -a direcciones_memoria_inicial
+	declare -a direcciones_memoria_proceso
 
 	ordenado_nombres_procesos[0]="---"
 	ordenado_arr_colores[0]="$DEFAULT"
+	unset direcciones_memoria_proceso
+	unset direcciones_memoria_inicial
+	unset direcciones_memoria_final
+
+	contador_partes_de_procesos_en_mem=0
+
+
 
 	proceso=1
 	tamCola=0
@@ -795,6 +872,8 @@ function bucle_principal_script {
 			fi
 
 		done
+
+		llenar_direcciones_memoria
 		
 		#echo Tiempo=$tiempo
 
@@ -810,7 +889,10 @@ function bucle_principal_script {
 			clear
 			echo Tiempo=$tiempo
 			echo ""
-			imprimir_tabla
+			#imprimir_tabla
+			#echo ""
+			tabla_con_DM
+
 			echo ""
 			echo "LINEA MEMORIA:"
 			#echo "${#array_memoria[@]}"
@@ -818,11 +900,22 @@ function bucle_principal_script {
 			#echo "${array_memoria[@]}"
 
 			if [[ $necesito_reubicar -eq 1 ]]; then
-				echo "necesito reubicar"
+				echo -e "\e[31m\e[1m\e[106mSE HA REUBICADO LA MEMORIA\u2757\u2757\e[49m\e[39m\e[0m"
+				necesito_reubicar=0
 			fi
 			#imprimir_mem
 			echo "Tamaño memoria = $tamanio_memoria"
 			#echo "${procesos_linea_memoria[@]}"
+			echo "partes: $contador_partes_de_procesos_en_mem"
+
+			#echo "${direcciones_memoria[@]}"
+
+			#for (( i = 1; i <= $contador_partes_de_procesos_en_mem; i++ )); do
+			#	echo "${direcciones_memoria_proceso[@]}"
+			#	echo "${direcciones_memoria_inicial[@]}"
+			#	echo "${direcciones_memoria_final[@]}"
+			#done
+			
 			imprimir_procesos_linea_memoria
 			imprimir_linea_memoria
 			#echo "${direcciones_linea_memoria[@]}"
@@ -846,7 +939,13 @@ function bucle_principal_script {
 			
 		fi
 		
-		
+		for (( i = 1; i <= $contador_partes_de_procesos_en_mem; i++ )); do
+			direcciones_memoria_proceso[$i]=0
+			direcciones_memoria_inicial[$i]=0
+			direcciones_memoria_final[$i]=0
+
+		done
+
 	done
 
 	#imprimir_tabla
