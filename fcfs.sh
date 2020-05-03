@@ -600,7 +600,7 @@ function reubicamos {
 		minimo=1000
 		for (( j = 1; j <= $tamanio_memoria; j++ )); do
 
-			if [[ ${array_memoria[$j]} -lt "$minimo" ]]; then
+			if [[ ${array_memoria[$j]} -lt "$minimo" ]] && [[ ${array_memoria[$j]} -ne 0 ]]; then
 				minimo=${array_memoria[$j]}
 				posicion=$j
 				
@@ -628,7 +628,7 @@ function gg_necesito_reubicar {
 	necesito_reubicar=0
 
 	for (( i = 1; i <= $tamanio_memoria ; i++ )); do
-		if [[ ${array_memoria[$i]} -ne 0 ]]; then
+		#if [[ ${array_memoria[$i]} -ne 0 ]]; then
 			
 		
 			if [[ $i -eq 1 ]]; then
@@ -656,7 +656,7 @@ function gg_necesito_reubicar {
 					fi
 				fi
 			fi
-		fi
+		#fi
 	done
 
 }
@@ -835,10 +835,10 @@ function bucle_principal_script {
 			#echo "buscar"
 			#imprimir_mem
 			#echo EN EJ: $proceso_en_ejecucion
-			if [[ $tiempo -ne 0 ]]; then
+			if [[ $tiempo -ne 0 ]] && [[ $tiempo -ne ${ordenado_arr_tiempos_llegada[$proceso_en_ejecucion]} ]]; then
 				array_tiempo_espera[$proceso_en_ejecucion]=$((${array_tiempo_espera[$proceso_en_ejecucion]}+1))
-
 			fi
+
 			array_estado[$proceso_en_ejecucion]="En ejecucion"
 			cambio_a_imprimir=1
 
