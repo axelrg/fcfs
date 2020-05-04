@@ -25,210 +25,113 @@
       #              Grado en ingeniería informática (2019-2020)            #
       #                                                                     #
       #######################################################################
-Tiempo=0
+FCFS-SN-N-S
+T=0
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 5   3   2   | -    -    -    -    -    Fuera del sistema 
+ P02 6   3   3   | -    -    -    -    -    Fuera del sistema 
+ P03 6   3   3   | -    -    -    -    -    Fuera del sistema 
+ P04 7   3   1   | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 0 TIEMPO MEDIO RETORNO = 0
+   ---            
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0              5  
 
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   0   3   0   1 En ejecucion 
- P02   1   3   2 |   -   -   -   -   - Fuera del sistema 
- P03   2   3   2 |   -   -   -   -   - Fuera del sistema 
- P04   3   3   2 |   -   -   -   -   - Fuera del sistema 
- P05   4   3   2 |   -   -   -   -   - Fuera del sistema 
- P06   5   3   2 |   -   -   -   -   - Fuera del sistema 
-
-TIEMPO MEDIO ESPERA = 0
-TIEMPO MEDIO RETORNO = 0
-
-   P01   ---         
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2           6  
-
-Tiempo=1
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   1   2   0   1 En ejecucion 
- P02   1   3   2 |   0   0   3   2   3 En memoria 
- P03   2   3   2 |   -   -   -   -   - Fuera del sistema 
- P04   3   3   2 |   -   -   -   -   - Fuera del sistema 
- P05   4   3   2 |   -   -   -   -   - Fuera del sistema 
- P06   5   3   2 |   -   -   -   -   - Fuera del sistema 
-
-TIEMPO MEDIO ESPERA = 0
-TIEMPO MEDIO RETORNO = .50
-
-   P01   P02   ---   
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2     4     6  
-   P01P01
-BT|▓▓▓
-   0  1  
-Tiempo=2
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   2   1   0   1 En ejecucion 
- P02   1   3   2 |   1   1   3   2   3 En memoria 
- P03   2   3   2 |   0   0   3   4   5 En memoria 
- P04   3   3   2 |   -   -   -   -   - Fuera del sistema 
- P05   4   3   2 |   -   -   -   -   - Fuera del sistema 
- P06   5   3   2 |   -   -   -   -   - Fuera del sistema 
-
-TIEMPO MEDIO ESPERA = .33
-TIEMPO MEDIO RETORNO = 1.00
-
-   P01   P02   P03   
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2     4     6  
-   P01   P01
-BT|▓▓▓▓▓▓
-   0     2  
-Tiempo=3
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   3   0   -   - Finalizado 
- P02   1   3   2 |   2   2   3   2   3 En ejecucion 
- P03   2   3   2 |   1   1   3   4   5 En memoria 
- P04   3   3   2 |   0   0   3   0   1 En memoria 
- P05   4   3   2 |   -   -   -   -   - Fuera del sistema 
- P06   5   3   2 |   -   -   -   -   - Fuera del sistema 
-
-TIEMPO MEDIO ESPERA = .75
-TIEMPO MEDIO RETORNO = 1.50
-
-   P04   P02   P03   
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2     4     6  
-   P01      P02
-BT|▓▓▓▓▓▓▓▓▓
-   0        3  
-Tiempo=4
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   3   0   -   - Finalizado 
- P02   1   3   2 |   2   3   2   2   3 En ejecucion 
- P03   2   3   2 |   2   2   3   4   5 En memoria 
- P04   3   3   2 |   1   1   3   0   1 En memoria 
- P05   4   3   2 |   0   0   -   -   - En espera 
- P06   5   3   2 |   -   -   -   -   - Fuera del sistema 
-
-TIEMPO MEDIO ESPERA = 1.00
-TIEMPO MEDIO RETORNO = 1.80
-
-   P04   P02   P03   
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2     4     6  
-   P01      P02P02
-BT|▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3  4  
-Tiempo=5
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   3   0   -   - Finalizado 
- P02   1   3   2 |   2   4   1   2   3 En ejecucion 
- P03   2   3   2 |   3   3   3   4   5 En memoria 
- P04   3   3   2 |   2   2   3   0   1 En memoria 
- P05   4   3   2 |   1   1   -   -   - En espera 
- P06   5   3   2 |   0   0   -   -   - En espera 
-
-TIEMPO MEDIO ESPERA = 1.33
-TIEMPO MEDIO RETORNO = 2.16
-
-   P04   P02   P03   
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2     4     6  
-   P01      P02   P02
+FCFS-SN-N-S
+T=5
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 5   3   2   | 0    0    3    0    1    En ejecucion 
+ P02 6   3   3   | -    -    -    -    -    Fuera del sistema 
+ P03 6   3   3   | -    -    -    -    -    Fuera del sistema 
+ P04 7   3   1   | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 0 TIEMPO MEDIO RETORNO = 0
+   P01   ---      
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0     2        5  
+   ---            P01
 BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3     5  
-Tiempo=6
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   3   0   -   - Finalizado 
- P02   1   3   2 |   2   5   0   -   - Finalizado 
- P03   2   3   2 |   4   4   3   4   5 En ejecucion 
- P04   3   3   2 |   3   3   3   0   1 En memoria 
- P05   4   3   2 |   2   2   3   2   3 En memoria 
- P06   5   3   2 |   1   1   -   -   - En espera 
-
-TIEMPO MEDIO ESPERA = 2.00
-TIEMPO MEDIO RETORNO = 3.00
-
-   P04   P05   P03   
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2     4     6  
-   P01      P02      P03
+   0              5  
+FCFS-SN-N-S
+T=6
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 5   3   2   | 0    1    2    0    1    En ejecucion 
+ P02 6   3   3   | 0    0    3    2    4    En memoria 
+ P03 6   3   3   | 0    0    -    -    -    En espera 
+ P04 7   3   1   | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 0 TIEMPO MEDIO RETORNO = .33
+   P01   P02      
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0     2        5  
+   ---            P01P01
 BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3        6  
-Tiempo=9
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   3   0   -   - Finalizado 
- P02   1   3   2 |   2   5   0   -   - Finalizado 
- P03   2   3   2 |   4   7   0   -   - Finalizado 
- P04   3   3   2 |   6   6   3   0   1 En ejecucion 
- P05   4   3   2 |   5   5   3   2   3 En memoria 
- P06   5   3   2 |   4   4   3   4   5 En memoria 
-
-TIEMPO MEDIO ESPERA = 3.50
-TIEMPO MEDIO RETORNO = 5.00
-
-   P04   P05   P06   
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2     4     6  
-   P01      P02      P03      P04
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3        6        9  
-Tiempo=12
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   3   0   -   - Finalizado 
- P02   1   3   2 |   2   5   0   -   - Finalizado 
- P03   2   3   2 |   4   7   0   -   - Finalizado 
- P04   3   3   2 |   6   9   0   -   - Finalizado 
- P05   4   3   2 |   8   8   3   2   3 En ejecucion 
- P06   5   3   2 |   7   7   3   4   5 En memoria 
-
-TIEMPO MEDIO ESPERA = 4.50
-TIEMPO MEDIO RETORNO = 6.50
-
-   ---   P05   P06   
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2     4     6  
-   P01      P02      P03      P04      P05
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3        6        9        12 
-Tiempo=15
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   3   0   -   - Finalizado 
- P02   1   3   2 |   2   5   0   -   - Finalizado 
- P03   2   3   2 |   4   7   0   -   - Finalizado 
- P04   3   3   2 |   6   9   0   -   - Finalizado 
- P05   4   3   2 |   8  11   0   -   - Finalizado 
- P06   5   3   2 |  10  10   3   4   5 En ejecucion 
-
-TIEMPO MEDIO ESPERA = 5.00
-TIEMPO MEDIO RETORNO = 7.50
-
-   ---         P06   
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0           4     6  
-   P01      P02      P03      P04      P05      P06
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3        6        9        12       15 
-Tiempo=18
-
- Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado
- P01   0   3   2 |   0   3   0   -   - Finalizado 
- P02   1   3   2 |   2   5   0   -   - Finalizado 
- P03   2   3   2 |   4   7   0   -   - Finalizado 
- P04   3   3   2 |   6   9   0   -   - Finalizado 
- P05   4   3   2 |   8  11   0   -   - Finalizado 
- P06   5   3   2 |  10  13   0   -   - Finalizado 
-
-TIEMPO MEDIO ESPERA = 5.00
-TIEMPO MEDIO RETORNO = 8.00
-
-   ---               
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0                 6  
-   P01      P02      P03      P04      P05      P06      ---
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3        6        9        12       15       18 
+   0              5  6  
+FCFS-SN-N-S
+T=7
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 5   3   2   | 0    2    1    0    1    En ejecucion 
+ P02 6   3   3   | 1    1    3    2    4    En memoria 
+ P03 6   3   3   | 1    1    -    -    -    En espera 
+ P04 7   3   1   | 0    0    -    -    -    En espera 
+TIEMPO MEDIO ESPERA = .50 TIEMPO MEDIO RETORNO = 1.00
+   P01   P02      
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0     2        5  
+   ---            P01   P01
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0              5     7  
+FCFS-SN-N-S
+T=8
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 5   3   2   | 0    3    0    -    -    Finalizado 
+ P02 6   3   3   | 2    2    3    2    4    En ejecucion 
+ P03 6   3   3   | 2    2    -    -    -    En espera 
+ P04 7   3   1   | 1    1    -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 1.25 TIEMPO MEDIO RETORNO = 2.00
+   ---   P02      
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0     2        5  
+   ---            P01      P02
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0              5        8  
+FCFS-SN-N-S
+T=11
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 5   3   2   | 0    3    0    -    -    Finalizado 
+ P02 6   3   3   | 2    5    0    -    -    Finalizado 
+ P03 6   3   3   | 5    5    3    0    2    En ejecucion 
+ P04 7   3   1   | 4    4    3    3    3    En memoria 
+TIEMPO MEDIO ESPERA = 2.75 TIEMPO MEDIO RETORNO = 4.25
+   P03      P04---
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0        3  4  5  
+   ---            P01      P02      P03
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0              5        8        11 
+FCFS-SN-N-S
+T=14
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 5   3   2   | 0    3    0    -    -    Finalizado 
+ P02 6   3   3   | 2    5    0    -    -    Finalizado 
+ P03 6   3   3   | 5    8    0    -    -    Finalizado 
+ P04 7   3   1   | 7    7    3    3    3    En ejecucion 
+TIEMPO MEDIO ESPERA = 3.50 TIEMPO MEDIO RETORNO = 5.75
+   ---      P04---
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0        3  4  5  
+   ---            P01      P02      P03      P04
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0              5        8        11       14 
+FCFS-SN-N-S
+T=17
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 5   3   2   | 0    3    0    -    -    Finalizado 
+ P02 6   3   3   | 2    5    0    -    -    Finalizado 
+ P03 6   3   3   | 5    8    0    -    -    Finalizado 
+ P04 7   3   1   | 7    10   0    -    -    Finalizado 
+TIEMPO MEDIO ESPERA = 3.50 TIEMPO MEDIO RETORNO = 6.50
+   ---            
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0              5  
+   ---            P01      P02      P03      P04      ---
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   0              5        8        11       14       17 

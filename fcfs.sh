@@ -690,12 +690,12 @@ function llenar_direcciones_memoria {
 }
 
 function tabla_con_DM {
-	printf " Ref Tll Tej Mem | Tes Trt Tre Din Dfi Estado\n"
+	printf " Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado\n"
 	for (( i = 1; i <= $contador; i++ )); do
 		
 
 		if [[ ${array_estado[$i]} == "Finalizado" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "Fuera del sistema" ]]; then
-			printf " ${ordenado_arr_colores[$i]}%*s %*s %*s %*s $DEFAULT|${ordenado_arr_colores[$i]} %*s %*s %*s %*s %*s %*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "-" 3 "-" 3 "${array_estado[$i]}"
+			printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 4 "${array_tiempo_espera[$i]}" 4 "${array_tiempo_retorno[$i]}" 4 "${array_tiempo_restante[$i]}" 4 "-" 4 "-" 4 "${array_estado[$i]}"
 		else
 
 		#if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]]; then
@@ -708,7 +708,7 @@ function tabla_con_DM {
 							#echo $j
 							proceso_detectado=${direcciones_memoria_proceso[$j]}
 							#echo $proceso_detectado
-							printf " ${ordenado_arr_colores[$i]}%*s %*s %*s %*s $DEFAULT|${ordenado_arr_colores[$i]} %*s %*s %*s %*s %*s %*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "${direcciones_memoria_inicial[$j]}" 3 "${direcciones_memoria_final[$j]}" 3 "${array_estado[$i]}"
+							printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 4 "${array_tiempo_espera[$i]}" 4 "${array_tiempo_retorno[$i]}" 4 "${array_tiempo_restante[$i]}" 4 "${direcciones_memoria_inicial[$j]}" 4 "${direcciones_memoria_final[$j]}" 4 "${array_estado[$i]}"
 							direcciones_memoria_proceso[$j]=1000
 						else
 							proceso_detectado=1000
@@ -909,13 +909,14 @@ function bucle_principal_script {
 
 		if [[ $cambio_a_imprimir -eq 1 ]] && [[ $tiempo -ge ${ordenado_arr_tiempos_llegada[1]} ]] ||  [[ $tiempo -eq 0 ]] ; then
 			clear
-			echo Tiempo=$tiempo
-			echo ""
+			echo "FCFS-SN-N-S"
+			echo "T=$tiempo"
+			
 			#imprimir_tabla
 			#echo ""
 			tabla_con_DM
 
-			echo ""
+			
 			#echo "LINEA MEMORIA:"
 			#echo "${#array_memoria[@]}"
 			#echo "${array_memoria_ord[@]}"
@@ -937,8 +938,8 @@ function bucle_principal_script {
 			#	echo "${direcciones_memoria_inicial[@]}"
 			#	echo "${direcciones_memoria_final[@]}"
 			#done
-			printf "TIEMPO MEDIO ESPERA = $tiempo_medio_espera\n"
-			printf "TIEMPO MEDIO RETORNO = $tiempo_medio_retorno\n\n"
+			printf "TIEMPO MEDIO ESPERA = $tiempo_medio_espera "
+			printf "TIEMPO MEDIO RETORNO = $tiempo_medio_retorno\n"
 			
 			imprimir_procesos_linea_memoria
 			imprimir_linea_memoria
