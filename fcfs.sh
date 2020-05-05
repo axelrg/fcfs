@@ -44,13 +44,15 @@ function array_colores {
 }
 
 function pregunto_si_otro_proceso_mas {
-	echo "¿Quieres añadir otro proceso?"
+	echo "¿Quieres añadir otro proceso?"| tee -a informeColor.txt
 	       		read "op"
+	       		echo "$op" >> informeColor.txt
 			until [ "$op" == "n" -o "$op" == "s" ]
 				do
-					echo "Respuesta introducida no válida"
-					echo "Introduzca una respuesta que sea s/n"
+					echo "Respuesta introducida no válida"| tee -a informeColor.txt
+					echo "Introduzca una respuesta que sea s/n"| tee -a informeColor.txt
 					read "op"
+					echo "$op" >> informeColor.txt
 				done
 }
 
@@ -118,9 +120,10 @@ function imprimir_tabla_datos {
 function entrada_por_teclado {
 	op="s"
 	contador=1
-	echo "Introduce el tamaño de la memoria"
+	echo "Introduce el tamaño de la memoria"| tee -a informeColor.txt
 	read tamanio_memoria
-	echo "El tamaño de la memoria es $tamanio_memoria"
+	echo "$tamanio_memoria">> informeColor.txt
+	echo "El tamaño de la memoria es $tamanio_memoria"| tee -a informeColor.txt
 	while [ "$op" == "s" ]; do
 
 			arr_tiempos_llegada[$contador]="-"
@@ -142,23 +145,26 @@ function entrada_por_teclado {
 			#echo "${nombres_procesos[@]}"
 			#echo "${arr_colores[@]}"
 			clear
-			imprimir_tabla_datos
-			echo "Tiempo de llegada P$contador:"
+			imprimir_tabla_datos| tee -a informeColor.txt
+			echo "Tiempo de llegada P$contador:"| tee -a informeColor.txt
 			read tiempo_llegada
+			echo "$tiempo_llegada">> informeColor.txt
 			arr_tiempos_llegada[$contador]=$tiempo_llegada
 
 			copia_inversa_arrays
 			clear
 			imprimir_tabla_datos
-			echo "Tiempo de ejecución P$contador:"
+			echo "Tiempo de ejecución P$contador:"| tee -a informeColor.txt
 			read tiempo_ejecucion
+			echo "$tiempo_ejecucion">> informeColor.txt
 			arr_tiempos_ejecucion[$contador]=$tiempo_ejecucion
 
 			copia_inversa_arrays
 			clear
 			imprimir_tabla_datos
-			echo "Memoria P$contador:"
+			echo "Memoria P$contador:"| tee -a informeColor.txt
 			read memoria
+			echo "$memoria">> informeColor.txt
 			arr_memoria[$contador]=$memoria
 
 			ordenar_arrays_por_Tll
@@ -171,7 +177,7 @@ function entrada_por_teclado {
 			#echo "${arr_colores[@]}"
 
 			clear
-			imprimir_tabla_datos
+			imprimir_tabla_datos| tee -a informeColor.txt
 			pregunto_si_otro_proceso_mas
 
 			if [ "$op" == "s" ]; then
@@ -257,27 +263,27 @@ function entrada_por_fichero {
 
 function menu_entrada {
 
-	echo "Elige una de las opciones para introducir los datos:"
-	echo "1-> Entrada por teclado"
-	echo "2-> Generar datos aleatorios"
-	echo "3-> Leer desde un archivo"
+	echo "Elige una de las opciones para introducir los datos:" | tee -a informeColor.txt
+	echo "1-> Entrada por teclado"| tee -a informeColor.txt
+	echo "2-> Generar datos aleatorios"| tee -a informeColor.txt
+	echo "3-> Leer desde un archivo"| tee -a informeColor.txt
 	read opcion_menu_datos
 
 	case $opcion_menu_datos in
 		1)
-			echo "Has elegido entrada por teclado:"
+			echo "Has elegido entrada por teclado:"| tee -a informeColor.txt
 			entrada_por_teclado
 			
 		;;
 
 		2)
-			echo "Has elegido generar los datos aleatoriamente:"
+			echo "Has elegido generar los datos aleatoriamente:"| tee -a informeColor.txt
 			entrada_aleatoria
 			
 		;;
 
 		3)
-			echo "Has elegido lectura desde archivo:"
+			echo "Has elegido lectura desde archivo:"| tee -a informeColor.txt
 			entrada_por_fichero
 			
 			#echo "${arr_colores[@]}"
@@ -292,7 +298,7 @@ function menu_entrada {
 		;;
 
 		*)
-			echo "ERROR"
+			echo "ERROR"| tee -a informeColor.txt
 		;;
 	esac
 }
@@ -711,14 +717,21 @@ function tabla_con_DM {
 		#if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]]; then
 			#echo $i
 			proceso_detectado=$i
+			contador_parejas_direcciones_proceso=0
 			while [[ $proceso_detectado -eq $i ]]; do
 				for (( j = 0; j <= $contador_partes_de_procesos_en_mem; j++ )); do
 					if [[ ${direcciones_memoria_proceso[$j]} -ne 0 ]]; then
 						if [[ ${direcciones_memoria_proceso[$j]} -eq $i ]]; then
 							#echo $j
+							((contador_parejas_direcciones_proceso++))
 							proceso_detectado=${direcciones_memoria_proceso[$j]}
 							#echo $proceso_detectado
-							printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 4 "${array_tiempo_espera[$i]}" 4 "${array_tiempo_retorno[$i]}" 4 "${array_tiempo_restante[$i]}" 4 "${direcciones_memoria_inicial[$j]}" 4 "${direcciones_memoria_final[$j]}" 4 "${array_estado[$i]}"
+							#Con este if imprimo todos los datos si es la primera pareja de DM, si no lo es inprimo solo las parejas de DM
+							if [[ $contador_parejas_direcciones_proceso -eq 1 ]]; then
+								printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 4 "${array_tiempo_espera[$i]}" 4 "${array_tiempo_retorno[$i]}" 4 "${array_tiempo_restante[$i]}" 4 "${direcciones_memoria_inicial[$j]}" 4 "${direcciones_memoria_final[$j]}" 4 "${array_estado[$i]}"
+							else
+								printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT ${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "   " 3 "   " 3 "   " 3 "   " 4 "    " 4 "    " 4 "    " 4 "${direcciones_memoria_inicial[$j]}" 4 "${direcciones_memoria_final[$j]}" 4 "    "
+							fi
 							direcciones_memoria_proceso[$j]=1000
 						else
 							proceso_detectado=1000
@@ -1065,7 +1078,7 @@ function principal {
 	portada
 	clear
 	echo ""
-	menu_entrada
+	menu_entrada 
 	imprimir_tabla_datos
 	bucle_principal_script | tee -a informeColor.txt
 	quitar_clear
