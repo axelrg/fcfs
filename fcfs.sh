@@ -421,6 +421,7 @@ function imprimir_linea_temporal {
 	for (( i = 0; i <= $(($tiempo-1)); i++ )); do
 		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}\u2593\u2593\u2593$DEFAULT"
 	done
+	printf "|$tiempo"
 	echo ""
 }
 
@@ -429,6 +430,7 @@ function imprimir_linea_memoria {
 	for (( i = 1; i <= $tamanio_memoria; i++ )); do
 		printf "${ordenado_arr_colores[${array_memoria[$i]}]}\u2593\u2593\u2593$DEFAULT"
 	done
+	printf "|$tamanio_memoria"
 	echo ""
 }
 
@@ -450,14 +452,16 @@ function tiempo_linea_temporal {
 		fi
 
 		if [[ $i -eq $tiempo ]]; then
+			tiempo_linea_temporal[$i]=""
 
-			if [[ $(($i - 1)) -lt 10 ]]; then
-				tiempo_linea_temporal[$i]="$i  "
-			fi
 
-			if [[ $(($i - 1)) -ge 10 ]]; then
-				tiempo_linea_temporal[$i]="$i "
-			fi
+			#if [[ $(($i - 1)) -lt 10 ]]; then
+			#	tiempo_linea_temporal[$i]="$i  "
+			#fi
+#
+#			#if [[ $(($i - 1)) -ge 10 ]]; then
+#			#	tiempo_linea_temporal[$i]="$i "
+			#fi
 		fi
 
 	done
@@ -481,8 +485,13 @@ function procesos_linea_temporal {
 			 procesos_linea_temporal[$i]="   "
 		fi
 
+		#if [[ $i -eq $tiempo ]]; then
+		#	procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"
+		#fi
+
 		if [[ $i -eq $tiempo ]]; then
-			procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"
+			procesos_linea_temporal[$i]=""
+			#procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"
 		fi
 
 		if [[ $i -eq 0 ]]; then
@@ -493,9 +502,9 @@ function procesos_linea_temporal {
 	#if [[ ${array_linea_temporal[0]} -ne 0 ]]; then
 	#	procesos_linea_temporal[0]="${ordenado_nombres_procesos[${array_linea_temporal[0]}]}"	
 	#fi
-
-	#if [[ ${array_linea_temporal[0]} -eq 0 ]]; then
-	#	procesos_linea_temporal[0]="   "
+#
+#	#if [[ ${array_linea_temporal[0]} -eq 0 ]]; then
+#	#	procesos_linea_temporal[0]="   "
 	#fi
 
 	#procesos_linea_temporal[0]="${ordenado_nombres_procesos[${array_linea_temporal[]}]}"
@@ -508,6 +517,7 @@ function imprimir_procesos_linea_temporal {
 		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}${procesos_linea_temporal[$i]}$DEFAULT"
 	done
 	echo ""
+
 }
 
 function direcciones_linea_memoria {
@@ -547,7 +557,7 @@ function direcciones_linea_memoria {
 function imprimir_direcciones_linea_memoria {
 	printf "   "
 	printf "0  "
-	for (( i = 0; i <= $(($tamanio_memoria + 1)); i++ )); do
+	for (( i = 0; i <= $tamanio_memoria; i++ )); do
 		printf "${direcciones_linea_memoria[$i]}"
 	done
 }

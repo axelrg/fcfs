@@ -28,110 +28,750 @@
 FCFS-SN-N-S
 T=0
  Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
- P01 5   3   2   | -    -    -    -    -    Fuera del sistema 
- P02 6   3   3   | -    -    -    -    -    Fuera del sistema 
- P03 6   3   3   | -    -    -    -    -    Fuera del sistema 
- P04 7   3   1   | -    -    -    -    -    Fuera del sistema 
+ P01 0   10  20  | 0    0    10   0    19   En ejecucion 
+ P09 1   15  30  | -    -    -    -    -    Fuera del sistema 
+ P02 2   18  25  | -    -    -    -    -    Fuera del sistema 
+ P14 3   30  10  | -    -    -    -    -    Fuera del sistema 
+ P07 4   22  10  | -    -    -    -    -    Fuera del sistema 
+ P05 6   8   25  | -    -    -    -    -    Fuera del sistema 
+ P04 8   11  30  | -    -    -    -    -    Fuera del sistema 
+ P08 9   13  15  | -    -    -    -    -    Fuera del sistema 
+ P10 11  20  25  | -    -    -    -    -    Fuera del sistema 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
 TIEMPO MEDIO ESPERA = 0 TIEMPO MEDIO RETORNO = 0
-   ---            
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5  
+   P01                                                         ---                                                         
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                                                          
 
 FCFS-SN-N-S
-T=5
+T=1
  Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
- P01 5   3   2   | 0    0    3    0    1    En ejecucion 
- P02 6   3   3   | -    -    -    -    -    Fuera del sistema 
- P03 6   3   3   | -    -    -    -    -    Fuera del sistema 
- P04 7   3   1   | -    -    -    -    -    Fuera del sistema 
-TIEMPO MEDIO ESPERA = 0 TIEMPO MEDIO RETORNO = 0
-   P01   ---      
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2        5  
-   ---            P01
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5  
+ P01 0   10  20  | 0    1    9    0    19   En ejecucion 
+ P09 1   15  30  | 0    0    -    -    -    En espera 
+ P02 2   18  25  | -    -    -    -    -    Fuera del sistema 
+ P14 3   30  10  | -    -    -    -    -    Fuera del sistema 
+ P07 4   22  10  | -    -    -    -    -    Fuera del sistema 
+ P05 6   8   25  | -    -    -    -    -    Fuera del sistema 
+ P04 8   11  30  | -    -    -    -    -    Fuera del sistema 
+ P08 9   13  15  | -    -    -    -    -    Fuera del sistema 
+ P10 11  20  25  | -    -    -    -    -    Fuera del sistema 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 0 TIEMPO MEDIO RETORNO = .50
+   P01                                                         ---                                                         
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                                                          
+   P01
+BT|▓▓▓|1
+   0  
+FCFS-SN-N-S
+T=2
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    2    8    0    19   En ejecucion 
+ P09 1   15  30  | 1    1    -    -    -    En espera 
+ P02 2   18  25  | 0    0    -    -    -    En espera 
+ P14 3   30  10  | -    -    -    -    -    Fuera del sistema 
+ P07 4   22  10  | -    -    -    -    -    Fuera del sistema 
+ P05 6   8   25  | -    -    -    -    -    Fuera del sistema 
+ P04 8   11  30  | -    -    -    -    -    Fuera del sistema 
+ P08 9   13  15  | -    -    -    -    -    Fuera del sistema 
+ P10 11  20  25  | -    -    -    -    -    Fuera del sistema 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = .33 TIEMPO MEDIO RETORNO = 1.00
+   P01                                                         ---                                                         
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                                                          
+   P01   
+BT|▓▓▓▓▓▓|2
+   0     
+FCFS-SN-N-S
+T=3
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    3    7    0    19   En ejecucion 
+ P09 1   15  30  | 2    2    -    -    -    En espera 
+ P02 2   18  25  | 1    1    -    -    -    En espera 
+ P14 3   30  10  | 0    0    -    -    -    En espera 
+ P07 4   22  10  | -    -    -    -    -    Fuera del sistema 
+ P05 6   8   25  | -    -    -    -    -    Fuera del sistema 
+ P04 8   11  30  | -    -    -    -    -    Fuera del sistema 
+ P08 9   13  15  | -    -    -    -    -    Fuera del sistema 
+ P10 11  20  25  | -    -    -    -    -    Fuera del sistema 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = .75 TIEMPO MEDIO RETORNO = 1.50
+   P01                                                         ---                                                         
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                                                          
+   P01      
+BT|▓▓▓▓▓▓▓▓▓|3
+   0        
+FCFS-SN-N-S
+T=4
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    4    6    0    19   En ejecucion 
+ P09 1   15  30  | 3    3    -    -    -    En espera 
+ P02 2   18  25  | 2    2    -    -    -    En espera 
+ P14 3   30  10  | 1    1    -    -    -    En espera 
+ P07 4   22  10  | 0    0    -    -    -    En espera 
+ P05 6   8   25  | -    -    -    -    -    Fuera del sistema 
+ P04 8   11  30  | -    -    -    -    -    Fuera del sistema 
+ P08 9   13  15  | -    -    -    -    -    Fuera del sistema 
+ P10 11  20  25  | -    -    -    -    -    Fuera del sistema 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 1.20 TIEMPO MEDIO RETORNO = 2.00
+   P01                                                         ---                                                         
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                                                          
+   P01         
+BT|▓▓▓▓▓▓▓▓▓▓▓▓|4
+   0           
 FCFS-SN-N-S
 T=6
  Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
- P01 5   3   2   | 0    1    2    0    1    En ejecucion 
- P02 6   3   3   | 0    0    3    2    4    En memoria 
- P03 6   3   3   | 0    0    -    -    -    En espera 
- P04 7   3   1   | -    -    -    -    -    Fuera del sistema 
-TIEMPO MEDIO ESPERA = 0 TIEMPO MEDIO RETORNO = .33
-   P01   P02      
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2        5  
-   ---            P01P01
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5  6  
-FCFS-SN-N-S
-T=7
- Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
- P01 5   3   2   | 0    2    1    0    1    En ejecucion 
- P02 6   3   3   | 1    1    3    2    4    En memoria 
- P03 6   3   3   | 1    1    -    -    -    En espera 
- P04 7   3   1   | 0    0    -    -    -    En espera 
-TIEMPO MEDIO ESPERA = .50 TIEMPO MEDIO RETORNO = 1.00
-   P01   P02      
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2        5  
-   ---            P01   P01
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5     7  
+ P01 0   10  20  | 0    6    4    0    19   En ejecucion 
+ P09 1   15  30  | 5    5    -    -    -    En espera 
+ P02 2   18  25  | 4    4    -    -    -    En espera 
+ P14 3   30  10  | 3    3    -    -    -    En espera 
+ P07 4   22  10  | 2    2    -    -    -    En espera 
+ P05 6   8   25  | 0    0    -    -    -    En espera 
+ P04 8   11  30  | -    -    -    -    -    Fuera del sistema 
+ P08 9   13  15  | -    -    -    -    -    Fuera del sistema 
+ P10 11  20  25  | -    -    -    -    -    Fuera del sistema 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 2.33 TIEMPO MEDIO RETORNO = 3.33
+   P01                                                         ---                                                         
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                                                          
+   P01               
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|6
+   0                 
 FCFS-SN-N-S
 T=8
  Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
- P01 5   3   2   | 0    3    0    -    -    Finalizado 
- P02 6   3   3   | 2    2    3    2    4    En ejecucion 
- P03 6   3   3   | 2    2    -    -    -    En espera 
- P04 7   3   1   | 1    1    -    -    -    En espera 
-TIEMPO MEDIO ESPERA = 1.25 TIEMPO MEDIO RETORNO = 2.00
-   ---   P02      
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0     2        5  
-   ---            P01      P02
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5        8  
+ P01 0   10  20  | 0    8    2    0    19   En ejecucion 
+ P09 1   15  30  | 7    7    -    -    -    En espera 
+ P02 2   18  25  | 6    6    -    -    -    En espera 
+ P14 3   30  10  | 5    5    -    -    -    En espera 
+ P07 4   22  10  | 4    4    -    -    -    En espera 
+ P05 6   8   25  | 2    2    -    -    -    En espera 
+ P04 8   11  30  | 0    0    -    -    -    En espera 
+ P08 9   13  15  | -    -    -    -    -    Fuera del sistema 
+ P10 11  20  25  | -    -    -    -    -    Fuera del sistema 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 3.42 TIEMPO MEDIO RETORNO = 4.57
+   P01                                                         ---                                                         
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                                                          
+   P01                     
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|8
+   0                       
+FCFS-SN-N-S
+T=9
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    9    1    0    19   En ejecucion 
+ P09 1   15  30  | 8    8    -    -    -    En espera 
+ P02 2   18  25  | 7    7    -    -    -    En espera 
+ P14 3   30  10  | 6    6    -    -    -    En espera 
+ P07 4   22  10  | 5    5    -    -    -    En espera 
+ P05 6   8   25  | 3    3    -    -    -    En espera 
+ P04 8   11  30  | 1    1    -    -    -    En espera 
+ P08 9   13  15  | 0    0    -    -    -    En espera 
+ P10 11  20  25  | -    -    -    -    -    Fuera del sistema 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 3.75 TIEMPO MEDIO RETORNO = 4.87
+   P01                                                         ---                                                         
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                                                          
+   P01                        
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|9
+   0                          
+FCFS-SN-N-S
+T=10
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    9    15   0    29   En ejecucion 
+ P02 2   18  25  | 8    8    -    -    -    En espera 
+ P14 3   30  10  | 7    7    -    -    -    En espera 
+ P07 4   22  10  | 6    6    -    -    -    En espera 
+ P05 6   8   25  | 4    4    -    -    -    En espera 
+ P04 8   11  30  | 2    2    -    -    -    En espera 
+ P08 9   13  15  | 1    1    -    -    -    En espera 
+ P10 11  20  25  | -    -    -    -    -    Fuera del sistema 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 4.62 TIEMPO MEDIO RETORNO = 5.87
+   P09                                                                                       ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                         30                            
+   P01                           
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|10
+   0                             
 FCFS-SN-N-S
 T=11
  Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
- P01 5   3   2   | 0    3    0    -    -    Finalizado 
- P02 6   3   3   | 2    5    0    -    -    Finalizado 
- P03 6   3   3   | 5    5    3    0    2    En ejecucion 
- P04 7   3   1   | 4    4    3    3    3    En memoria 
-TIEMPO MEDIO ESPERA = 2.75 TIEMPO MEDIO RETORNO = 4.25
-   P03      P04---
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3  4  5  
-   ---            P01      P02      P03
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5        8        11 
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    10   14   0    29   En ejecucion 
+ P02 2   18  25  | 9    9    -    -    -    En espera 
+ P14 3   30  10  | 8    8    -    -    -    En espera 
+ P07 4   22  10  | 7    7    -    -    -    En espera 
+ P05 6   8   25  | 5    5    -    -    -    En espera 
+ P04 8   11  30  | 3    3    -    -    -    En espera 
+ P08 9   13  15  | 2    2    -    -    -    En espera 
+ P10 11  20  25  | 0    0    -    -    -    En espera 
+ P06 12  12  20  | -    -    -    -    -    Fuera del sistema 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 4.77 TIEMPO MEDIO RETORNO = 6.00
+   P09                                                                                       ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                         30                            
+   P01                           P09
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|11
+   0                             10  
+FCFS-SN-N-S
+T=12
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    11   13   0    29   En ejecucion 
+ P02 2   18  25  | 10   10   -    -    -    En espera 
+ P14 3   30  10  | 9    9    -    -    -    En espera 
+ P07 4   22  10  | 8    8    -    -    -    En espera 
+ P05 6   8   25  | 6    6    -    -    -    En espera 
+ P04 8   11  30  | 4    4    -    -    -    En espera 
+ P08 9   13  15  | 3    3    -    -    -    En espera 
+ P10 11  20  25  | 1    1    -    -    -    En espera 
+ P06 12  12  20  | 0    0    -    -    -    En espera 
+ P12 13  28  35  | -    -    -    -    -    Fuera del sistema 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 5.00 TIEMPO MEDIO RETORNO = 6.20
+   P09                                                                                       ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                         30                            
+   P01                           P09   
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|12
+   0                             10     
+FCFS-SN-N-S
+T=13
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    12   12   0    29   En ejecucion 
+ P02 2   18  25  | 11   11   -    -    -    En espera 
+ P14 3   30  10  | 10   10   -    -    -    En espera 
+ P07 4   22  10  | 9    9    -    -    -    En espera 
+ P05 6   8   25  | 7    7    -    -    -    En espera 
+ P04 8   11  30  | 5    5    -    -    -    En espera 
+ P08 9   13  15  | 4    4    -    -    -    En espera 
+ P10 11  20  25  | 2    2    -    -    -    En espera 
+ P06 12  12  20  | 1    1    -    -    -    En espera 
+ P12 13  28  35  | 0    0    -    -    -    En espera 
+ P03 14  25  15  | -    -    -    -    -    Fuera del sistema 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 5.27 TIEMPO MEDIO RETORNO = 6.45
+   P09                                                                                       ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                         30                            
+   P01                           P09      
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|13
+   0                             10        
 FCFS-SN-N-S
 T=14
  Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
- P01 5   3   2   | 0    3    0    -    -    Finalizado 
- P02 6   3   3   | 2    5    0    -    -    Finalizado 
- P03 6   3   3   | 5    8    0    -    -    Finalizado 
- P04 7   3   1   | 7    7    3    3    3    En ejecucion 
-TIEMPO MEDIO ESPERA = 3.50 TIEMPO MEDIO RETORNO = 5.75
-   ---      P04---
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0        3  4  5  
-   ---            P01      P02      P03      P04
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5        8        11       14 
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    13   11   0    29   En ejecucion 
+ P02 2   18  25  | 12   12   -    -    -    En espera 
+ P14 3   30  10  | 11   11   -    -    -    En espera 
+ P07 4   22  10  | 10   10   -    -    -    En espera 
+ P05 6   8   25  | 8    8    -    -    -    En espera 
+ P04 8   11  30  | 6    6    -    -    -    En espera 
+ P08 9   13  15  | 5    5    -    -    -    En espera 
+ P10 11  20  25  | 3    3    -    -    -    En espera 
+ P06 12  12  20  | 2    2    -    -    -    En espera 
+ P12 13  28  35  | 1    1    -    -    -    En espera 
+ P03 14  25  15  | 0    0    -    -    -    En espera 
+ P15 15  15  5   | -    -    -    -    -    Fuera del sistema 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 5.58 TIEMPO MEDIO RETORNO = 6.75
+   P09                                                                                       ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                         30                            
+   P01                           P09         
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|14
+   0                             10           
 FCFS-SN-N-S
-T=17
+T=15
  Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
- P01 5   3   2   | 0    3    0    -    -    Finalizado 
- P02 6   3   3   | 2    5    0    -    -    Finalizado 
- P03 6   3   3   | 5    8    0    -    -    Finalizado 
- P04 7   3   1   | 7    10   0    -    -    Finalizado 
-TIEMPO MEDIO ESPERA = 3.50 TIEMPO MEDIO RETORNO = 6.50
-   ---            
-BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5  
-   ---            P01      P02      P03      P04      ---
-BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   0              5        8        11       14       17 
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    14   10   0    29   En ejecucion 
+ P02 2   18  25  | 13   13   -    -    -    En espera 
+ P14 3   30  10  | 12   12   -    -    -    En espera 
+ P07 4   22  10  | 11   11   -    -    -    En espera 
+ P05 6   8   25  | 9    9    -    -    -    En espera 
+ P04 8   11  30  | 7    7    -    -    -    En espera 
+ P08 9   13  15  | 6    6    -    -    -    En espera 
+ P10 11  20  25  | 4    4    -    -    -    En espera 
+ P06 12  12  20  | 3    3    -    -    -    En espera 
+ P12 13  28  35  | 2    2    -    -    -    En espera 
+ P03 14  25  15  | 1    1    -    -    -    En espera 
+ P15 15  15  5   | 0    0    -    -    -    En espera 
+ P11 21  19  10  | -    -    -    -    -    Fuera del sistema 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 5.92 TIEMPO MEDIO RETORNO = 7.07
+   P09                                                                                       ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                         30                            
+   P01                           P09            
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|15
+   0                             10              
+FCFS-SN-N-S
+T=21
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    20   4    0    29   En ejecucion 
+ P02 2   18  25  | 19   19   -    -    -    En espera 
+ P14 3   30  10  | 18   18   -    -    -    En espera 
+ P07 4   22  10  | 17   17   -    -    -    En espera 
+ P05 6   8   25  | 15   15   -    -    -    En espera 
+ P04 8   11  30  | 13   13   -    -    -    En espera 
+ P08 9   13  15  | 12   12   -    -    -    En espera 
+ P10 11  20  25  | 10   10   -    -    -    En espera 
+ P06 12  12  20  | 9    9    -    -    -    En espera 
+ P12 13  28  35  | 8    8    -    -    -    En espera 
+ P03 14  25  15  | 7    7    -    -    -    En espera 
+ P15 15  15  5   | 6    6    -    -    -    En espera 
+ P11 21  19  10  | 0    0    -    -    -    En espera 
+ P13 22  32  30  | -    -    -    -    -    Fuera del sistema 
+TIEMPO MEDIO ESPERA = 10.21 TIEMPO MEDIO RETORNO = 11.71
+   P09                                                                                       ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                         30                            
+   P01                           P09                              
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|21
+   0                             10                                
+FCFS-SN-N-S
+T=22
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    21   3    0    29   En ejecucion 
+ P02 2   18  25  | 20   20   -    -    -    En espera 
+ P14 3   30  10  | 19   19   -    -    -    En espera 
+ P07 4   22  10  | 18   18   -    -    -    En espera 
+ P05 6   8   25  | 16   16   -    -    -    En espera 
+ P04 8   11  30  | 14   14   -    -    -    En espera 
+ P08 9   13  15  | 13   13   -    -    -    En espera 
+ P10 11  20  25  | 11   11   -    -    -    En espera 
+ P06 12  12  20  | 10   10   -    -    -    En espera 
+ P12 13  28  35  | 9    9    -    -    -    En espera 
+ P03 14  25  15  | 8    8    -    -    -    En espera 
+ P15 15  15  5   | 7    7    -    -    -    En espera 
+ P11 21  19  10  | 1    1    -    -    -    En espera 
+ P13 22  32  30  | 0    0    -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 10.33 TIEMPO MEDIO RETORNO = 11.80
+   P09                                                                                       ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                         30                            
+   P01                           P09                                 
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|22
+   0                             10                                   
+FCFS-SN-N-S
+T=25
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   23   18   0    24   En ejecucion 
+ P14 3   30  10  | 22   22   30   25   34   En memoria 
+ P07 4   22  10  | 21   21   -    -    -    En espera 
+ P05 6   8   25  | 19   19   -    -    -    En espera 
+ P04 8   11  30  | 17   17   -    -    -    En espera 
+ P08 9   13  15  | 16   16   -    -    -    En espera 
+ P10 11  20  25  | 14   14   -    -    -    En espera 
+ P06 12  12  20  | 13   13   -    -    -    En espera 
+ P12 13  28  35  | 12   12   -    -    -    En espera 
+ P03 14  25  15  | 11   11   -    -    -    En espera 
+ P15 15  15  5   | 10   10   -    -    -    En espera 
+ P11 21  19  10  | 4    4    -    -    -    En espera 
+ P13 22  32  30  | 3    3    -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 12.93 TIEMPO MEDIO RETORNO = 14.60
+   P02                                                                        P14                           ---            
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                          25                            35             
+   P01                           P09                                          
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|25
+   0                             10                                            
+FCFS-SN-N-S
+T=43
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   40   30   25   34   En ejecucion 
+ P07 4   22  10  | 39   39   22   0    9    En memoria 
+ P05 6   8   25  | 37   37   -    -    -    En espera 
+ P04 8   11  30  | 35   35   -    -    -    En espera 
+ P08 9   13  15  | 34   34   -    -    -    En espera 
+ P10 11  20  25  | 32   32   -    -    -    En espera 
+ P06 12  12  20  | 31   31   -    -    -    En espera 
+ P12 13  28  35  | 30   30   -    -    -    En espera 
+ P03 14  25  15  | 29   29   -    -    -    En espera 
+ P15 15  15  5   | 28   28   -    -    -    En espera 
+ P11 21  19  10  | 22   22   -    -    -    En espera 
+ P13 22  32  30  | 21   21   -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 27.33 TIEMPO MEDIO RETORNO = 30.20
+   P07                           ---                                          P14                           ---            
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                             10                                           25                            35             
+   P01                           P09                                          P02                                                   
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|43
+   0                             10                                            25                                                    
+FCFS-SN-N-S
+T=73
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   69   22   0    9    En ejecucion 
+ P05 6   8   25  | 67   67   8    10   34   En memoria 
+ P04 8   11  30  | 65   65   -    -    -    En espera 
+ P08 9   13  15  | 64   64   -    -    -    En espera 
+ P10 11  20  25  | 62   62   -    -    -    En espera 
+ P06 12  12  20  | 61   61   -    -    -    En espera 
+ P12 13  28  35  | 60   60   -    -    -    En espera 
+ P03 14  25  15  | 59   59   -    -    -    En espera 
+ P15 15  15  5   | 58   58   -    -    -    En espera 
+ P11 21  19  10  | 52   52   -    -    -    En espera 
+ P13 22  32  30  | 51   51   -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 49.33 TIEMPO MEDIO RETORNO = 54.20
+   P07                           P05                                                                        ---            
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                             10                                                                         35             
+   P01                           P09                                          P02                                                   P14                                                                                       
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|73
+   0                             10                                            25                                                    43                                                                                        
+FCFS-SN-N-S
+T=95
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   89   8    10   34   En ejecucion 
+ P04 8   11  30  | 87   87   -    -    -    En espera 
+ P08 9   13  15  | 86   86   -    -    -    En espera 
+ P10 11  20  25  | 84   84   -    -    -    En espera 
+ P06 12  12  20  | 83   83   -    -    -    En espera 
+ P12 13  28  35  | 82   82   -    -    -    En espera 
+ P03 14  25  15  | 81   81   -    -    -    En espera 
+ P15 15  15  5   | 80   80   -    -    -    En espera 
+ P11 21  19  10  | 74   74   -    -    -    En espera 
+ P13 22  32  30  | 73   73   -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 64.00 TIEMPO MEDIO RETORNO = 70.33
+   ---                           P05                                                                        ---            
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                             10                                                                         35             
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|95
+   0                             10                                            25                                                    43                                                                                        73                                                                
+FCFS-SN-N-S
+T=103
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   95   11   0    29   En ejecucion 
+ P08 9   13  15  | 94   94   -    -    -    En espera 
+ P10 11  20  25  | 92   92   -    -    -    En espera 
+ P06 12  12  20  | 91   91   -    -    -    En espera 
+ P12 13  28  35  | 90   90   -    -    -    En espera 
+ P03 14  25  15  | 89   89   -    -    -    En espera 
+ P15 15  15  5   | 88   88   -    -    -    En espera 
+ P11 21  19  10  | 82   82   -    -    -    En espera 
+ P13 22  32  30  | 81   81   -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 68.80 TIEMPO MEDIO RETORNO = 75.66
+   P04                                                                                       ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                         30                            
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|103
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      
+FCFS-SN-N-S
+T=114
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   106  0    -    -    Finalizado 
+ P08 9   13  15  | 105  105  13   0    14   En ejecucion 
+ P10 11  20  25  | 103  103  20   15   39   En memoria 
+ P06 12  12  20  | 102  102  -    -    -    En espera 
+ P12 13  28  35  | 101  101  -    -    -    En espera 
+ P03 14  25  15  | 100  100  -    -    -    En espera 
+ P15 15  15  5   | 99   99   -    -    -    En espera 
+ P11 21  19  10  | 93   93   -    -    -    En espera 
+ P13 22  32  30  | 92   92   -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 74.66 TIEMPO MEDIO RETORNO = 82.26
+   P08                                          P10                                                                        
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                            15                                                                         
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     P04                              
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|114
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      103                               
+FCFS-SN-N-S
+T=127
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   106  0    -    -    Finalizado 
+ P08 9   13  15  | 105  118  0    -    -    Finalizado 
+ P10 11  20  25  | 116  116  20   15   39   En ejecucion 
+ P06 12  12  20  | 115  115  -    -    -    En espera 
+ P12 13  28  35  | 114  114  -    -    -    En espera 
+ P03 14  25  15  | 113  113  -    -    -    En espera 
+ P15 15  15  5   | 112  112  -    -    -    En espera 
+ P11 21  19  10  | 106  106  -    -    -    En espera 
+ P13 22  32  30  | 105  105  -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 80.73 TIEMPO MEDIO RETORNO = 89.20
+   ---                                          P10                                                                        
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                            15                                                                         
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     P04                              P08                                    
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|127
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      103                               114                                     
+FCFS-SN-N-S
+T=147
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   106  0    -    -    Finalizado 
+ P08 9   13  15  | 105  118  0    -    -    Finalizado 
+ P10 11  20  25  | 116  136  0    -    -    Finalizado 
+ P06 12  12  20  | 135  135  12   0    19   En ejecucion 
+ P12 13  28  35  | 134  134  -    -    -    En espera 
+ P03 14  25  15  | 133  133  -    -    -    En espera 
+ P15 15  15  5   | 132  132  -    -    -    En espera 
+ P11 21  19  10  | 126  126  -    -    -    En espera 
+ P13 22  32  30  | 125  125  -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 88.73 TIEMPO MEDIO RETORNO = 98.53
+   P06                                                         ---                                                         
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                                                          
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     P04                              P08                                    P10                                                         
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|147
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      103                               114                                     127                                                          
+FCFS-SN-N-S
+T=159
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   106  0    -    -    Finalizado 
+ P08 9   13  15  | 105  118  0    -    -    Finalizado 
+ P10 11  20  25  | 116  136  0    -    -    Finalizado 
+ P06 12  12  20  | 135  147  0    -    -    Finalizado 
+ P12 13  28  35  | 146  146  28   0    34   En ejecucion 
+ P03 14  25  15  | 145  145  -    -    -    En espera 
+ P15 15  15  5   | 144  144  -    -    -    En espera 
+ P11 21  19  10  | 138  138  -    -    -    En espera 
+ P13 22  32  30  | 137  137  -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 92.73 TIEMPO MEDIO RETORNO = 103.33
+   P12                                                                                                      ---            
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                                        35             
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     P04                              P08                                    P10                                                         P06                                 
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|159
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      103                               114                                     127                                                          147                                  
+FCFS-SN-N-S
+T=187
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   106  0    -    -    Finalizado 
+ P08 9   13  15  | 105  118  0    -    -    Finalizado 
+ P10 11  20  25  | 116  136  0    -    -    Finalizado 
+ P06 12  12  20  | 135  147  0    -    -    Finalizado 
+ P12 13  28  35  | 146  174  0    -    -    Finalizado 
+ P03 14  25  15  | 173  173  25   0    14   En ejecucion 
+ P15 15  15  5   | 172  172  15   15   19   En memoria 
+ P11 21  19  10  | 166  166  19   20   29   En memoria 
+ P13 22  32  30  | 165  165  -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 100.20 TIEMPO MEDIO RETORNO = 112.66
+   P03                                          P15            P11                           ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                            15             20                            30                            
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     P04                              P08                                    P10                                                         P06                                 P12                                                                                 
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|187
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      103                               114                                     127                                                          147                                  159                                                                                  
+FCFS-SN-N-S
+T=212
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   106  0    -    -    Finalizado 
+ P08 9   13  15  | 105  118  0    -    -    Finalizado 
+ P10 11  20  25  | 116  136  0    -    -    Finalizado 
+ P06 12  12  20  | 135  147  0    -    -    Finalizado 
+ P12 13  28  35  | 146  174  0    -    -    Finalizado 
+ P03 14  25  15  | 173  198  0    -    -    Finalizado 
+ P15 15  15  5   | 197  197  15   15   19   En ejecucion 
+ P11 21  19  10  | 191  191  19   20   29   En memoria 
+ P13 22  32  30  | 190  190  -    -    -    En espera 
+TIEMPO MEDIO ESPERA = 105.20 TIEMPO MEDIO RETORNO = 119.33
+   ---                                          P15            P11                           ---                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                            15             20                            30                            
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     P04                              P08                                    P10                                                         P06                                 P12                                                                                 P03                                                                        
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|212
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      103                               114                                     127                                                          147                                  159                                                                                  187                                                                         
+FCFS-SN-N-S
+T=227
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   106  0    -    -    Finalizado 
+ P08 9   13  15  | 105  118  0    -    -    Finalizado 
+ P10 11  20  25  | 116  136  0    -    -    Finalizado 
+ P06 12  12  20  | 135  147  0    -    -    Finalizado 
+ P12 13  28  35  | 146  174  0    -    -    Finalizado 
+ P03 14  25  15  | 173  198  0    -    -    Finalizado 
+ P15 15  15  5   | 197  212  0    -    -    Finalizado 
+ P11 21  19  10  | 206  206  19   20   29   En ejecucion 
+ P13 22  32  30  | 205  205  32   0    19   En memoria 
+ P13 22  32  30  | 205  205  32   30   39   En memoria 
+TIEMPO MEDIO ESPERA = 107.20 TIEMPO MEDIO RETORNO = 122.33
+   P13                                                         P11                           P13                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                            30                            
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     P04                              P08                                    P10                                                         P06                                 P12                                                                                 P03                                                                        P15                                          
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|227
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      103                               114                                     127                                                          147                                  159                                                                                  187                                                                         212                                           
+FCFS-SN-N-S
+T=246
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   106  0    -    -    Finalizado 
+ P08 9   13  15  | 105  118  0    -    -    Finalizado 
+ P10 11  20  25  | 116  136  0    -    -    Finalizado 
+ P06 12  12  20  | 135  147  0    -    -    Finalizado 
+ P12 13  28  35  | 146  174  0    -    -    Finalizado 
+ P03 14  25  15  | 173  198  0    -    -    Finalizado 
+ P15 15  15  5   | 197  212  0    -    -    Finalizado 
+ P11 21  19  10  | 206  225  0    -    -    Finalizado 
+ P13 22  32  30  | 224  224  32   0    19   En ejecucion 
+ P13 22  32  30  | 224  224  32   30   39   En ejecucion 
+TIEMPO MEDIO ESPERA = 108.46 TIEMPO MEDIO RETORNO = 124.86
+   P13                                                         ---                           P13                           
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                           20                            30                            
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     P04                              P08                                    P10                                                         P06                                 P12                                                                                 P03                                                                        P15                                          P11                                                      
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|246
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      103                               114                                     127                                                          147                                  159                                                                                  187                                                                         212                                           227                                                       
+FCFS-SN-N-S
+T=278
+ Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado
+ P01 0   10  20  | 0    10   0    -    -    Finalizado 
+ P09 1   15  30  | 9    24   0    -    -    Finalizado 
+ P02 2   18  25  | 23   41   0    -    -    Finalizado 
+ P14 3   30  10  | 40   70   0    -    -    Finalizado 
+ P07 4   22  10  | 69   91   0    -    -    Finalizado 
+ P05 6   8   25  | 89   97   0    -    -    Finalizado 
+ P04 8   11  30  | 95   106  0    -    -    Finalizado 
+ P08 9   13  15  | 105  118  0    -    -    Finalizado 
+ P10 11  20  25  | 116  136  0    -    -    Finalizado 
+ P06 12  12  20  | 135  147  0    -    -    Finalizado 
+ P12 13  28  35  | 146  174  0    -    -    Finalizado 
+ P03 14  25  15  | 173  198  0    -    -    Finalizado 
+ P15 15  15  5   | 197  212  0    -    -    Finalizado 
+ P11 21  19  10  | 206  225  0    -    -    Finalizado 
+ P13 22  32  30  | 224  256  0    -    -    Finalizado 
+TIEMPO MEDIO ESPERA = 108.46 TIEMPO MEDIO RETORNO = 127.00
+   ---                                                                                                                     
+BM|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|40
+   0                                                                                                                       
+   P01                           P09                                          P02                                                   P14                                                                                       P07                                                               P05                     P04                              P08                                    P10                                                         P06                                 P12                                                                                 P03                                                                        P15                                          P11                                                      P13                                                                                             
+BT|▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓|278
+   0                             10                                            25                                                    43                                                                                        73                                                                95                      103                               114                                     127                                                          147                                  159                                                                                  187                                                                         212                                           227                                                       246                                                                                              
