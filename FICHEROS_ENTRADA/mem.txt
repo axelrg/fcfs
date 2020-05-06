@@ -1,4 +1,5 @@
 MEM:5
+REU:3
 TLL:TEJ:MEM
 5:3:2
 6:3:3

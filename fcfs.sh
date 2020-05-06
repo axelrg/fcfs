@@ -31,7 +31,8 @@ declare -r L_MAGENTA='\e[95m' #Magenta claro
 declare -r L_CYAN='\e[96m' #Cyan claro
 declare -r D_GRAY='\e[90m' #Gris oscuro
 
-
+#Esta variable guarda el limite superior de huecos en memoria hasta el cual se reubica
+reubicabilidad=0
 contador_colores=1
 #Esta función se va a encargar de llenar el array con colores en función 
 #del número de procesos introducidos
@@ -123,6 +124,9 @@ function entrada_por_teclado {
 	echo "Introduce el tamaño de la memoria"| tee -a informeColor.txt
 	read tamanio_memoria
 	echo "$tamanio_memoria">> informeColor.txt
+	echo "Introduce el numero hasta el cual se reubica"| tee -a informeColor.txt
+	read reubicabilidad
+	echo "$tamanio_memoria">> informeColor.txt
 	echo "El tamaño de la memoria es $tamanio_memoria"| tee -a informeColor.txt
 	while [ "$op" == "s" ]; do
 
@@ -188,7 +192,9 @@ function entrada_por_teclado {
 
 function entrada_aleatoria {
 	tamanio_memoria=$((RANDOM%99))
+	reubicabilidad=$((RANDOM%6))
 	echo "El tamaño de la memoria es $tamanio_memoria"
+	echo "El numero hasta el cual se reubica es $reubicabilidad"
 	echo "¿Cuántos procesos quieres crear?"
 	read procesos_a_crear
 	contador=1
@@ -224,12 +230,13 @@ function entrada_aleatoria {
 function corte_datos {
 	cd FICHEROS_ENTRADA
 	tamanio_memoria=`sed -n 1p $fichero_entrada | cut -d ":" -f 2`
-	echo "El tamaño de la memoria es $tamanio_memoria"
+	reubicabilidad=`sed -n 2p $fichero_entrada | cut -d ":" -f 2`
+	#echo "El tamaño de la memoria es $tamanio_memoria"
 
-	for (( contador = 1; contador <= $(($procesos_en_fichero+2)); contador++ )); do
-		arr_tiempos_llegada[$contador]=`sed -n $(($contador+2))p $fichero_entrada | cut -d ":" -f 1`
-		arr_tiempos_ejecucion[$contador]=`sed -n $(($contador+2))p $fichero_entrada | cut -d ":" -f 2`
-		arr_memoria[$contador]=`sed -n $(($contador+2))p $fichero_entrada | cut -d ":" -f 3`
+	for (( contador = 1; contador <= $(($procesos_en_fichero+3)); contador++ )); do
+		arr_tiempos_llegada[$contador]=`sed -n $(($contador+3))p $fichero_entrada | cut -d ":" -f 1`
+		arr_tiempos_ejecucion[$contador]=`sed -n $(($contador+3))p $fichero_entrada | cut -d ":" -f 2`
+		arr_memoria[$contador]=`sed -n $(($contador+3))p $fichero_entrada | cut -d ":" -f 3`
 		if [ $contador -gt 9 ]; then
 			nombres_procesos[$contador]="P$contador"
 		fi
@@ -255,7 +262,7 @@ function entrada_por_fichero {
 	echo "Escribe el fichero del que deseas extraer los datos:"
 	read fichero_entrada
 	procesos_en_fichero=(`wc -l ./FICHEROS_ENTRADA/$fichero_entrada`)
-	procesos_en_fichero=$(($procesos_en_fichero-1))
+	procesos_en_fichero=$(($procesos_en_fichero-2))
 	echo "El numero de líneas del fichero es $procesos_en_fichero"
 	contador=$procesos_en_fichero
 	corte_datos
@@ -623,7 +630,7 @@ function reubicamos {
 			fi
 		done
 		array_memoria_ord[$i]=${array_memoria[$posicion]}
-		array_memoria[$posicion]="1000"
+		array_memoria[$posicion]="0"
 	done
 
 	inicializar_array_memoria
@@ -657,19 +664,20 @@ function gg_necesito_reubicar {
 				fi
 
 				if [[ ${array_memoria[$i]} -ne ${array_memoria[$(($i - 1))]} ]]; then
-					if [[ $contador_reubicar -le 1 ]]; then
-						if [[ ${ordenado_arr_memoria[${array_memoria[$(($i - 1))]}]} -gt 1 ]]; then
+					if [[ $contador_reubicar -le $reubicabilidad ]]; then
+						if [[ ${ordenado_arr_memoria[${array_memoria[$(($i - 1))]}]} -gt $contador_reubicar ]]; then
 							necesito_reubicar=0
 							reubicamos
 							necesito_reubicar=1
+							contador_reubicar=1
 						fi
 						
 					fi
-
-					if [[ $contador_reubicar -gt 1 ]]; then
-						contador_reubicar=0
-						((contador_reubicar++))
-					fi
+					contador_reubicar=1
+						#if [[ $contador_reubicar -gt 1 ]]; then
+						#	contador_reubicar=0
+						#	((contador_reubicar++))
+						#fi
 				fi
 			fi
 		#fi
@@ -933,7 +941,8 @@ function bucle_principal_script {
 		if [[ $cambio_a_imprimir -eq 1 ]] && [[ $tiempo -ge ${ordenado_arr_tiempos_llegada[1]} ]] ||  [[ $tiempo -eq 0 ]] ; then
 			clear
 			echo "FCFS-SN-N-S"
-			echo "T=$tiempo"
+			echo "T=$tiempo R=$reubicabilidad"
+			#echo "R=$reubicabilidad"
 			
 			#imprimir_tabla
 			#echo ""
@@ -943,6 +952,7 @@ function bucle_principal_script {
 			#echo "LINEA MEMORIA:"
 			#echo "${#array_memoria[@]}"
 			#echo "${array_memoria_ord[@]}"
+			#echo "${cola[@]}"
 			#echo "${array_memoria[@]}"
 
 			if [[ $necesito_reubicar -eq 1 ]]; then
@@ -1073,6 +1083,8 @@ function portada {
 
 #Esta funcion es la encargada de llamar a la entrada, al bucle principal y a los informes/salida
 function principal {
+	#Esta variable guarda el numero maximo de partes de procesos con las que se reubica
+	reubicabilidad=0
 	rm informeColor.txt
 	rm informeBN.txt
 	portada
