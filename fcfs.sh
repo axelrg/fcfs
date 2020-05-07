@@ -455,9 +455,15 @@ function tiempo_linea_temporal {
 				tiempo_linea_temporal[$i]="$i  "
 			fi
 
-			if [[ $(($i - 1)) -ge 10 ]]; then
+			if [[ $(($i - 1)) -lt 100 ]]; then
 				tiempo_linea_temporal[$i]="$i "
 			fi
+
+			if [[ $(($i - 1)) -ge 100 ]]; then
+				tiempo_linea_temporal[$i]="$i"
+			fi
+
+
 		fi
 
 		if [[ ${array_linea_temporal[$i]} -eq ${array_linea_temporal[$(($i - 1))]} ]]; then
@@ -775,6 +781,117 @@ function tiempos_medios {
 	fi
 }
 
+#Esta función imprime la barra de memoria cortandola para que en caso de que se necesite otra linea coincida la impresión de los 3 arrays, el de procesos, la barra y el de direcciones
+function truncado_memoria {
+
+	#Esta variable guarda las columnas que tiene el terminal 
+	ancho_terminal="$(tput cols)"
+	#En esta variable guardo los elementos (cada uno de 3 columnas) que caben en cada linea
+	elementos_por_linea=$(($(($ancho_terminal/3))-2))
+	echo "elementos por linea:$elementos_por_linea"
+	#En esta variable guardo el numero de lineas a imprimir
+	lineas=$(($(($tamanio_memoria/$elementos_por_linea))+1))
+	echo "lineas:$lineas"
+	ultima_posicion_impresa=0
+	for (( j = 1; j <= $lineas; j++ )); do
+		echo ""
+		printf "   "
+		for (( i = $(($ultima_posicion_impresa+1)); i <=$(($elementos_por_linea*$j)); i++ )); do
+			if [[ $i -le $tamanio_memoria ]]; then
+				printf "${ordenado_arr_colores[${array_memoria[$i]}]}${procesos_linea_memoria[$i]}$DEFAULT"
+			fi
+		done
+		echo ""
+		if [[ $j -eq 1 ]]; then
+			printf "BM|"
+		else
+			printf "   "
+		fi
+		for (( i = $(($ultima_posicion_impresa+1)); i <=$(($elementos_por_linea*$j)); i++ )); do
+			if [[ $i -le $tamanio_memoria ]]; then
+				printf "${ordenado_arr_colores[${array_memoria[$i]}]}\u2593\u2593\u2593$DEFAULT"
+			fi
+			
+		done
+		if [[ $j -eq $lineas ]]; then
+			printf "|$tamanio_memoria"
+		fi
+		
+		echo ""
+
+		
+		if [[ $j -eq 1 ]]; then
+			printf "   "
+			printf "0  "
+		else
+			printf "   "
+		fi
+		for (( i = $(($ultima_posicion_impresa+1)); i <=$(($elementos_por_linea*$j)); i++ )); do
+			if [[ $i -le $tamanio_memoria ]]; then
+				printf "${direcciones_linea_memoria[$i]}"
+			fi
+			
+		done
+		ultima_posicion_impresa=$(($(($elementos_por_linea*$j))))
+	done
+}
+	
+#Esta función imprime la barra de tiempo cortandola para que en caso de que se necesite otra linea coincida la impresión de los 3 arrays, el de procesos, la barra y el de tiempo
+function truncado_tiempo {
+
+	#Esta variable guarda las columnas que tiene el terminal 
+	ancho_terminal="$(tput cols)"
+	#En esta variable guardo los elementos (cada uno de 3 columnas) que caben en cada linea
+	elementos_por_linea=$(($(($ancho_terminal/3))-2))
+	echo "elementos por linea:$elementos_por_linea"
+	#En esta variable guardo el numero de lineas a imprimir
+	lineas=$(($(($tiempo/$elementos_por_linea))+1))
+	echo "lineas:$lineas"
+	ultima_posicion_impresa=0
+	for (( j = 1; j <= $lineas; j++ )); do
+		echo ""
+		printf "   "
+		for (( i = $(($ultima_posicion_impresa)); i <=$(($elementos_por_linea*$j)); i++ )); do
+			if [[ $i -le $tiempo ]]; then
+				printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}${procesos_linea_temporal[$i]}$DEFAULT"
+			fi
+		done
+		echo ""
+		if [[ $j -eq 1 ]]; then
+			printf "BT|"
+		else
+			printf "   "
+		fi
+		for (( i = $(($ultima_posicion_impresa)); i <=$(($(($elementos_por_linea*$j))-1)); i++ )); do
+			if [[ $i -lt $tiempo ]]; then
+				printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}\u2593\u2593\u2593$DEFAULT"
+			fi
+			
+		done
+		if [[ $j -eq $lineas ]]; then
+			printf "|$tiempo"
+		fi
+		
+		echo ""
+
+		
+		if [[ $j -eq 1 ]]; then
+			printf "   "
+			#printf "0  "
+		else
+			printf "   "
+		fi
+		for (( i = $(($ultima_posicion_impresa)); i <=$(($elementos_por_linea*$j)); i++ )); do
+			if [[ $i -le $tiempo ]]; then
+				printf "${tiempo_linea_temporal[$i]}"
+			fi
+			
+		done
+		ultima_posicion_impresa=$(($(($elementos_por_linea*$j))))
+	done
+}
+	
+
 #Esta funcion calcula todos los elementos en el script
 function bucle_principal_script {
 	declare -a cola
@@ -942,6 +1059,8 @@ function bucle_principal_script {
 			clear
 			echo "FCFS-SN-N-S"
 			echo "T=$tiempo R=$reubicabilidad"
+			
+			#echo "$ancho_terminal"
 			#echo "R=$reubicabilidad"
 			
 			#imprimir_tabla
@@ -973,11 +1092,11 @@ function bucle_principal_script {
 			#done
 			printf "TIEMPO MEDIO ESPERA = $tiempo_medio_espera "
 			printf "TIEMPO MEDIO RETORNO = $tiempo_medio_retorno\n"
-			
-			imprimir_procesos_linea_memoria
-			imprimir_linea_memoria
+			truncado_memoria
+			#imprimir_procesos_linea_memoria
+			#imprimir_linea_memoria
 			#echo "${direcciones_linea_memoria[@]}"
-			imprimir_direcciones_linea_memoria
+			#imprimir_direcciones_linea_memoria
 			echo ""
 			#echo $procesos_media
 		
@@ -988,10 +1107,11 @@ function bucle_principal_script {
 			#echo ${tiempo_linea_temporal[@]}
 			if [[ $tiempo -ne 0 ]]; then
 				#echo "${tiempo_linea_temporal[@]}"
-				
-				imprimir_procesos_linea_temporal
-				imprimir_linea_temporal
-				imprimir_tiempo_linea_temporal
+				truncado_tiempo
+				#imprimir_procesos_linea_temporal
+				#echo ""
+				#imprimir_linea_temporal
+				#imprimir_tiempo_linea_temporal
 			fi
 			
 
