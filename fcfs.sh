@@ -788,13 +788,15 @@ function truncado_memoria {
 	ancho_terminal="$(tput cols)"
 	#En esta variable guardo los elementos (cada uno de 3 columnas) que caben en cada linea
 	elementos_por_linea=$(($(($ancho_terminal/3))-2))
-	echo "elementos por linea:$elementos_por_linea"
+	#echo "elementos por linea:$elementos_por_linea"
 	#En esta variable guardo el numero de lineas a imprimir
 	lineas=$(($(($tamanio_memoria/$elementos_por_linea))+1))
-	echo "lineas:$lineas"
+	#echo "lineas:$lineas"
 	ultima_posicion_impresa=0
 	for (( j = 1; j <= $lineas; j++ )); do
-		echo ""
+		if [[ $j -ne 1 ]]; then
+			printf "\n"
+		fi
 		printf "   "
 		for (( i = $(($ultima_posicion_impresa+1)); i <=$(($elementos_por_linea*$j)); i++ )); do
 			if [[ $i -le $tamanio_memoria ]]; then
@@ -843,16 +845,18 @@ function truncado_tiempo {
 	ancho_terminal="$(tput cols)"
 	#En esta variable guardo los elementos (cada uno de 3 columnas) que caben en cada linea
 	elementos_por_linea=$(($(($ancho_terminal/3))-2))
-	echo "elementos por linea:$elementos_por_linea"
+	#echo "elementos por linea:$elementos_por_linea"
 	#En esta variable guardo el numero de lineas a imprimir
 	lineas=$(($(($tiempo/$elementos_por_linea))+1))
-	echo "lineas:$lineas"
+	#echo "lineas:$lineas"
 	ultima_posicion_impresa=0
 	for (( j = 1; j <= $lineas; j++ )); do
-		echo ""
+		if [[ $j -ne 1 ]]; then
+			printf "\n"
+		fi
 		printf "   "
-		for (( i = $(($ultima_posicion_impresa)); i <=$(($elementos_por_linea*$j)); i++ )); do
-			if [[ $i -le $tiempo ]]; then
+		for (( i = $(($ultima_posicion_impresa)); i <=$(($(($elementos_por_linea*$j))-1)); i++ )); do
+			if [[ $i -lt $tiempo ]]; then
 				printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}${procesos_linea_temporal[$i]}$DEFAULT"
 			fi
 		done
