@@ -981,7 +981,7 @@ function bucle_principal_script {
 			fi
 
 			array_estado[$proceso_en_ejecucion]="Finalizado"
-			
+			cambio_a_imprimir=1
 			array_tiempo_retorno[$proceso_en_ejecucion]=$((${array_tiempo_retorno[$proceso_en_ejecucion]}+1))
 			#array_tiempo_espera[$proceso_en_ejecucion]=$((${array_tiempo_espera[$proceso_en_ejecucion]}+1))
 			#array_tiempo_retorno[$proceso_en_ejecucion]=$tiempo
@@ -1036,7 +1036,10 @@ function bucle_principal_script {
 			fi
 
 			array_estado[$proceso_en_ejecucion]="En ejecucion"
-			cambio_a_imprimir=1
+			if [[ $proceso_en_ejecucion -ne 0 ]]; then
+				cambio_a_imprimir=1
+			fi
+			
 
 		fi
 
@@ -1091,7 +1094,7 @@ function bucle_principal_script {
 		#echo Linea Temporal:
 		#echo ${array_linea_temporal[@]}
 
-		if [[ $cambio_a_imprimir -eq 1 ]] && [[ $tiempo -ge ${ordenado_arr_tiempos_llegada[1]} ]] && [[ $proceso_en_ejecucion -ne 0 ]] ||  [[ $tiempo -eq 0 ]] || [[ $procesos_ejecutados -eq $contador ]] ; then
+		if [[ $cambio_a_imprimir -eq 1 ]] && [[ $tiempo -ge ${ordenado_arr_tiempos_llegada[1]} ]] ||  [[ $tiempo -eq 0 ]] || [[ $procesos_ejecutados -eq $contador ]] ; then
 			clear
 			echo " FCFS-SN-NC-R"
 			echo " T=$tiempo    Marcos Reubicabilidad=$reubicabilidad    MEMtotal=$tamanio_memoria"
