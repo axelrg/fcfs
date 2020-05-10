@@ -12,6 +12,12 @@ declare -a ordenado_arr_memoria
 declare -a ordenado_nombres_procesos
 declare -a ordenado_arr_colores
 
+#Estos arrays se usan para crear el fichero con los datos introducidos por teclado, si así lo desea el usuario
+#El motivo por el cual creo este array es que los otros son ordenados (por tll) y este debe permanecer sin hacerlo.
+declare -a arr_tiempos_llegada_fichero
+declare -a arr_tiempos_ejecucion_fichero
+declare -a arr_memoria_fichero
+
 declare -r DEFAULT='\e[39m' #Color por defecto
 declare -r BLACK='\e[30m'
 declare -r WHITE='\e[97m'
@@ -154,6 +160,7 @@ function entrada_por_teclado {
 			read tiempo_llegada
 			echo "$tiempo_llegada">> informeColor.txt
 			arr_tiempos_llegada[$contador]=$tiempo_llegada
+			arr_tiempos_llegada_fichero[$contador]=$tiempo_llegada
 
 			copia_inversa_arrays
 			clear
@@ -162,6 +169,7 @@ function entrada_por_teclado {
 			read tiempo_ejecucion
 			echo "$tiempo_ejecucion">> informeColor.txt
 			arr_tiempos_ejecucion[$contador]=$tiempo_ejecucion
+			arr_tiempos_ejecucion_fichero[$contador]=$tiempo_ejecucion
 
 			copia_inversa_arrays
 			clear
@@ -170,6 +178,7 @@ function entrada_por_teclado {
 			read memoria
 			echo "$memoria">> informeColor.txt
 			arr_memoria[$contador]=$memoria
+			arr_memoria_fichero[$contador]=$memoria
 
 			ordenar_arrays_por_Tll
 			copiar_arrays
@@ -448,19 +457,18 @@ function imprimir_linea_memoria {
 }
 
 function tiempo_linea_temporal {
-	tiempo_linea_temporal[0]="0  "
+	tiempo_linea_temporal[0]="  0"
 	for (( i = 1; i <= $tiempo; i++ )); do
 		if [[ ${array_linea_temporal[$i]} -ne ${array_linea_temporal[$(($i - 1))]} ]]; then
-			if [[ $(($i - 1)) -lt 10 ]]; then
-				tiempo_linea_temporal[$i]="$i  "
-			fi
 
-			if [[ $(($i - 1)) -lt 100 ]]; then
-				tiempo_linea_temporal[$i]="$i "
-			fi
-
-			if [[ $(($i - 1)) -ge 100 ]]; then
-				tiempo_linea_temporal[$i]="$i"
+			if [[ $i -lt 10 ]] && [[ $i -ne 10 ]]; then
+				tiempo_linea_temporal[$i]="  $i"
+			else
+				if [[ $i -le 99 ]]; then
+					tiempo_linea_temporal[$i]=" $i"
+				else
+					tiempo_linea_temporal[$i]="$i"
+				fi
 			fi
 
 
@@ -547,11 +555,11 @@ function direcciones_linea_memoria {
 				
 
 				if [[ $(($i - 1)) -lt 10 ]]; then
-					direcciones_linea_memoria[$i]="$(($i - 1))  "
+					direcciones_linea_memoria[$i]="  $(($i - 1))"
 				fi
 
 				if [[ $(($i - 1)) -ge 10 ]]; then
-					direcciones_linea_memoria[$i]="$(($i - 1)) "
+					direcciones_linea_memoria[$i]=" $(($i - 1))"
 				fi	
 			fi
 
@@ -562,11 +570,11 @@ function direcciones_linea_memoria {
 			if [[ $i -eq $tamanio_memoria ]]; then
 
 				if [[ $(($i - 1)) -lt 10 ]]; then
-					direcciones_linea_memoria[$(($i + 1))]="$i  "
+					direcciones_linea_memoria[$(($i + 1))]="  $i"
 				fi
 
 				if [[ $(($i - 1)) -ge 10 ]]; then
-					direcciones_linea_memoria[$(($i + 1))]="$i "
+					direcciones_linea_memoria[$(($i + 1))]=" $i"
 				fi
 			fi
 		fi
@@ -656,7 +664,7 @@ function gg_necesito_reubicar {
 	contador_reubicar=0
 	necesito_reubicar=0
 
-	for (( i = 1; i <= $tamanio_memoria ; i++ )); do
+	for (( i = 1; i <= $(($tamanio_memoria + 1)) ; i++ )); do
 		#if [[ ${array_memoria[$i]} -ne 0 ]]; then
 			
 		
@@ -720,12 +728,12 @@ function llenar_direcciones_memoria {
 }
 
 function tabla_con_DM {
-	printf " Ref Tll Tej Mem | Tesp Tret Tres Dini Dfin Estado\n"
+	printf " Ref Tll Tej Mem | Tesp Tret Trej Mini Mfin Estado\n"
 	for (( i = 1; i <= $contador; i++ )); do
 		
 
 		if [[ ${array_estado[$i]} == "Finalizado" ]] || [[ ${array_estado[$i]} == "En espera" ]] || [[ ${array_estado[$i]} == "Fuera del sistema" ]]; then
-			printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 4 "${array_tiempo_espera[$i]}" 4 "${array_tiempo_retorno[$i]}" 4 "${array_tiempo_restante[$i]}" 4 "-" 4 "-" 4 "${array_estado[$i]}"
+			printf " ${ordenado_arr_colores[$i]}%*s %*s %*s %*s $DEFAULT|${ordenado_arr_colores[$i]} %*s %*s %*s %*s %*s %*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 4 "${array_tiempo_espera[$i]}" 4 "${array_tiempo_retorno[$i]}" 4 "${array_tiempo_restante[$i]}" 4 "-" 4 "-" 4 "${array_estado[$i]}"
 		else
 
 		#if [[ ${array_estado[$i]} == "En memoria" ]] || [[ ${array_estado[$i]} == "En ejecucion" ]]; then
@@ -742,9 +750,9 @@ function tabla_con_DM {
 							#echo $proceso_detectado
 							#Con este if imprimo todos los datos si es la primera pareja de DM, si no lo es inprimo solo las parejas de DM
 							if [[ $contador_parejas_direcciones_proceso -eq 1 ]]; then
-								printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 4 "${array_tiempo_espera[$i]}" 4 "${array_tiempo_retorno[$i]}" 4 "${array_tiempo_restante[$i]}" 4 "${direcciones_memoria_inicial[$j]}" 4 "${direcciones_memoria_final[$j]}" 4 "${array_estado[$i]}"
+								printf " ${ordenado_arr_colores[$i]}%*s %*s %*s %*s $DEFAULT|${ordenado_arr_colores[$i]} %*s %*s %*s %*s %*s %*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 4 "${array_tiempo_espera[$i]}" 4 "${array_tiempo_retorno[$i]}" 4 "${array_tiempo_restante[$i]}" 4 "${direcciones_memoria_inicial[$j]}" 4 "${direcciones_memoria_final[$j]}" 4 "${array_estado[$i]}"
 							else
-								printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT ${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "   " 3 "   " 3 "   " 3 "   " 4 "    " 4 "    " 4 "    " 4 "${direcciones_memoria_inicial[$j]}" 4 "${direcciones_memoria_final[$j]}" 4 "    "
+								printf " ${ordenado_arr_colores[$i]}%*s %*s %*s %*s $DEFAULT ${ordenado_arr_colores[$i]} %*s %*s %*s %*s %*s %*s $DEFAULT\n" 3 "   " 3 "   " 3 "   " 3 "   " 4 "    " 4 "    " 4 "    " 4 "${direcciones_memoria_inicial[$j]}" 4 "${direcciones_memoria_final[$j]}" 4 "    "
 							fi
 							direcciones_memoria_proceso[$j]=1000
 						else
@@ -797,7 +805,7 @@ function truncado_memoria {
 		if [[ $j -ne 1 ]]; then
 			printf "\n"
 		fi
-		printf "   "
+		printf "    "
 		for (( i = $(($ultima_posicion_impresa+1)); i <=$(($elementos_por_linea*$j)); i++ )); do
 			if [[ $i -le $tamanio_memoria ]]; then
 				printf "${ordenado_arr_colores[${array_memoria[$i]}]}${procesos_linea_memoria[$i]}$DEFAULT"
@@ -805,9 +813,9 @@ function truncado_memoria {
 		done
 		echo ""
 		if [[ $j -eq 1 ]]; then
-			printf "BM|"
+			printf " BM|"
 		else
-			printf "   "
+			printf "    "
 		fi
 		for (( i = $(($ultima_posicion_impresa+1)); i <=$(($elementos_por_linea*$j)); i++ )); do
 			if [[ $i -le $tamanio_memoria ]]; then
@@ -816,17 +824,17 @@ function truncado_memoria {
 			
 		done
 		if [[ $j -eq $lineas ]]; then
-			printf "|$tamanio_memoria"
+			printf "$tamanio_memoria"
 		fi
 		
 		echo ""
 
 		
 		if [[ $j -eq 1 ]]; then
-			printf "   "
-			printf "0  "
+			printf "    "
+			printf "  0"
 		else
-			printf "   "
+			printf "    "
 		fi
 		for (( i = $(($ultima_posicion_impresa+1)); i <=$(($elementos_por_linea*$j)); i++ )); do
 			if [[ $i -le $tamanio_memoria ]]; then
@@ -854,7 +862,7 @@ function truncado_tiempo {
 		if [[ $j -ne 1 ]]; then
 			printf "\n"
 		fi
-		printf "   "
+		printf "    "
 		for (( i = $(($ultima_posicion_impresa)); i <=$(($(($elementos_por_linea*$j))-1)); i++ )); do
 			if [[ $i -lt $tiempo ]]; then
 				printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}${procesos_linea_temporal[$i]}$DEFAULT"
@@ -862,9 +870,9 @@ function truncado_tiempo {
 		done
 		echo ""
 		if [[ $j -eq 1 ]]; then
-			printf "BT|"
+			printf " BT|"
 		else
-			printf "   "
+			printf "    "
 		fi
 		for (( i = $(($ultima_posicion_impresa)); i <=$(($(($elementos_por_linea*$j))-1)); i++ )); do
 			if [[ $i -lt $tiempo ]]; then
@@ -873,19 +881,19 @@ function truncado_tiempo {
 			
 		done
 		if [[ $j -eq $lineas ]]; then
-			printf "|$tiempo"
+			printf "$tiempo"
 		fi
 		
 		echo ""
 
 		
 		if [[ $j -eq 1 ]]; then
-			printf "   "
+			printf "    "
 			#printf "0  "
 		else
-			printf "   "
+			printf "    "
 		fi
-		for (( i = $(($ultima_posicion_impresa)); i <=$(($elementos_por_linea*$j)); i++ )); do
+		for (( i = $(($ultima_posicion_impresa)); i <=$(($(($elementos_por_linea*$j))-1)); i++ )); do
 			if [[ $i -le $tiempo ]]; then
 				printf "${tiempo_linea_temporal[$i]}"
 			fi
@@ -895,6 +903,22 @@ function truncado_tiempo {
 	done
 }
 	
+function crear_fichero_entrada {
+	echo "Escribe el nombre del fichero de entrada a crear:"
+	read fichero_datos_salida
+	echo "MEM:$tamanio_memoria">>$fichero_datos_salida
+	echo "REU:$reubicabilidad">>$fichero_datos_salida
+	echo "TLL:TEJ:MEM">>$fichero_datos_salida
+	for (( i = 1; i <= $contador; i++ )); do
+		if [[ $i -eq $contador ]]; then
+			echo -n "${arr_tiempos_llegada_fichero[$i]}:${arr_tiempos_ejecucion_fichero[$i]}:${arr_memoria_fichero[$i]}">>$fichero_datos_salida
+		else
+			echo "${arr_tiempos_llegada_fichero[$i]}:${arr_tiempos_ejecucion_fichero[$i]}:${arr_memoria_fichero[$i]}">>$fichero_datos_salida
+
+		fi
+	done
+	mv $fichero_datos_salida FICHEROS_ENTRADA
+}
 
 #Esta funcion calcula todos los elementos en el script
 function bucle_principal_script {
@@ -951,7 +975,7 @@ function bucle_principal_script {
 		fi
 
 		if [[ ${array_tiempo_restante[$proceso_en_ejecucion]} -eq 0 ]]; then
-			if [[ $proceso_en_ejecucion -ne 0 ]]; then
+			if [[ $proceso_en_ejecucion != 0 ]]; then
 				#echo $proceso_en_ejecucion
 				((procesos_ejecutados++))
 			fi
@@ -1045,6 +1069,14 @@ function bucle_principal_script {
 
 		done
 
+		for (( i = 1; i <= $contador; i++ )); do
+			if [[ ${array_tiempo_restante[$i]} != "-" ]]; then
+				if [[ ${array_tiempo_restante[$i]} -eq 0 ]]; then
+					array_tiempo_restante[$i]="-"
+				fi
+			fi
+		done
+
 		llenar_direcciones_memoria
 
 		tiempos_medios
@@ -1059,11 +1091,11 @@ function bucle_principal_script {
 		#echo Linea Temporal:
 		#echo ${array_linea_temporal[@]}
 
-		if [[ $cambio_a_imprimir -eq 1 ]] && [[ $tiempo -ge ${ordenado_arr_tiempos_llegada[1]} ]] ||  [[ $tiempo -eq 0 ]] ; then
+		if [[ $cambio_a_imprimir -eq 1 ]] && [[ $tiempo -ge ${ordenado_arr_tiempos_llegada[1]} ]] && [[ $proceso_en_ejecucion -ne 0 ]] ||  [[ $tiempo -eq 0 ]] || [[ $procesos_ejecutados -eq $contador ]] ; then
 			clear
-			echo "FCFS-SN-N-S"
-			echo "T=$tiempo R=$reubicabilidad"
-			
+			echo " FCFS-SN-NC-R"
+			echo " T=$tiempo    Marcos Reubicabilidad=$reubicabilidad    MEMtotal=$tamanio_memoria"
+				
 			#echo "$ancho_terminal"
 			#echo "R=$reubicabilidad"
 			
@@ -1079,7 +1111,7 @@ function bucle_principal_script {
 			#echo "${array_memoria[@]}"
 
 			if [[ $necesito_reubicar -eq 1 ]]; then
-				echo -e "\e[31m\e[1m\e[106mSE HA REUBICADO LA MEMORIA\u2757\u2757\e[49m\e[39m\e[0m"
+				echo -e " \e[31m\e[1m\e[106mSE HA REUBICADO LA MEMORIA\u2757\u2757\e[49m\e[39m\e[0m"
 				necesito_reubicar=0
 			fi
 			#imprimir_mem
@@ -1094,7 +1126,7 @@ function bucle_principal_script {
 			#	echo "${direcciones_memoria_inicial[@]}"
 			#	echo "${direcciones_memoria_final[@]}"
 			#done
-			printf "TIEMPO MEDIO ESPERA = $tiempo_medio_espera "
+			printf " TIEMPO MEDIO ESPERA = $tiempo_medio_espera "
 			printf "TIEMPO MEDIO RETORNO = $tiempo_medio_retorno\n"
 			truncado_memoria
 			#imprimir_procesos_linea_memoria
@@ -1109,6 +1141,10 @@ function bucle_principal_script {
 			#echo ${array_linea_temporal[@]}
 			
 			#echo ${tiempo_linea_temporal[@]}
+			if [[ $tiempo -eq 0 ]]; then
+				printf " BT|"
+			fi
+
 			if [[ $tiempo -ne 0 ]]; then
 				#echo "${tiempo_linea_temporal[@]}"
 				truncado_tiempo
@@ -1120,7 +1156,7 @@ function bucle_principal_script {
 			
 
 			echo ""
-			read -ers -p "Pulse [intro] para continuar la ejecucion"
+			read -ers -p " Pulse [intro] para continuar la ejecucion"
 			
 		fi
 		
@@ -1209,6 +1245,8 @@ function portada {
 function principal {
 	#Esta variable guarda el numero maximo de partes de procesos con las que se reubica
 	reubicabilidad=0
+
+	opcion_menu_datos=0
 	rm informeColor.txt
 	rm informeBN.txt
 	portada
@@ -1217,8 +1255,29 @@ function principal {
 	menu_entrada 
 	imprimir_tabla_datos
 	bucle_principal_script | tee -a informeColor.txt
+
+	if [[ $opcion_menu_datos -eq 1 ]]; then
+		echo ""
+		echo "¿Quieres crear un fichero con los datos de entrada?"| tee -a informeColor.txt
+	      		read "op"
+	      		echo "$op" >> informeColor.txt
+		until [ "$op" == "n" -o "$op" == "s" ]
+			do
+				echo "Respuesta introducida no válida"| tee -a informeColor.txt
+				echo "Introduzca una respuesta que sea s/n"| tee -a informeColor.txt
+				read "op"
+				echo "$op" >> informeColor.txt
+			done
+
+		if [[ "$op" == "s" ]]; then
+			crear_fichero_entrada
+		fi
+	fi
+	
+	
+
 	quitar_clear
-	pasar_fichero_a_BN	
+	pasar_fichero_a_BN
 }
 
 
