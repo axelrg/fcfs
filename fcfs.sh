@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#Nombre:		FCFS-SN-N-S_Rubio_Gonzalez_Axel.sh
+#Descripcion: 	El script simula el funcionamiento de un algoritmo de gestión de procesos first coming first served 
+#			  	con memoria según necesidades no continua y reubicable (FCFS-SN-N-S)
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
+
+
+#Declaración de los arrays del programa
 declare -a arr_tiempos_llegada
 declare -a arr_tiempos_ejecucion
 declare -a arr_memoria
@@ -18,6 +26,7 @@ declare -a arr_tiempos_llegada_fichero
 declare -a arr_tiempos_ejecucion_fichero
 declare -a arr_memoria_fichero
 
+#Colores
 declare -r DEFAULT='\e[39m' #Color por defecto
 declare -r BLACK='\e[30m'
 declare -r WHITE='\e[97m'
@@ -40,8 +49,12 @@ declare -r D_GRAY='\e[90m' #Gris oscuro
 #Esta variable guarda el limite superior de huecos en memoria hasta el cual se reubica
 reubicabilidad=0
 contador_colores=1
-#Esta función se va a encargar de llenar el array con colores en función 
-#del número de procesos introducidos
+
+
+#Nombre:		array_colores
+#Descripcion: 	Esta función se va a encargar de llenar el array con colores en función del número de procesos introducidos
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function array_colores {
 	arr_colores[$contador]="\e[3${contador_colores}m"
 	contador_colores=$(($contador_colores+1))
@@ -50,6 +63,11 @@ function array_colores {
 	fi
 }
 
+
+#Nombre:		pregunto_si_otro_proceso_mas
+#Descripcion: 	Esta función va a preguntar si quiero introducir otro proceso
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function pregunto_si_otro_proceso_mas {
 	echo "¿Quieres añadir otro proceso?"| tee -a informeColor.txt
 	       		read "op"
@@ -63,8 +81,13 @@ function pregunto_si_otro_proceso_mas {
 				done
 }
 
+
+#Nombre:		ordenar_arrays_por_Tll
+#Descripcion: 	Esta función ordena los cinco arrays según el tiempo de llegada de cada proceso (de menor a mayor)
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function ordenar_arrays_por_Tll {
-	#contador guarda el número de procesos en los arrays
+	#contador guarda el número de procesos
 	for (( t = 1; t <= $contador; t++ )); do
 
 		min=1000 #1000 es un numero que hace imposible que  haya uno menor
@@ -97,6 +120,12 @@ function ordenar_arrays_por_Tll {
 	done
 }
 
+
+
+#Nombre:		copiar_arrays
+#Descripcion: 	Esta función copia el contenido de los vectores ordenados a los desordenados
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function copiar_arrays {
 	for (( i = 1; i <= $contador; i++ )); do
 		arr_tiempos_llegada[$i]=${ordenado_arr_tiempos_llegada[$i]}
@@ -107,6 +136,12 @@ function copiar_arrays {
 	done
 }
 
+
+
+#Nombre:		copia_inversa_arrays
+#Descripcion: 	Esta función copia el contenido de los vectores desordenados a los ordenados
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function copia_inversa_arrays {
 	for (( i = 1; i <= $contador; i++ )); do
 		ordenado_arr_tiempos_llegada[$i]=${arr_tiempos_llegada[$i]}
@@ -117,6 +152,12 @@ function copia_inversa_arrays {
 	done
 }
 
+
+
+#Nombre:		imprimir_tabla_datos
+#Descripcion: 	Esta función imprime una primera version de la tabla de datos NO SE USA EN LA VERSION FINAL
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function imprimir_tabla_datos {
 	printf " REF TLL TEJ MEM\n"
 	for (( i = 1; i <= $contador; i++ )); do
@@ -124,6 +165,11 @@ function imprimir_tabla_datos {
 	done
 }
 
+
+#Nombre:		entrada_por_teclado
+#Descripcion: 	Esta función llena los arrays de datos con lo que introduzca el usuario, también genera los nombres automaticos
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function entrada_por_teclado {
 	op="s"
 	contador=1
@@ -156,7 +202,7 @@ function entrada_por_teclado {
 			#echo "${arr_colores[@]}"
 			clear
 			imprimir_tabla_datos| tee -a informeColor.txt
-			echo "Tiempo de llegada P$contador:"| tee -a informeColor.txt
+			echo "Tiempo de llegada ${nombres_procesos[$contador]}:"| tee -a informeColor.txt
 			read tiempo_llegada
 			echo "$tiempo_llegada">> informeColor.txt
 			arr_tiempos_llegada[$contador]=$tiempo_llegada
@@ -165,7 +211,7 @@ function entrada_por_teclado {
 			copia_inversa_arrays
 			clear
 			imprimir_tabla_datos
-			echo "Tiempo de ejecución P$contador:"| tee -a informeColor.txt
+			echo "Tiempo de ejecución ${nombres_procesos[$contador]}:"| tee -a informeColor.txt
 			read tiempo_ejecucion
 			echo "$tiempo_ejecucion">> informeColor.txt
 			arr_tiempos_ejecucion[$contador]=$tiempo_ejecucion
@@ -174,7 +220,7 @@ function entrada_por_teclado {
 			copia_inversa_arrays
 			clear
 			imprimir_tabla_datos
-			echo "Memoria P$contador:"| tee -a informeColor.txt
+			echo "Memoria ${nombres_procesos[$contador]}:"| tee -a informeColor.txt
 			read memoria
 			echo "$memoria">> informeColor.txt
 			arr_memoria[$contador]=$memoria
@@ -199,6 +245,12 @@ function entrada_por_teclado {
 	done
 }
 
+
+
+#Nombre:		entrada_aleatoria
+#Descripcion: 	Esta función llena los arrays de datos aleatoriamente, también genera los nombres automaticos
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function entrada_aleatoria {
 	tamanio_memoria=$((RANDOM%99))
 	reubicabilidad=$((RANDOM%6))
@@ -236,6 +288,11 @@ function entrada_aleatoria {
 	fi
 }
 
+
+#Nombre:		corte_datos
+#Descripcion: 	Esta función llena los arrays con los datos del fichero introducido, también genera los nombres automaticos
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function corte_datos {
 	cd FICHEROS_ENTRADA
 	tamanio_memoria=`sed -n 1p $fichero_entrada | cut -d ":" -f 2`
@@ -263,6 +320,11 @@ function corte_datos {
 	cd ../		
 }
 
+
+#Nombre:		corte_datos
+#Descripcion: 	Esta función realiza la entrada por fichero, pide un fichero al usuario y con corte_datos coge los datos de ese fichero
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function entrada_por_fichero {
 	echo "Ficheros en el directorio FICHEROS_ENTRADA"
 	cd FICHEROS_ENTRADA
@@ -277,6 +339,11 @@ function entrada_por_fichero {
 	corte_datos
 }
 
+
+#Nombre:		menu_entrada
+#Descripcion: 	Esta función imprime un menú para dar a elegir al usuario como quiere introducir los datos
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function menu_entrada {
 
 	echo "Elige una de las opciones para introducir los datos:" | tee -a informeColor.txt
@@ -319,12 +386,25 @@ function menu_entrada {
 	esac
 }
 
+
+#Nombre:		inicializar_array_memoria
+#Descripcion: 	Esta función escribe en el array de memoria tantos ceros como el tamaño de la memoria
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function inicializar_array_memoria {
 	for (( i = 0 ; i <=$tamanio_memoria ; i++ )); do
 		array_memoria[$i]=0
 	done
+	#Despues de la ultima dirección de la memoria en el array guardo este numero para poder saber donde ha acabado
+	uno=$(($tamanio_memoria + 1))
+	array_memoria[$uno]=1000
 }
 
+
+#Nombre:		inicializar_array_tiempo_restante
+#Descripcion: 	Esta función escribe en el array tiempo restante tantos - como procesos 
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function inicializar_array_tiempo_restante {
 	array_tiempo_restante[0]=10000
 	for (( i = 1 ; i <= $contador ; i++ )); do
@@ -332,32 +412,58 @@ function inicializar_array_tiempo_restante {
 	done
 }
 
+
+#Nombre:		inicializar_array_tiempo_espera
+#Descripcion: 	Esta función escribe en el array tiempo espera tantos - como procesos 
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function inicializar_array_tiempo_espera {
 	for (( i = 1 ; i <= $contador ; i++ )); do
 		array_tiempo_espera[$i]="-"
 	done
 }
 
+
+
+#Nombre:		inicializar_array_tiempo_espera
+#Descripcion: 	Esta función escribe en el array tiempo retorno tantos - como procesos 
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function inicializar_array_tiempo_retorno {
 	for (( i = 1 ; i <= $contador ; i++ )); do
 		array_tiempo_retorno[$i]="-"
 	done
 }
 
+
+
+#Nombre:		inicializar_array_estado
+#Descripcion: 	Esta función escribe en el array tiempo espera tantos "Fuera del sistema" como procesos 
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function inicializar_array_estado {
 	for (( i = 1 ; i <= $contador ; i++ )); do
 		array_estado[$i]="Fuera del sistema"
 	done
 }
 
+
+#Nombre:		imprimir_tabla
+#Descripcion: 	Esta función imprime la tabla con los tiempos
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function imprimir_tabla {
 	printf " Ref Tll Tej Mem | Tes Trt Tre Estado\n"
 	for (( i = 1; i <= $contador; i++ )); do
 		printf " ${ordenado_arr_colores[$i]}%-*s %-*s %-*s %-*s $DEFAULT|${ordenado_arr_colores[$i]} %-*s %-*s %-*s %-*s $DEFAULT\n" 3 "${ordenado_nombres_procesos[$i]}" 3 "${ordenado_arr_tiempos_llegada[$i]}" 3 "${ordenado_arr_tiempos_ejecucion[$i]}" 3 "${ordenado_arr_memoria[$i]}" 3 "${array_tiempo_espera[$i]}" 3 "${array_tiempo_retorno[$i]}" 3 "${array_tiempo_restante[$i]}" 3 "${array_estado[$i]}"
 	done
-
 }
 
+
+#Nombre:		anadirCola
+#Descripcion: 	Esta función mete en el array cola los procesos que entren al sistema
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function anadirCola {
 	((tamCola++))
 	cola[$tamCola]=$proceso
@@ -367,6 +473,12 @@ function anadirCola {
 	array_tiempo_retorno[$proceso]=0
 }
 
+
+
+#Nombre:		eliminarCola
+#Descripcion: 	Esta función mueve todos los elementos en cola a la posicion anterior y elimina uno
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function eliminarCola {
 	local -i i
 	for(( i = 1; i <= tamCola; i++ )); do
@@ -375,6 +487,20 @@ function eliminarCola {
 	((tamCola--))
 }
 
+
+#Nombre:		anadirMemoria
+#Descripcion: 	Esta función escribe en el array memoria tantos identificadores del proceso como huecos ocupe en memoria
+#				Ejemplo:
+#				tamaño memoria =9
+#				3: ocupa 5 en memoria, le meto, estaba el 2 con 3 espacios 
+#
+#				Posiciones en el array: 	0 1 2 3 4 5 6 7 8 9 10
+#				Contenido en la posicion:	0 2 2 2 3 3 3 3 3 0 1000
+#
+#				La posicion 0 no se utiliza y la 10 guarda 1000 que indica el final del array
+#
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function anadirMemoria {
 	#Esta variable se encarga de que en memoria metamos solo los indices que ocupa el proceso
 	contador_memoria=0
@@ -393,6 +519,11 @@ function anadirMemoria {
 	array_tiempo_restante[$proceso_a_meter_en_memoria]=${ordenado_arr_tiempos_ejecucion[$proceso_a_meter_en_memoria]}
 }
 
+
+#Nombre:		eliminarMemoria
+#Descripcion: 	Esta función elimina de la memoria el proceso en ejecucion
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function eliminarMemoria {
 	for (( i = 1; i <=$tamanio_memoria ; i++ )); do
 
@@ -405,6 +536,10 @@ function eliminarMemoria {
 	done
 }
 
+#Nombre:		buscar_en_memoria
+#Descripcion: 	Esta función busca en memoria que proceso (de los que estan en memoria) ha llegado antes al sistema
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function buscar_en_memoria {
 	primero_en_llegar=1000
 	#echo Memoria busq:
@@ -421,6 +556,11 @@ function buscar_en_memoria {
 	fi	
 }
 
+
+#Nombre:		buscar_en_memoria
+#Descripcion: 	Calcula cuantos espacios con un 0 quedan en memoria
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function calcular_memoria_restante {
 	memoria_restante=0
 	for (( i = 1; i <= $tamanio_memoria ; i++ )); do
@@ -430,6 +570,10 @@ function calcular_memoria_restante {
 	done
 }
 
+#Nombre:		imprimir_mem
+#Descripcion: 	NO SE USA EN LA VERSION FINAL Imprime el array memoria
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function imprimir_mem {
 	#echo MEMORIA
 	for (( i = 1; i <=$tamanio_memoria ; i++ )); do
@@ -438,15 +582,26 @@ function imprimir_mem {
 	echo ""
 }
 
+
+#Nombre:		imprimir_linea_temporal
+#Descripcion: 	NO SE USA EN LA VERSION FINAL Imprime la linea temporal (con huecos con color)
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function imprimir_linea_temporal {
 	printf "BT|"
 	for (( i = 0; i <= $(($tiempo-1)); i++ )); do
 		printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}\u2593\u2593\u2593$DEFAULT"
 	done
-	printf "|$tiempo"
+		printf "|$tiempo"
+	
 	echo ""
 }
 
+
+#Nombre:		imprimir_linea_memoria
+#Descripcion: 	NO SE USA EN LA VERSION FINAL Imprime la linea de memoria (con huecos con color)
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function imprimir_linea_memoria {
 	printf "BM|"
 	for (( i = 1; i <= $tamanio_memoria; i++ )); do
@@ -456,10 +611,15 @@ function imprimir_linea_memoria {
 	echo ""
 }
 
+
+#Nombre:		tiempo_linea_temporal
+#Descripcion: 	genera el array que guarda 3 espacios o el tiempo dependiendo de si se debe imprimir o no
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function tiempo_linea_temporal {
 	tiempo_linea_temporal[0]="  0"
 	for (( i = 1; i <= $tiempo; i++ )); do
-		if [[ ${array_linea_temporal[$i]} -ne ${array_linea_temporal[$(($i - 1))]} ]]; then
+		if [[ ${array_linea_temporal[$i]} -ne ${array_linea_temporal[$(($i - 1))]} ]] && [[ $procesos_ejecutados -ne $contador ]]; then
 
 			if [[ $i -lt 10 ]] && [[ $i -ne 10 ]]; then
 				tiempo_linea_temporal[$i]="  $i"
@@ -478,22 +638,31 @@ function tiempo_linea_temporal {
 			tiempo_linea_temporal[$i]="   "
 		fi
 
-		if [[ $i -eq $tiempo ]]; then
-			tiempo_linea_temporal[$i]=""
+		if [[ $i -eq $tiempo ]] && [[ ${array_linea_temporal[$i]} -ne ${array_linea_temporal[$(($i - 1))]} ]]; then
+			if [[ $procesos_ejecutados -ne $contador ]]; then
+				
+			
+				tiempo_linea_temporal[$i]=""
 
 
-			#if [[ $(($i - 1)) -lt 10 ]]; then
-			#	tiempo_linea_temporal[$i]="$i  "
-			#fi
-#
-#			#if [[ $(($i - 1)) -ge 10 ]]; then
-#			#	tiempo_linea_temporal[$i]="$i "
-			#fi
+				if [[ $i -lt 10 ]] && [[ $i -ne 10 ]]; then
+					tiempo_linea_temporal[$i]="  $i"
+				else
+					if [[ $i -le 99 ]]; then
+						tiempo_linea_temporal[$i]=" $i"
+					else
+						tiempo_linea_temporal[$i]="$i"
+					fi
+				fi
+			fi
 		fi
-
 	done
 }
 
+#Nombre:		imprimir_tiempo_linea_temporal
+#Descripcion: 	NO SE USA EN LA VESION FINAL imprime el tiempo de la linea temporal
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function imprimir_tiempo_linea_temporal {
 	printf "   "
 	for (( i = 0; i <= $tiempo; i++ )); do
@@ -501,10 +670,15 @@ function imprimir_tiempo_linea_temporal {
 	done
 }
 
+
+#Nombre:		procesos_linea_temporal
+#Descripcion: 	genera el array que guarda 3 espacios o el nombre de proceso dependiendo de si se debe imprimir o no
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function procesos_linea_temporal {
 
 	for (( i = 0; i <= $tiempo; i++ )); do
-		if [[ ${array_linea_temporal[$i]} -ne ${array_linea_temporal[$(($i - 1))]} ]]; then
+		if [[ ${array_linea_temporal[$i]} -ne ${array_linea_temporal[$(($i - 1))]} ]] && [[ $procesos_ejecutados -ne $contador ]]; then
 			procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"	
 		fi
 
@@ -516,9 +690,9 @@ function procesos_linea_temporal {
 		#	procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"
 		#fi
 
-		if [[ $i -eq $tiempo ]]; then
+		if [[ $i -eq $tiempo ]] && [[ ${array_linea_temporal[$i]} -ne ${array_linea_temporal[$(($i - 1))]} ]] && [[ $procesos_ejecutados -ne $contador ]]; then
 			procesos_linea_temporal[$i]=""
-			#procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"
+			procesos_linea_temporal[$i]="${ordenado_nombres_procesos[${array_linea_temporal[$i]}]}"
 		fi
 
 		if [[ $i -eq 0 ]]; then
@@ -538,6 +712,11 @@ function procesos_linea_temporal {
 
 }
 
+
+#Nombre:		imprimir_procesos_linea_temporal
+#Descripcion: 	NO SE USA EN LA VESION FINAL imprime los procesos en la linea temporal
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function imprimir_procesos_linea_temporal {
 	printf "   "
 	for (( i = 0; i <= $tiempo; i++ )); do
@@ -547,6 +726,11 @@ function imprimir_procesos_linea_temporal {
 
 }
 
+
+#Nombre:		direcciones_linea_memoria
+#Descripcion: 	genera el array que guarda 3 espacios o la direccion de memoria dependiendo de si se debe imprimir o no
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function direcciones_linea_memoria {
 
 	for (( i = 1; i <= $tamanio_memoria; i++ )); do
@@ -581,6 +765,11 @@ function direcciones_linea_memoria {
 	done
 }
 
+
+#Nombre:		imprimir_direcciones_linea_memoria
+#Descripcion: 	NO SE USA EN LA VESION FINAL imprime las DM en la linea memoria
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function imprimir_direcciones_linea_memoria {
 	printf "   "
 	printf "0  "
@@ -589,6 +778,11 @@ function imprimir_direcciones_linea_memoria {
 	done
 }
 
+
+#Nombre:		procesos_linea_memoria
+#Descripcion: 	genera el array que guarda 3 espacios o el nombre del proceso dependiendo de si se debe imprimir o no
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function procesos_linea_memoria {
 
 
@@ -619,6 +813,11 @@ function procesos_linea_memoria {
 	#procesos_linea_memoria[1]="${ordenado_nombres_procesos[${array_memoria[1]}]}"
 }
 
+
+#Nombre:		imprimir_procesos_linea_memoria
+#Descripcion: 	NO SE USA EN LA VESION FINAL imprime los nombres de procesos en la linea memoria
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function imprimir_procesos_linea_memoria {
 	printf "   "
 	for (( i = 0; i <=$tamanio_memoria; i++ )); do
@@ -627,6 +826,11 @@ function imprimir_procesos_linea_memoria {
 	echo ""
 }
 
+
+#Nombre:		reubicamos
+#Descripcion: 	funcion que realiza la reubicabilidad
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function reubicamos {
 	
 	for (( i = 0 ; i <=$tamanio_memoria ; i++ )); do
@@ -660,9 +864,15 @@ function reubicamos {
 	#done
 }
 
+
+#Nombre:		gg_necesito_reubicar
+#Descripcion: 	comprueba si es necesario reubicar
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function gg_necesito_reubicar {
 	contador_reubicar=0
 	necesito_reubicar=0
+
 
 	for (( i = 1; i <= $(($tamanio_memoria + 1)) ; i++ )); do
 		#if [[ ${array_memoria[$i]} -ne 0 ]]; then
@@ -679,12 +889,15 @@ function gg_necesito_reubicar {
 
 				if [[ ${array_memoria[$i]} -ne ${array_memoria[$(($i - 1))]} ]]; then
 					if [[ $contador_reubicar -le $reubicabilidad ]]; then
-						if [[ ${ordenado_arr_memoria[${array_memoria[$(($i - 1))]}]} -gt $contador_reubicar ]]; then
-							necesito_reubicar=0
-							reubicamos
-							necesito_reubicar=1
+						#if [[ ${ordenado_arr_memoria[${array_memoria[$(($i - 1))]}]} -gt $contador_reubicar ]]; then
+							if [[ ${array_memoria[$(($i - 1))]} -eq 0 ]]; then
+								necesito_reubicar=0
+								reubicamos
+								necesito_reubicar=1
+							fi
+
 							contador_reubicar=1
-						fi
+						#fi
 						
 					fi
 					contador_reubicar=1
@@ -699,6 +912,11 @@ function gg_necesito_reubicar {
 
 }
 
+
+#Nombre:		llenar_direcciones_memoria
+#Descripcion: 	llena tres arrays , uno con el proceso, otro con su Dinicial y otro con su Dfinal
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function llenar_direcciones_memoria {
 	contador_dir=0
 	contador_partes_de_procesos_en_mem=0
@@ -727,6 +945,11 @@ function llenar_direcciones_memoria {
 	done
 }
 
+
+#Nombre:		tabla_con_DM
+#Descripcion: 	imprime la tabla final con las DM, si el proceso está en varios lugares en memoria imprime varias lineas
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function tabla_con_DM {
 	printf " Ref Tll Tej Mem | Tesp Tret Trej Mini Mfin Estado\n"
 	for (( i = 1; i <= $contador; i++ )); do
@@ -768,6 +991,11 @@ function tabla_con_DM {
 	done
 }
 
+
+#Nombre:		tiempos_medios
+#Descripcion: 	calcula los tiempos medios
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function tiempos_medios {
 	procesos_media=0
 	tiempo_medio_espera_acumulado=0
@@ -789,7 +1017,12 @@ function tiempos_medios {
 	fi
 }
 
-#Esta función imprime la barra de memoria cortandola para que en caso de que se necesite otra linea coincida la impresión de los 3 arrays, el de procesos, la barra y el de direcciones
+
+#Nombre:		truncado_memoria
+#Descripcion: 	Esta función imprime la barra de memoria cortandola para que en caso de que se necesite otra linea coincida la impresión de
+#				los 3 arrays, el de procesos, la barra y el de direcciones
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function truncado_memoria {
 
 	#Esta variable guarda las columnas que tiene el terminal 
@@ -805,7 +1038,12 @@ function truncado_memoria {
 		if [[ $j -ne 1 ]]; then
 			printf "\n"
 		fi
-		printf "    "
+
+		if [[ $j -eq 1 ]]; then
+			printf "   |"
+		else
+			printf "    "
+		fi
 		for (( i = $(($ultima_posicion_impresa+1)); i <=$(($elementos_por_linea*$j)); i++ )); do
 			if [[ $i -le $tamanio_memoria ]]; then
 				printf "${ordenado_arr_colores[${array_memoria[$i]}]}${procesos_linea_memoria[$i]}$DEFAULT"
@@ -831,7 +1069,7 @@ function truncado_memoria {
 
 		
 		if [[ $j -eq 1 ]]; then
-			printf "    "
+			printf "   |"
 			printf "  0"
 		else
 			printf "    "
@@ -845,8 +1083,12 @@ function truncado_memoria {
 		ultima_posicion_impresa=$(($(($elementos_por_linea*$j))))
 	done
 }
-	
-#Esta función imprime la barra de tiempo cortandola para que en caso de que se necesite otra linea coincida la impresión de los 3 arrays, el de procesos, la barra y el de tiempo
+
+#Nombre:		truncado_tiempo
+#Descripcion: 	Esta función imprime la barra de tiempo cortandola para que en caso de que se necesite otra linea coincida
+#				la impresión de los 3 arrays, el de procesos, la barra y el de tiempo
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function truncado_tiempo {
 
 	#Esta variable guarda las columnas que tiene el terminal 
@@ -862,9 +1104,15 @@ function truncado_tiempo {
 		if [[ $j -ne 1 ]]; then
 			printf "\n"
 		fi
-		printf "    "
+
+		if [[ $j -eq 1 ]]; then
+			printf "   |"
+		else
+			printf "    "
+		fi
+
 		for (( i = $(($ultima_posicion_impresa)); i <=$(($(($elementos_por_linea*$j))-1)); i++ )); do
-			if [[ $i -lt $tiempo ]]; then
+			if [[ $i -le $tiempo ]]; then
 				printf "${ordenado_arr_colores[${array_linea_temporal[$i]}]}${procesos_linea_temporal[$i]}$DEFAULT"
 			fi
 		done
@@ -881,14 +1129,18 @@ function truncado_tiempo {
 			
 		done
 		if [[ $j -eq $lineas ]]; then
-			printf "$tiempo"
+			if [[ ${array_linea_temporal[$tiempo]} -eq ${array_linea_temporal[$(($tiempo-1))]} ]] || [[ $procesos_ejecutados -eq $contador ]]; then
+				if [[ $tiempo -ne 0 ]]; then
+					printf "$tiempo"
+				fi
+				
+			fi
 		fi
 		
 		echo ""
-
 		
 		if [[ $j -eq 1 ]]; then
-			printf "    "
+			printf "   |"
 			#printf "0  "
 		else
 			printf "    "
@@ -902,7 +1154,12 @@ function truncado_tiempo {
 		ultima_posicion_impresa=$(($(($elementos_por_linea*$j))))
 	done
 }
-	
+
+
+#Nombre:		crear_fichero_entrada
+#Descripcion: 	Esta función crea un fichero con los datos de entrada
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function crear_fichero_entrada {
 	echo "Escribe el nombre del fichero de entrada a crear:"
 	read fichero_datos_salida
@@ -920,7 +1177,10 @@ function crear_fichero_entrada {
 	mv $fichero_datos_salida FICHEROS_ENTRADA
 }
 
-#Esta funcion calcula todos los elementos en el script
+#Nombre:		bucle_principal_script
+#Descripcion: 	Esta función coordina todas las tareas del funcionamiento del algoritmo
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function bucle_principal_script {
 	declare -a cola
 	declare -a array_estado
@@ -1013,12 +1273,13 @@ function bucle_principal_script {
 			primero_en_cola=${cola[1]}
 			calcular_memoria_restante
 			if [[ $memoria_restante -ge ${ordenado_arr_memoria[$primero_en_cola]} ]] && [[ $tamCola -gt 0 ]]; then
+				gg_necesito_reubicar
 				anadirMemoria
 				#echo "añadir"
 				#imprimir_mem
 				eliminarCola
 
-				gg_necesito_reubicar
+				
 			fi
 		done	
 		
@@ -1131,6 +1392,7 @@ function bucle_principal_script {
 			#done
 			printf " TIEMPO MEDIO ESPERA = $tiempo_medio_espera "
 			printf "TIEMPO MEDIO RETORNO = $tiempo_medio_retorno\n"
+			echo "$procesos_ejecutados"
 			truncado_memoria
 			#imprimir_procesos_linea_memoria
 			#imprimir_linea_memoria
@@ -1144,15 +1406,18 @@ function bucle_principal_script {
 			#echo ${array_linea_temporal[@]}
 			
 			#echo ${tiempo_linea_temporal[@]}
-			if [[ $tiempo -eq 0 ]]; then
-				printf " BT|"
-			fi
+			#if [[ $tiempo -eq 0 ]]; then
+			#	printf "   |\n"
+			#	printf " BT|\n"
+			#	printf "   |"
+			#fi
 
-			if [[ $tiempo -ne 0 ]]; then
+			if [[ $tiempo -ge 0 ]]; then
 				#echo "${tiempo_linea_temporal[@]}"
 				truncado_tiempo
-				#imprimir_procesos_linea_temporal
+				
 				#echo ""
+				#imprimir_procesos_linea_temporal
 				#imprimir_linea_temporal
 				#imprimir_tiempo_linea_temporal
 			fi
@@ -1177,6 +1442,11 @@ function bucle_principal_script {
 	#echo ${array_estado[@]}
 }
 
+
+#Nombre:		quitar_clear
+#Descripcion: 	Esta función quita los clear del fichero a color
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function quitar_clear {
 	sed -i 's/\x1b\[3J//g' informeColor.txt
 	sed -i 's/\x1b\[2J//g' informeColor.txt
@@ -1184,10 +1454,20 @@ function quitar_clear {
 	#sed -i 's/\x1b\[3J\x1b\[2J\x1b\[H//g' informePrueba.txt no va
 }
 
+
+#Nombre:		pasar_fichero_a_BN
+#Descripcion: 	Esta función copia el fichero a color a otro en blanco y negro
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function pasar_fichero_a_BN {
 	sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" informeColor.txt > informeBN.txt
 }
 
+
+#Nombre:		portada
+#Descripcion: 	Esta función imprime la portada en consola y en los ficheros
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function portada {
 	clear 
 	#Las siguientes lineas van a aparecer en el informe y en la consola durante la ejecucion gracias a "tee -a"
@@ -1244,7 +1524,11 @@ function portada {
 
 }
 
-#Esta funcion es la encargada de llamar a la entrada, al bucle principal y a los informes/salida
+
+#Nombre:		portada
+#Descripcion: 	Esta funcion es la encargada de llamar a la entrada, al bucle principal y a los informes/salida
+#Autor:		  	Áxel Rubio González
+#Organización:	Universidad de Burgos
 function principal {
 	#Esta variable guarda el numero maximo de partes de procesos con las que se reubica
 	reubicabilidad=0
@@ -1256,32 +1540,14 @@ function principal {
 	clear
 	echo ""
 	menu_entrada 
-	imprimir_tabla_datos
-	bucle_principal_script | tee -a informeColor.txt
-
 	if [[ $opcion_menu_datos -eq 1 ]]; then
-		echo ""
-		echo "¿Quieres crear un fichero con los datos de entrada?"| tee -a informeColor.txt
-	      		read "op"
-	      		echo "$op" >> informeColor.txt
-		until [ "$op" == "n" -o "$op" == "s" ]
-			do
-				echo "Respuesta introducida no válida"| tee -a informeColor.txt
-				echo "Introduzca una respuesta que sea s/n"| tee -a informeColor.txt
-				read "op"
-				echo "$op" >> informeColor.txt
-			done
-
-		if [[ "$op" == "s" ]]; then
-			crear_fichero_entrada
-		fi
+		crear_fichero_entrada
 	fi
-	
-	
-
+	#imprimir_tabla_datos
+	bucle_principal_script | tee -a informeColor.txt
 	quitar_clear
 	pasar_fichero_a_BN
 }
 
-
+#Llamada a la función anterior
 principal
